@@ -10,7 +10,7 @@ class User_create_model extends CI_Model
         parent::__construct();
     }
 
-    public function get_users_info()
+    public function get_record_list()
     {
         $CI =& get_instance();
 
@@ -81,4 +81,5 @@ class User_create_model extends CI_Model
             return false;
         }
     }
+
 }
