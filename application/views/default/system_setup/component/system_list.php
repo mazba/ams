@@ -2,16 +2,28 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
 ?>
-<div id="system_content" class="system_content_margin">
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div id="system_action_button_container" class="system_action_button_container">
+            <?php
+            $CI->load_view('system_action_buttons');
+            ?>
+        </div>
+        <!-- BEGIN PAGE CONTENT INNER -->
+        <div class="row margin-top-10">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet box grey-cararra">
+                    <div class="portlet-body">
+                        <div id="system_dataTable">
 
-</div>
-<div id="system_content" class="system_content_margin">
-    <div id="system_action_button_container" class="system_action_button_container">
-        <?php
-        $CI->load_view('system_action_buttons');
-        ?>
-    </div>
-    <div id="system_dataTable">
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE FORM PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
 
