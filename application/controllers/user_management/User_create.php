@@ -243,6 +243,9 @@ class User_create extends Root_Controller
             //$user_group_level=$user_group_id_level[1];
             $userDetail['user_group_id']=$user_group_id;
 
+            $date_of_birth=strtotime($userDetail['dob']);
+            $userDetail['dob']=$date_of_birth;
+
             if($id>0)
             {
                 unset($userDetail['id']);

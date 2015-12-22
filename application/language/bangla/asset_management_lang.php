@@ -48,6 +48,17 @@ $lang['EDIT_CATEGORY']		= 'ক্যাটাগরি সম্পাদনা'
 
 $lang['CREATE_NEW_USER']		= 'ব্যবহারকারী   যোগ করন';
 $lang['EDIT_USER']		= 'ব্যবহারকারী সম্পাদনা';
+$lang['GROUP_NAME']		= 'গ্রুপ রোল';
+$lang['USER_NAME']		= 'ব্যবহারকারীর নাম';
+$lang['PASSWORD']		= 'পাসওয়ার্ড';
+$lang['CONFIRM_PASSWORD']		= 'পুনরায় পাসওয়ার্ড';
+$lang['EMAIL']		= 'ইমেল';
+$lang['MOBILE_NUMBER']		= 'মোবাইল নাম্বার';
+$lang['DATE_OF_BIRTH']		= 'জন্ম তারিখ';
+$lang['USER_TYPE']		= 'ব্যবহারকারী ধরণ';
+$lang['DESIGNATION']		= 'পদবী';
+$lang['PRESENT_ADDRESS']		= 'বর্তমান ঠিকানা';
+$lang['PERMANENT_ADDRESS']		= 'স্থায়ী ঠিকানা';
 
 $lang['CREATE_NEW_SUPPLIER']		= 'সরবরাহকারী   যোগ করন';
 $lang['EDIT_SUPPLIER']		= 'সরবরাহকারী সম্পাদনা';

@@ -37,7 +37,7 @@ $CI=& get_instance();
                             <input type="hidden" name="system_save_new_status"  id="system_save_new_status" value="0"/>
                             <div class="form-body">
                                 <div class="form-group has-error row">
-                                    <div class="col-lg-2"><label class="control-label" for="name_bn"><?php echo $CI->lang->line('GROUP_NAME'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('GROUP_NAME'); ?></label></div>
                                     <div class="col-lg-8">
                                         <select name="user_detail[user_group_id]" class="form-control" >
                                             <?php
@@ -99,7 +99,7 @@ $CI=& get_instance();
                                     </div>
                                 </div>
                                 <div class="form-group has-error row">
-                                    <div class="col-lg-2"><label class="control-label" for="name_bn"><?php echo $CI->lang->line('USER_TYPE'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('USER_TYPE'); ?></label></div>
                                     <div class="col-lg-8">
                                         <select name="user_detail[type]" class="form-control" >
                                             <option value=""><?php echo $this->lang->line('SELECT');?></option>
@@ -125,7 +125,7 @@ $CI=& get_instance();
                                     </div>
                                 </div>
                                 <div class="form-group has-error row">
-                                    <div class="col-lg-2"><label class="control-label" for="name_bn"><?php echo $CI->lang->line('DESIGNATION'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('DESIGNATION'); ?></label></div>
                                     <div class="col-lg-8">
                                         <select name="user_detail[designation]" class="form-control" >
                                             <?php
@@ -147,7 +147,7 @@ $CI=& get_instance();
                                     </div>
                                 </div>
                                 <div class="form-group has-error row" style="<?php if(!($userInfo['id']>0)){echo 'display:none';} ?>" id="module_container">
-                                    <div class="col-lg-2"><label class="control-label" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
                                     <div class="col-lg-8">
                                         <select name="user_detail[status]" class="form-control" >
                                             <?php
