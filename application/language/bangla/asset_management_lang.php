@@ -46,6 +46,9 @@ $lang['EDIT_WAREHOUSE']		= 'ওয়্যারহাউজ সম্পাদন
 $lang['CREATE_NEW_CATEGORY']		= 'ক্যাটাগরি   যোগ করন';
 $lang['EDIT_CATEGORY']		= 'ক্যাটাগরি সম্পাদনা';
 
+$lang['CREATE_NEW_USER']		= 'ব্যবহারকারী   যোগ করন';
+$lang['EDIT_USER']		= 'ব্যবহারকারী সম্পাদনা';
+
 $lang['CREATE_NEW_SUPPLIER']		= 'সরবরাহকারী   যোগ করন';
 $lang['EDIT_SUPPLIER']		= 'সরবরাহকারী সম্পাদনা';
 $lang['COMPANY_NAME']		= 'প্রতিষ্ঠানের নাম';

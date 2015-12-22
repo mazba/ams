@@ -1,6 +1,8 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
+
+
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -87,13 +89,39 @@ $CI=& get_instance();
                                 <div class="form-group has-success row">
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('MOBILE_NUMBER'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <input type="text" name="user_detail[mobile]" value="<?php echo $userInfo['mobile'];?>" placeholder="<?php echo $CI->lang->line('MOBILE_NUMBER'); ?>" class="form-control">
+                                        <input type="text" name="user_detail[mobile]" value="<?php echo $userInfo['mobile'];?>" placeholder="<?php echo $CI->lang->line('MOBILE_NUMBER'); ?>" class="form-control OnlyNumber" maxlength="11" />
                                     </div>
                                 </div>
                                 <div class="form-group has-success row">
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('DATE_OF_BIRTH'); ?></label></div>
                                     <div class="col-lg-8">
                                         <input type="text" name="user_detail[dob]" value="<?php echo $userInfo['dob']?date('d-m-Y',$userInfo['dob']):'';?>" placeholder="<?php echo $CI->lang->line('DATE_OF_BIRTH'); ?>" class="form-control datepicker">
+                                    </div>
+                                </div>
+                                <div class="form-group has-error row">
+                                    <div class="col-lg-2"><label class="control-label" for="name_bn"><?php echo $CI->lang->line('USER_TYPE'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <select name="user_detail[type]" class="form-control" >
+                                            <option value=""><?php echo $this->lang->line('SELECT');?></option>
+                                            <?php
+                                            $types=$this->config->item('USER_HIGHER_KEY');
+                                            foreach($types as $type_key=>$type_text)
+                                            {
+                                                if($type_key==$userInfo['type'])
+                                                {
+                                                    ?>
+                                                        <option value="<?php echo $type_key;?>" selected="selected"><?php echo $type_text;?></option>
+                                                    <?php
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                        <option value="<?php echo $type_key;?>"><?php echo $type_text;?></option>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group has-error row">
@@ -138,6 +166,7 @@ $CI=& get_instance();
         <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
+
 
 
 <script type="text/javascript">

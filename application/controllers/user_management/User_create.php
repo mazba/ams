@@ -104,6 +104,7 @@ class User_create extends Root_Controller
                 'name_bn'=>'',
                 'name_en'=>'',
                 'user_group_id'=>'',
+                'user_group_level'=>'',
                 'designation'=>'',
                 'gender'=>'',
                 'phone'=>'',
@@ -115,9 +116,17 @@ class User_create extends Root_Controller
                 'permanent_address'=>'',
                 'picture_name'=>'',
                 'dob'=>'',
+                'type'=>'',
                 'status'=>''
             );
 
+            $this->db->from($this->config->item('table_user_group'));
+            $this->db->where('status != 99');
+            $this->db->select("concat_ws('-', id, level) value",false);
+            $this->db->select("name_".$this->get_language_code()." text");
+            $data['groups']=$this->db->get()->result_array();
+
+            $data['designations']=Query_helper::get_info($this->config->item('table_designation'),array('id value', 'name_bn text'), array());
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_management/user_create/add_edit",$data,true));
 
             if($this->message)
@@ -143,9 +152,19 @@ class User_create extends Root_Controller
             $ajax['status']=true;
             $data=array();
 
-            $data['title']=$this->lang->line("EDIT_CATEGORY");
-            $data['category_info']=Query_helper::get_info($this->config->item('table_product_category'),'*',array('id ='.$id),1);
+            $data['title']=$this->lang->line("EDIT_USER");
+            $data['userInfo']=Query_helper::get_info($this->config->item('table_users'),'*',array('id ='.$id),1);
+            $user_group_id_level=Query_helper::get_info($this->config->item('table_user_group'),'*',array('id ='.$data['userInfo']['user_group_id']),1);
+            $data['userInfo']['user_group_level']=$user_group_id_level['level'];
 
+            $this->db->from($this->config->item('table_user_group'));
+            $this->db->where('status != 99');
+            $this->db->select("concat_ws('-', id, level) value",false);
+            $this->db->select("name_".$this->get_language_code()." text");
+            $data['groups']=$this->db->get()->result_array();
+
+            $data['designations']=Query_helper::get_info($this->config->item('table_designation'),array('id value', 'name_bn text'), array());
+            
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_management/user_create/add_edit",$data,true));
             if($this->message)
             {
@@ -195,18 +214,45 @@ class User_create extends Root_Controller
         }
         else
         {
-            $category_detail = $this->input->post('category');
+            $userDetail = $this->input->post('user_detail');
+            if($id>0)
+            {
+                if($userDetail['password']!="")
+                {
+                    $encryptPass = md5(md5($userDetail['password']));
+                    unset($userDetail['password']);
+                    unset($userDetail['confirm_password']);
+                    $userDetail['password'] = $encryptPass;
+                }
+                else
+                {
+                    unset($userDetail['password']);
+                    unset($userDetail['confirm_password']);
+                }
+            }
+            else
+            {
+                $encryptPass = md5(md5($userDetail['password']));
+                unset($userDetail['password']);
+                unset($userDetail['confirm_password']);
+                $userDetail['password'] = $encryptPass;
+            }
+
+            $user_group_id_level=explode('-',$this->input->post("user_detail[user_group_id]"));
+            $user_group_id=$user_group_id_level[0];
+            //$user_group_level=$user_group_id_level[1];
+            $userDetail['user_group_id']=$user_group_id;
 
             if($id>0)
             {
-                unset($category_detail['id']);
+                unset($userDetail['id']);
 
-                $category_detail['update_by']=$user->id;
-                $category_detail['update_date']=time();
+                $userDetail['update_by']=$user->id;
+                $userDetail['update_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::update($this->config->item('table_product_category'),$category_detail,array("id = ".$id));
+                Query_helper::update($this->config->item('table_users'),$userDetail,array("id = ".$id));
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -232,13 +278,13 @@ class User_create extends Root_Controller
             }
             else
             {
-                $category_detail['status']=$this->config->item('STATUS_ACTIVE');
-                $category_detail['create_by']=$user->id;
-                $category_detail['create_date']=time();
+                $userDetail['status']=$this->config->item('STATUS_ACTIVE');
+                $userDetail['create_by']=$user->id;
+                $userDetail['create_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::add($this->config->item('table_product_category'),$category_detail);
+                Query_helper::add($this->config->item('table_users'),$userDetail);
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -309,11 +355,45 @@ class User_create extends Root_Controller
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('category[category_name]',$this->lang->line('NAME'),'required');
+        $this->form_validation->set_rules('user_detail[user_group_id]',$this->lang->line('GROUP_NAME'),'required');
+        $this->form_validation->set_rules('user_detail[name_bn]',$this->lang->line('NAME_BN'),'required');
+        $this->form_validation->set_rules('user_detail[name_en]',$this->lang->line('NAME_EN'),'required');
+        $this->form_validation->set_rules('user_detail[username]',$this->lang->line('USER_NAME'),'required');
+        $this->form_validation->set_rules('user_detail[email]',$this->lang->line('EMAIL'),'required|valid_email');
+        $this->form_validation->set_rules('user_detail[designation]',$this->lang->line('DESIGNATION'),'required');
+        $this->form_validation->set_rules('user_detail[type]',$this->lang->line('USER_TYPE'),'required');
+        //$this->form_validation->set_rules('user_detail[password]',$this->lang->line('PASSWORD'),'required');
+        //$this->form_validation->set_rules('user_detail[confirm_password]',$this->lang->line('PASSWORD'),'required');
+        //$this->form_validation->set_rules('user_detail[mobile]',$this->lang->line('MOBILE_NUMBER'),'required');
+
+        $userDetail = $this->input->post('user_detail');
+        if($this->input->post('id')>0)
+        {
+            if($userDetail['password']!="")
+            {
+                $this->form_validation->set_rules('user_detail[password]',$this->lang->line('PASSWORD'),'required');
+                $this->form_validation->set_rules('user_detail[confirm_password]',$this->lang->line('PASSWORD'),'required');
+                if($userDetail['password']!=$userDetail['confirm_password'])
+                {
+                    $this->message.=$this->lang->line('NOT_MATCH_CONFIRM_PASSWORD');
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            $this->form_validation->set_rules('user_detail[password]',$this->lang->line('PASSWORD'),'required');
+            $this->form_validation->set_rules('user_detail[confirm_password]',$this->lang->line('PASSWORD'),'required');
+            if($userDetail['password']!=$userDetail['confirm_password'])
+            {
+                $this->message.=$this->lang->line('NOT_MATCH_CONFIRM_PASSWORD');
+                return false;
+            }
+        }
 
         if($this->input->post('id')>0)
         {
-            $this->form_validation->set_rules('category[status]',$this->lang->line('STATUS'),'required');
+            $this->form_validation->set_rules('user_detail[status]',$this->lang->line('STATUS'),'required');
         }
 
         if($this->form_validation->run() == FALSE)
