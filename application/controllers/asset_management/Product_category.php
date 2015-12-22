@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Warehouse extends Root_Controller
+class Product_category extends Root_Controller
 {
     public $permissions;
     public $message;
@@ -11,14 +11,14 @@ class Warehouse extends Root_Controller
     {
         parent::__construct();
         $this->message='';
-        $this->permissions=Menu_helper::get_permission('asset_management/warehouse');
+        $this->permissions=Menu_helper::get_permission('asset_management/product_category');
         if($this->permissions)
         {
             $this->permissions['delete']=0;
             $this->permissions['view']=0;
         }
-        $this->controller_url='asset_management/warehouse';
-        $this->load->model("asset_management/warehouse_model");
+        $this->controller_url='asset_management/product_category';
+        $this->load->model("asset_management/product_category_model");
         $this->lang->load("asset_management", $this->get_language());
     }
 
@@ -66,14 +66,14 @@ class Warehouse extends Root_Controller
         {
             $this->current_action='list';
             $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/warehouse/list","",true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/product_category/list","",true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse');
-            $ajax['system_page_title']=$this->lang->line("WAREHOUSE");
+            $ajax['system_page_url']=$this->get_encoded_url('asset_management/product_category');
+            $ajax['system_page_title']=$this->lang->line("product_category");
             $this->jsonReturn($ajax);
         }
         else
@@ -94,27 +94,25 @@ class Warehouse extends Root_Controller
             $ajax['status']=true;
             $data=array();
 
-            $data['title']=$this->lang->line("CREATE_NEW_WAREHOUSE");
+            $data['title']=$this->lang->line("CREATE_NEW_CATEGORY");
 
-            $data['warehouse_info'] = array
+            $data['category_info'] = array
             (
                 'id'=>'',
-                'warehouse_name'=>'',
-                'warehouse_code'=>'',
-                'warehouse_address'=>'',
-                'warehouse_capacity'=>'',
-                'warehouse_description'=>'',
+                'category_name'=>'',
+                'category_code'=>'',
+                'category_description'=>'',
                 'status'=>'',
             );
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/warehouse/add_edit",$data,true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/product_category/add_edit",$data,true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
 
-            $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse/index/add');
+            $ajax['system_page_url']=$this->get_encoded_url('asset_management/product_category/index/add');
             $this->jsonReturn($ajax);
         }
         else
@@ -132,15 +130,15 @@ class Warehouse extends Root_Controller
             $ajax['status']=true;
             $data=array();
 
-            $data['title']=$this->lang->line("EDIT_WAREHOUSE");
-            $data['warehouse_info']=Query_helper::get_info($this->config->item('table_warehouse'),'*',array('id ='.$id),1);
+            $data['title']=$this->lang->line("EDIT_CATEGORY");
+            $data['category_info']=Query_helper::get_info($this->config->item('table_product_category'),'*',array('id ='.$id),1);
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/warehouse/add_edit",$data,true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/product_category/add_edit",$data,true));
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse/index/edit/'.$id);
+            $ajax['system_page_url']=$this->get_encoded_url('asset_management/product_category/index/edit/'.$id);
             $this->jsonReturn($ajax);
         }
         else
@@ -184,18 +182,18 @@ class Warehouse extends Root_Controller
         }
         else
         {
-            $warehouse_detail = $this->input->post('warehouse');
+            $category_detail = $this->input->post('category');
 
             if($id>0)
             {
-                unset($warehouse_detail['id']);
+                unset($category_detail['id']);
 
-                $warehouse_detail['update_by']=$user->id;
-                $warehouse_detail['update_date']=time();
+                $category_detail['update_by']=$user->id;
+                $category_detail['update_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::update($this->config->item('table_warehouse'),$warehouse_detail,array("id = ".$id));
+                Query_helper::update($this->config->item('table_product_category'),$category_detail,array("id = ".$id));
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -221,13 +219,13 @@ class Warehouse extends Root_Controller
             }
             else
             {
-                $warehouse_detail['status']=$this->config->item('STATUS_ACTIVE');
-                $warehouse_detail['create_by']=$user->id;
-                $warehouse_detail['create_date']=time();
+                $category_detail['status']=$this->config->item('STATUS_ACTIVE');
+                $category_detail['create_by']=$user->id;
+                $category_detail['create_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::add($this->config->item('table_warehouse'),$warehouse_detail);
+                Query_helper::add($this->config->item('table_product_category'),$category_detail);
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -298,8 +296,8 @@ class Warehouse extends Root_Controller
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('warehouse[warehouse_name]',$this->lang->line('NAME'),'required');
-        $this->form_validation->set_rules('warehouse[status]',$this->lang->line('STATUS'),'required');
+        $this->form_validation->set_rules('category[category_name]',$this->lang->line('NAME'),'required');
+        $this->form_validation->set_rules('category[status]',$this->lang->line('STATUS'),'required');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -313,12 +311,12 @@ class Warehouse extends Root_Controller
 
     public function get_list()
     {
-        $warehouses = array();
+        $categories = array();
         if($this->permissions['list'])
         {
-            $warehouses = $this->warehouse_model->get_record_list();
+            $categories = $this->product_category_model->get_record_list();
         }
-        $this->jsonReturn($warehouses);
+        $this->jsonReturn($categories);
     }
 
 

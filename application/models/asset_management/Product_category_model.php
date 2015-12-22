@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Warehouse_model extends CI_Model
+class Product_category_model extends CI_Model
 {
     public function __construct()
     {
@@ -14,12 +14,12 @@ class Warehouse_model extends CI_Model
     {
         $CI =& get_instance();
         //$this->db->select('*');
-        $this->db->from($CI->config->item('table_warehouse'));
+        $this->db->from($CI->config->item('table_product_category'));
 
         $users = $this->db->get()->result_array();
         foreach($users as &$user)
         {
-            $user['edit_link']=$CI->get_encoded_url('asset_management/warehouse/index/edit/'.$user['id']);
+            $user['edit_link']=$CI->get_encoded_url('asset_management/product_category/index/edit/'.$user['id']);
             if($user['status']==$this->config->item('STATUS_ACTIVE'))
             {
                 $user['status_text']=$CI->lang->line('ACTIVE');
@@ -35,6 +35,5 @@ class Warehouse_model extends CI_Model
         }
         return $users;
     }
-
 
 }

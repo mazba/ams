@@ -30,7 +30,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        var url = "<?php echo $CI->get_encoded_url('asset_management/warehouse/get_list');?>";
+        var url = "<?php echo $CI->get_encoded_url('asset_management/supplier/get_list');?>";
 
         // prepare the data
         var source =
@@ -39,8 +39,10 @@ $CI=& get_instance();
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
-                { name: 'warehouse_name', type: 'string' },
-                { name: 'warehouse_code', type: 'string' },
+                { name: 'company_name', type: 'string' },
+                { name: 'company_office_phone', type: 'string' },
+                { name: 'contact_person', type: 'string' },
+                { name: 'contact_person_phone', type: 'string' },
                 { name: 'status_text', type: 'string' }
             ],
             id: 'id',
@@ -65,8 +67,10 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'warehouse_name', width:'40%'},
-                    { text: '<?php echo $CI->lang->line('CODE'); ?>', dataField: 'warehouse_code', width:'50%'},
+                    { text: '<?php echo $CI->lang->line('COMPANY_NAME'); ?>', dataField: 'company_name', width:'35%'},
+                    { text: '<?php echo $CI->lang->line('COMPANY_OFFICE_PHONE'); ?>', dataField: 'company_office_phone', width:'15%'},
+                    { text: '<?php echo $CI->lang->line('CONTACT_PERSON'); ?>', dataField: 'contact_person', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('CONTACT_PERSON_PHONE'); ?>', dataField: 'contact_person_phone', width:'17%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
                 ]
             });

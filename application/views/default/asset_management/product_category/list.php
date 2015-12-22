@@ -30,7 +30,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        var url = "<?php echo $CI->get_encoded_url('asset_management/warehouse/get_list');?>";
+        var url = "<?php echo $CI->get_encoded_url('asset_management/product_category/get_list');?>";
 
         // prepare the data
         var source =
@@ -39,8 +39,8 @@ $CI=& get_instance();
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
-                { name: 'warehouse_name', type: 'string' },
-                { name: 'warehouse_code', type: 'string' },
+                { name: 'category_name', type: 'string' },
+                { name: 'category_code', type: 'string' },
                 { name: 'status_text', type: 'string' }
             ],
             id: 'id',
@@ -65,8 +65,8 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'warehouse_name', width:'40%'},
-                    { text: '<?php echo $CI->lang->line('CODE'); ?>', dataField: 'warehouse_code', width:'50%'},
+                    { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'category_name', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('CODE'); ?>', dataField: 'category_code', width:'50%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
                 ]
             });

@@ -43,4 +43,14 @@ $lang['GO_CODE']		= 'জি ও কোড';
 $lang['CREATE_NEW_WAREHOUSE']		= 'ওয়্যারহাউজ   যোগ করন';
 $lang['EDIT_WAREHOUSE']		= 'ওয়্যারহাউজ সম্পাদনা';
 
+$lang['CREATE_NEW_CATEGORY']		= 'ক্যাটাগরি   যোগ করন';
+$lang['EDIT_CATEGORY']		= 'ক্যাটাগরি সম্পাদনা';
+
+$lang['CREATE_NEW_SUPPLIER']		= 'সরবরাহকারী   যোগ করন';
+$lang['EDIT_SUPPLIER']		= 'সরবরাহকারী সম্পাদনা';
+$lang['COMPANY_NAME']		= 'প্রতিষ্ঠানের নাম';
+$lang['COMPANY_OFFICE_PHONE']		= 'প্রতিষ্ঠানের ফোন নাম্বার';
+$lang['CONTACT_PERSON']		= 'যোগাযোগ ব্যক্তির নাম';
+$lang['CONTACT_PERSON_PHONE']		= 'যোগাযোগ ব্যক্তির ফোন নাম্বার';
+
 
