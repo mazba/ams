@@ -74,7 +74,7 @@ class Warehouse extends Root_Controller
                 $ajax['system_message']=$this->message;
             }
             $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse');
-            $ajax['system_page_title']=$this->lang->line("USER_CREATE");
+            $ajax['system_page_title']=$this->lang->line("WAREHOUSE");
             $this->jsonReturn($ajax);
         }
         else
@@ -315,12 +315,12 @@ class Warehouse extends Root_Controller
 
     public function get_list()
     {
-        $divisions = array();
+        $warehouses = array();
         if($this->permissions['list'])
         {
-            $divisions = $this->warehouse_model->get_record_list();
+            $warehouses = $this->warehouse_model->get_record_list();
         }
-        $this->jsonReturn($divisions);
+        $this->jsonReturn($warehouses);
     }
 
 

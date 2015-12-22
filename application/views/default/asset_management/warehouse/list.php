@@ -2,18 +2,30 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
 ?>
-<div id="system_content" class="system_content_margin">
-    <div id="system_action_button_container" class="system_action_button_container">
-        <?php
-        $CI->load_view('system_action_buttons');
-        ?>
-    </div>
-    <div id="system_dataTable">
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div id="system_action_button_container" class="system_action_button_container">
+            <?php
+            $CI->load_view('system_action_buttons');
+            ?>
+        </div>
+        <!-- BEGIN PAGE CONTENT INNER -->
+        <div class="row margin-top-10">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE FORM PORTLET-->
+                <div class="portlet box grey-cararra">
+                    <div class="portlet-body">
+                        <div id="system_dataTable">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE FORM PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
-
-
-
 <script type="text/javascript">
     $(document).ready(function ()
     {
@@ -28,6 +40,7 @@ $CI=& get_instance();
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
                 { name: 'warehouse_name', type: 'string' },
+                { name: 'warehouse_code', type: 'string' },
                 { name: 'status', type: 'string' }
             ],
             id: 'id',
@@ -52,8 +65,9 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('WAREHOUSE_NAME'); ?>', dataField: 'warehouse_name', width:'50%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status', width:'47%'}
+                    { text: '<?php echo $CI->lang->line('WAREHOUSE_NAME'); ?>', dataField: 'warehouse_name', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('WAREHOUSE_CODE'); ?>', dataField: 'warehouse_code', width:'50%'},
+                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status', width:'10%'}
                 ]
             });
         //for Double Click to edit

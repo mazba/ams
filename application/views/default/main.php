@@ -54,6 +54,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout4/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
         <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout4/css/custom.css" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
+        <!--    Start jqx    -->
+        <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/jq/jqx.base.css">
+        <!--    End jqx    -->
 
     </head>
 
