@@ -174,6 +174,28 @@ class Query_helper
             $CI->db->limit($limit,$start);
             return $CI->db->get($tablename)->result_array();
         }
+    }
+    //list for dropdown
+    public static function get_list($tablename,$fieldname,$conditions)
+    {
+        $CI =& get_instance();
+
+        $CI->db->select('id');
+        $CI->db->select($fieldname);
+        foreach($conditions as $condition)
+        {
+            $CI->db->where($condition);
+        }
+        $results = $CI->db->get($tablename)->result_array();
+//        create list
+        $list = array();
+        foreach($results as $result){
+            $list[] = array(
+                'value'=>$result['id'],
+                'title'=>$result[$fieldname]
+            );
+        }
+        return $list;
 
     }
 

@@ -120,6 +120,11 @@ class Product extends Root_Controller
                 'purchase_date'=>'',
                 'status'=>'',
             );
+            $data['category'] = Query_helper::get_list($this->config->item('table_product_category'),'category_name',array('status = 1'));
+            $data['manufacture'] = Query_helper::get_list($this->config->item('table_manufacture'),'manufacture_name',array('status = 1'));
+            $data['supplier'] = Query_helper::get_list($this->config->item('table_supplier'),'company_name',array('status = 1'));
+            $data['warehouse'] = Query_helper::get_list($this->config->item('table_warehouse'),'warehouse_name',array('status = 1'));
+
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/product/add_edit",$data,true));
 
             if($this->message)
