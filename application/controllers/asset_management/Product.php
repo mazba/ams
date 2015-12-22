@@ -119,6 +119,8 @@ class Product extends Root_Controller
                 'purchase_order_no'=>'',
                 'purchase_date'=>'',
                 'status'=>'',
+                'remarks'=>'',
+                'others'=>'',
             );
             $data['category'] = Query_helper::get_list($this->config->item('table_product_category'),'category_name',array('status = 1'));
             $data['manufacture'] = Query_helper::get_list($this->config->item('table_manufacture'),'manufacture_name',array('status = 1'));
@@ -144,29 +146,29 @@ class Product extends Root_Controller
 
     private function system_edit($id)
     {
-        if($this->permissions['edit'])
-        {
-            $this->current_action='edit';
-            $ajax['status']=true;
-            $data=array();
-
-            $data['title']=$this->lang->line("EDIT_MANUFACTURE");
-            $data['manufacture']=Query_helper::get_info($this->config->item('table_manufacture'),'*',array('id ='.$id),1);
-
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/manufacture/add_edit",$data,true));
-            if($this->message)
-            {
-                $ajax['system_message']=$this->message;
-            }
-            $ajax['system_page_url']=$this->get_encoded_url('asset_management/manufacture/index/edit/'.$id);
-            $this->jsonReturn($ajax);
-        }
-        else
-        {
-            $ajax['status']=true;
-            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
-            $this->jsonReturn($ajax);
-        }
+//        if($this->permissions['edit'])
+//        {
+//            $this->current_action='edit';
+//            $ajax['status']=true;
+//            $data=array();
+//
+//            $data['title']=$this->lang->line("EDIT_MANUFACTURE");
+//            $data['manufacture']=Query_helper::get_info($this->config->item('table_manufacture'),'*',array('id ='.$id),1);
+//
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/manufacture/add_edit",$data,true));
+//            if($this->message)
+//            {
+//                $ajax['system_message']=$this->message;
+//            }
+//            $ajax['system_page_url']=$this->get_encoded_url('asset_management/manufacture/index/edit/'.$id);
+//            $this->jsonReturn($ajax);
+//        }
+//        else
+//        {
+//            $ajax['status']=true;
+//            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
+//            $this->jsonReturn($ajax);
+//        }
     }
 
     private function system_save()
@@ -202,7 +204,11 @@ class Product extends Root_Controller
         }
         else
         {
-            $data = $this->input->post('manufacture');
+            $data = $this->input->post('product');
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+            die;
             if($id>0)
             {
                 unset($data['id']);
@@ -275,46 +281,21 @@ class Product extends Root_Controller
         //        $this->system_edit($selected_ids[0]);
     }
 
-    private function system_batch_delete()
-    {
-        //        if($this->permissions['delete'])
-        //        {
-        //            $user=User_helper::get_user();
-        //            $selected_ids=$this->input->post('selected_ids');
-        //            $this->db->trans_start();  //DB Transaction Handle START
-        //            foreach($selected_ids as $id)
-        //            {
-        //                Query_helper::update($this->config->item('table_divisions'),array('status'=>99,'update_by'=>$user->id,'update_date'=>time()),array("id = ".$id));
-        //            }
-        //            $this->db->trans_complete();   //DB Transaction Handle END
-        //
-        //            if ($this->db->trans_status() === TRUE)
-        //            {
-        //                $this->message=$this->lang->line("MSG_DELETE_SUCCESS");
-        //                $this->system_list();
-        //            }
-        //            else
-        //            {
-        //                $ajax['status']=false;
-        //                $ajax['system_message']=$this->lang->line("MSG_DELETE_FAIL");
-        //                $this->jsonReturn($ajax);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            $ajax['status']=false;
-        //            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
-        //            $this->jsonReturn($ajax);
-        //        }
-    }
-
     private function check_validation()
     {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('manufacture[manufacture_name]',$this->lang->line('NAME'),'required');
-        $this->form_validation->set_rules('manufacture[status]',$this->lang->line('STATUS'),'required');
+        $this->form_validation->set_rules('product[product_name]',$this->lang->line('PRODUCT_NAME'),'required');
+        $this->form_validation->set_rules('product[product_code]',$this->lang->line('PRODUCT_CODE'),'required');
+        $this->form_validation->set_rules('product[serial_number]',$this->lang->line('SERIAL_NUMBER'),'required');
+        $this->form_validation->set_rules('product[category_id]',$this->lang->line('CATEGORY_ID'),'required');
+        $this->form_validation->set_rules('product[manufacture_id]',$this->lang->line('MANUFACTURE_ID'),'required');
+        $this->form_validation->set_rules('product[warehouse_id]',$this->lang->line('WAREHOUSE_ID'),'required');
+        $this->form_validation->set_rules('product[unit_price]',$this->lang->line('UNIT_PRICE'),'required');
+        $this->form_validation->set_rules('product[quantity]',$this->lang->line('QUANTITY'),'required');
+
+        $this->form_validation->set_rules('product[status]',$this->lang->line('STATUS'),'required');
 
         if($this->form_validation->run() == FALSE)
         {

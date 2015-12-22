@@ -114,6 +114,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
