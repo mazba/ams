@@ -6,16 +6,19 @@ $config['PUBLIC_CONTROLLERS']=array('home');
 $config['page_size']=100;
 ///// report language folder
 $config['GET_LANGUAGE']="bangla";
+//// upload directories
+$config['file_upload']['supplier']='images/supplier';
 
-//upload directories
-$config['dcms_upload']['entrepreneur']='images/supplier';
-
+//////// USER LEVEL
 $config['SUPER_ADMIN_GROUP_ID'] = 1;
-$config['A_TO_I_GROUP_ID'] = 2;
-$config['DONOR_GROUP_ID'] = 3;
-$config['MINISTRY_GROUP_ID'] = 4;
+$config['ADMIN_GROUP_ID'] = 2;
+$config['TOP_MANAGEMENT_GROUP_ID'] = 3;
+$config['END_GROUP_ID'] = 4;
+$config['OFFICER_GROUP_ID'] = 5;
+$config['SUPPORT_GROUP_ID'] = 6;
+$config['OPERATOR_GROUP_ID'] = 7;
 
-
+///////// SYSTEM STATUS VALUE
 $config['STATUS_INACTIVE']=0; // SERVICE PROPOSED
 $config['STATUS_ACTIVE']=1; // SERVICE, USER APPROVED
 $config['STATUS_REJECT']=2;   // USER DENY
@@ -23,9 +26,14 @@ $config['STATUS_SUSPEND']=3;
 $config['STATUS_TEMPORARY_SUSPEND']=4;
 $config['STATUS_DELETE']=99;
 
+//////// USER HIGHER KEY
+$config['USER_HIGHER_KEY'][1] = 'Wing';
+$config['USER_HIGHER_KEY'][2] = 'Sub Wing';
+$config['USER_HIGHER_KEY'][3] = 'Branch';
+
 //////// GENDER CONFIG
-$config['GENDER']['1'] = 'পুরুষ';
-$config['GENDER']['0'] = 'মহিলা';
+$config['GENDER'][1] = 'পুরুষ';
+$config['GENDER'][0] = 'মহিলা';
 
 ////// DATE FORMATION
 $config['DATE_DISPLAY_FORMAT'] = 'Y-m-d';
