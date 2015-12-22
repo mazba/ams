@@ -23,12 +23,11 @@ $config['STATUS_SUSPEND']=3;
 $config['STATUS_TEMPORARY_SUSPEND']=4;
 $config['STATUS_DELETE']=99;
 
-$config['GENDER_MALE']=1;
-$config['GENDER_FEMALE']=2;
-
+//////// GENDER CONFIG
 $config['GENDER']['1'] = 'পুরুষ';
 $config['GENDER']['0'] = 'মহিলা';
 
+////// DATE FORMATION
 $config['DATE_DISPLAY_FORMAT'] = 'Y-m-d';
 
 // Equipment Status
@@ -49,7 +48,7 @@ $config['month']['10'] = 'অক্টোবর';
 $config['month']['11'] = 'নভেম্বর';
 $config['month']['12'] = 'ডিসেম্বর';
 
-//report menu id
+//// report menu id
 $config['report_component_id']=3;
 
 //////////// User Level ///////////
