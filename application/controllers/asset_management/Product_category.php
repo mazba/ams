@@ -297,7 +297,11 @@ class Product_category extends Root_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('category[category_name]',$this->lang->line('NAME'),'required');
-        $this->form_validation->set_rules('category[status]',$this->lang->line('STATUS'),'required');
+
+        if($this->input->post('id')>0)
+        {
+            $this->form_validation->set_rules('category[status]',$this->lang->line('STATUS'),'required');
+        }
 
         if($this->form_validation->run() == FALSE)
         {

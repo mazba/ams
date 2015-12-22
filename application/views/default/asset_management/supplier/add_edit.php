@@ -31,35 +31,59 @@ $CI=& get_instance();
                     </div>
                     <div class="portlet-body form">
                         <form id="system_save_form" action="<?php echo $CI->get_encoded_url('asset_management/supplier/index/save'); ?>" method="post">
-                            <input type="hidden" name="id" value="<?php echo $category_info['id'];?>"/>
+                            <input type="hidden" name="id" value="<?php echo $supplier_info['id'];?>"/>
                             <input type="hidden" name="system_save_new_status"  id="system_save_new_status" value="0"/>
                             <div class="form-body">
                                 <div class="form-group has-error row">
                                     <div class="col-lg-2">
-                                        <label class="control-label bold" for="name_en"><?php echo $CI->lang->line('NAME'); ?></label>
+                                        <label class="control-label bold" for="name_en"><?php echo $CI->lang->line('COMPANY_NAME'); ?></label>
                                     </div>
                                     <div class="col-lg-8">
-                                        <input type="text" name="category[category_name]" value="<?php echo $category_info['category_name'];?>" placeholder="<?php echo $CI->lang->line('NAME'); ?>" class="form-control">
+                                        <input type="text" name="supplier[company_name]" value="<?php echo $supplier_info['company_name'];?>" placeholder="<?php echo $CI->lang->line('COMPANY_NAME'); ?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group has-success row">
-                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('CODE'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="controller"><?php echo $CI->lang->line('ADDRESS'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <input type="text" name="category[category_code]" value="<?php echo $category_info['category_code'];?>" placeholder="<?php echo $CI->lang->line('CODE'); ?>" class="form-control">
+                                        <textarea class="form-control" name="supplier[company_address]"  rows="3"><?php echo $supplier_info['company_address'];?></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('COMPANY_OFFICE_PHONE'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="supplier[company_office_phone]" value="<?php echo $supplier_info['company_office_phone'];?>" placeholder="<?php echo $CI->lang->line('COMPANY_OFFICE_PHONE'); ?>" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('COMPANY_OFFICE_FAX'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="supplier[company_office_fax]" value="<?php echo $supplier_info['company_office_fax'];?>" placeholder="<?php echo $CI->lang->line('COMPANY_OFFICE_FAX'); ?>" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('CONTACT_PERSON'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="supplier[contact_person]" value="<?php echo $supplier_info['contact_person'];?>" placeholder="<?php echo $CI->lang->line('CONTACT_PERSON'); ?>" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('CONTACT_PERSON_PHONE'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="supplier[contact_person_phone]" value="<?php echo $supplier_info['contact_person_phone'];?>" placeholder="<?php echo $CI->lang->line('CONTACT_PERSON_PHONE'); ?>" class="form-control OnlyNumber" maxlength="11">
                                     </div>
                                 </div>
                                 <div class="form-group has-success row">
                                     <div class="col-lg-2"><label class="control-label bold" for="controller"><?php echo $CI->lang->line('DESCRIPTION'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <textarea class="form-control" name="category[category_description]"  rows="3"><?php echo $category_info['category_description'];?></textarea>
+                                        <textarea class="form-control" name="supplier[supplier_description]"  rows="3"><?php echo $supplier_info['supplier_description'];?></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group has-error row" style="<?php if(!($category_info['id']>0)){echo 'display:none';} ?>" id="module_container">
+                                <div class="form-group has-error row" style="<?php if(!($supplier_info['id']>0)){echo 'display:none';} ?>" id="module_container">
                                     <div class="col-lg-2"><label class="control-label" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <select name="category[status]" class="form-control" >
+                                        <select name="supplier[status]" class="form-control" >
                                             <?php
-                                            $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('ACTIVE'),'value'=>$this->config->item('STATUS_ACTIVE')),array('text'=>$CI->lang->line('INACTIVE'),'value'=>$this->config->item('STATUS_INACTIVE'))),'drop_down_selected'=>isset($category_info['status'])?$category_info['status']:$this->config->item('STATUS_ACTIVE')));
+                                            $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('ACTIVE'),'value'=>$this->config->item('STATUS_ACTIVE')),array('text'=>$CI->lang->line('INACTIVE'),'value'=>$this->config->item('STATUS_INACTIVE'))),'drop_down_selected'=>isset($supplier_info['status'])?$supplier_info['status']:$this->config->item('STATUS_ACTIVE')));
                                             ?>
                                         </select>
                                     </div>

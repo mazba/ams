@@ -96,12 +96,17 @@ class Supplier extends Root_Controller
 
             $data['title']=$this->lang->line("CREATE_NEW_SUPPLIER");
 
-            $data['category_info'] = array
+            $data['supplier_info'] = array
             (
                 'id'=>'',
-                'category_name'=>'',
-                'category_code'=>'',
-                'category_description'=>'',
+                'company_name'=>'',
+                'company_address'=>'',
+                'company_office_phone'=>'',
+                'company_office_fax'=>'',
+                'contact_person'=>'',
+                'contact_person_phone'=>'',
+                'agreement_attachment'=>'',
+                'supplier_description'=>'',
                 'status'=>'',
             );
 
@@ -131,7 +136,7 @@ class Supplier extends Root_Controller
             $data=array();
 
             $data['title']=$this->lang->line("EDIT_SUPPLIER");
-            $data['category_info']=Query_helper::get_info($this->config->item('table_supplier'),'*',array('id ='.$id),1);
+            $data['supplier_info']=Query_helper::get_info($this->config->item('table_supplier'),'*',array('id ='.$id),1);
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/supplier/add_edit",$data,true));
             if($this->message)
@@ -182,18 +187,18 @@ class Supplier extends Root_Controller
         }
         else
         {
-            $category_detail = $this->input->post('category');
+            $supplier_detail = $this->input->post('supplier');
 
             if($id>0)
             {
-                unset($category_detail['id']);
+                unset($supplier_detail['id']);
 
-                $category_detail['update_by']=$user->id;
-                $category_detail['update_date']=time();
+                $supplier_detail['update_by']=$user->id;
+                $supplier_detail['update_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::update($this->config->item('table_supplier'),$category_detail,array("id = ".$id));
+                Query_helper::update($this->config->item('table_supplier'),$supplier_detail,array("id = ".$id));
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -219,13 +224,13 @@ class Supplier extends Root_Controller
             }
             else
             {
-                $category_detail['status']=$this->config->item('STATUS_ACTIVE');
-                $category_detail['create_by']=$user->id;
-                $category_detail['create_date']=time();
+                $supplier_detail['status']=$this->config->item('STATUS_ACTIVE');
+                $supplier_detail['create_by']=$user->id;
+                $supplier_detail['create_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::add($this->config->item('table_supplier'),$category_detail);
+                Query_helper::add($this->config->item('table_supplier'),$supplier_detail);
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -296,8 +301,11 @@ class Supplier extends Root_Controller
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('category[category_name]',$this->lang->line('NAME'),'required');
-        $this->form_validation->set_rules('category[status]',$this->lang->line('STATUS'),'required');
+        $this->form_validation->set_rules('supplier[company_name]',$this->lang->line('COMPANY_NAME'),'required');
+        if($this->input->post('id')>0)
+        {
+            $this->form_validation->set_rules('supplier[status]',$this->lang->line('STATUS'),'required');
+        }
 
         if($this->form_validation->run() == FALSE)
         {

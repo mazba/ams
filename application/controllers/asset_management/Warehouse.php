@@ -299,7 +299,11 @@ class Warehouse extends Root_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('warehouse[warehouse_name]',$this->lang->line('NAME'),'required');
-        $this->form_validation->set_rules('warehouse[status]',$this->lang->line('STATUS'),'required');
+
+        if($this->input->post('id')>0)
+        {
+            $this->form_validation->set_rules('warehouse[status]',$this->lang->line('STATUS'),'required');
+        }
 
         if($this->form_validation->run() == FALSE)
         {
