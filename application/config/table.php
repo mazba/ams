@@ -23,3 +23,4 @@ $config['table_supplier'] = 'supplier';
 $config['table_ticket_assign'] = 'ticket_assign';
 $config['table_ticket_issue'] = 'ticket_issue';
 $config['table_warehouse'] = 'warehouse';
+$config['table_manufacture'] = 'manufacture';
