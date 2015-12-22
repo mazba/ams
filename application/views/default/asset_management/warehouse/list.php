@@ -18,7 +18,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        var url = "<?php echo $CI->get_encoded_url('basic_setup/warehouse/get_list');?>";
+        var url = "<?php echo $CI->get_encoded_url('asset_management/warehouse/get_list');?>";
 
         // prepare the data
         var source =

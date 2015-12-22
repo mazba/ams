@@ -11,14 +11,14 @@ class Warehouse extends Root_Controller
     {
         parent::__construct();
         $this->message='';
-        $this->permissions=Menu_helper::get_permission('basic_setup/warehouse');
+        $this->permissions=Menu_helper::get_permission('asset_management/warehouse');
         if($this->permissions)
         {
             $this->permissions['delete']=0;
             $this->permissions['view']=0;
         }
-        $this->controller_url='basic_setup/warehouse';
-        $this->load->model("basic_setup/warehouse_model");
+        $this->controller_url='asset_management/warehouse';
+        $this->load->model("asset_management/warehouse_model");
         $this->lang->load("basic_setup", $this->get_language());
     }
 
@@ -67,13 +67,13 @@ class Warehouse extends Root_Controller
             $this->current_action='list';
             $ajax['status']=true;
             //$ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/list","",true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/warehouse/list","",true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/warehouse');
+            $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse');
             $ajax['system_page_title']=$this->lang->line("USER_CREATE");
             $this->jsonReturn($ajax);
         }
@@ -109,14 +109,14 @@ class Warehouse extends Root_Controller
             );
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/add_edit",$data,true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/warehouse/add_edit",$data,true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
 
-            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/warehouse/index/add');
+            $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse/index/add');
             $this->jsonReturn($ajax);
         }
         else
@@ -137,13 +137,13 @@ class Warehouse extends Root_Controller
             $data['title']=$this->lang->line("EDIT_WAREHOUSE");
             $data['warehouse_info']=Query_helper::get_info($this->config->item('table_warehouse'),'*',array('id ='.$id),1);
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/add_edit",$data,true));
+            //$ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/warehouse/add_edit",$data,true));
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/warehouse/index/edit/'.$id);
+            $ajax['system_page_url']=$this->get_encoded_url('asset_management/warehouse/index/edit/'.$id);
             $this->jsonReturn($ajax);
         }
         else
@@ -187,18 +187,18 @@ class Warehouse extends Root_Controller
         }
         else
         {
-            $division_detail = $this->input->post('division_detail');
+            $warehouse_detail = $this->input->post('warehouse');
 
             if($id>0)
             {
-                unset($division_detail['divid']);
+                unset($warehouse_detail['id']);
 
-                //$division_detail['update_by']=$user->id;
-                //$division_detail['update_date']=time();
+                $warehouse_detail['update_by']=$user->id;
+                $warehouse_detail['update_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::update($this->config->item('table_divisions'),$division_detail,array("divid = ".$id));
+                Query_helper::update($this->config->item('table_warehouse'),$warehouse_detail,array("id = ".$id));
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -224,12 +224,12 @@ class Warehouse extends Root_Controller
             }
             else
             {
-                //$division_detail['create_by']=$user->id;
-                //$division_detail['create_date']=time();
+                $warehouse_detail['create_by']=$user->id;
+                $warehouse_detail['create_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::add($this->config->item('table_divisions'),$division_detail);
+                Query_helper::add($this->config->item('table_warehouse'),$warehouse_detail);
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -258,74 +258,50 @@ class Warehouse extends Root_Controller
 
     private function system_batch_edit()
     {
-        $selected_ids=$this->input->post('selected_ids');
-        $this->system_edit($selected_ids[0]);
+        //        $selected_ids=$this->input->post('selected_ids');
+        //        $this->system_edit($selected_ids[0]);
     }
 
     private function system_batch_delete()
     {
-        if($this->permissions['delete'])
-        {
-            $user=User_helper::get_user();
-            $selected_ids=$this->input->post('selected_ids');
-            $this->db->trans_start();  //DB Transaction Handle START
-            foreach($selected_ids as $id)
-            {
-                Query_helper::update($this->config->item('table_divisions'),array('status'=>99,'update_by'=>$user->id,'update_date'=>time()),array("id = ".$id));
-            }
-            $this->db->trans_complete();   //DB Transaction Handle END
-
-            if ($this->db->trans_status() === TRUE)
-            {
-                $this->message=$this->lang->line("MSG_DELETE_SUCCESS");
-                $this->system_list();
-            }
-            else
-            {
-                $ajax['status']=false;
-                $ajax['system_message']=$this->lang->line("MSG_DELETE_FAIL");
-                $this->jsonReturn($ajax);
-            }
-        }
-        else
-        {
-            $ajax['status']=false;
-            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
-            $this->jsonReturn($ajax);
-        }
+        //        if($this->permissions['delete'])
+        //        {
+        //            $user=User_helper::get_user();
+        //            $selected_ids=$this->input->post('selected_ids');
+        //            $this->db->trans_start();  //DB Transaction Handle START
+        //            foreach($selected_ids as $id)
+        //            {
+        //                Query_helper::update($this->config->item('table_divisions'),array('status'=>99,'update_by'=>$user->id,'update_date'=>time()),array("id = ".$id));
+        //            }
+        //            $this->db->trans_complete();   //DB Transaction Handle END
+        //
+        //            if ($this->db->trans_status() === TRUE)
+        //            {
+        //                $this->message=$this->lang->line("MSG_DELETE_SUCCESS");
+        //                $this->system_list();
+        //            }
+        //            else
+        //            {
+        //                $ajax['status']=false;
+        //                $ajax['system_message']=$this->lang->line("MSG_DELETE_FAIL");
+        //                $this->jsonReturn($ajax);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            $ajax['status']=false;
+        //            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
+        //            $this->jsonReturn($ajax);
+        //        }
     }
 
     private function check_validation()
     {
 
         $this->load->library('form_validation');
-        /*
-        $table_name =$this->config->item('table_divisions');
-        if (!$this->db->table_exists($table_name))
-        {
-            $this->message = $this->lang->line('TABLE_NOT_AVAILABLE');
-            return false;
-        }
-        */
-        if($this->warehouse_model->check_existence($this->input->post("division_detail[divname]"),$this->input->post('id'), "divname"))
-        {
-            $this->message = $this->lang->line('DIVISION_NAME_BN_EXISTS');
-            return false;
-        }
-        if($this->warehouse_model->check_existence($this->input->post("division_detail[divnameeng]"),$this->input->post('id'), "divnameeng"))
-        {
-            $this->message = $this->lang->line('DIVISION_NAME_EN_EXISTS');
-            return false;
-        }
-        if($this->warehouse_model->check_existence($this->input->post("division_detail[id]"),$this->input->post('id'), "divid"))
-        {
-            $this->message = $this->lang->line('DIVISION_CODE_EXISTS');
-            return false;
-        }
 
-        $this->form_validation->set_rules('division_detail[divid]',$this->lang->line('DIVISION_CODE'),'required');
-        $this->form_validation->set_rules('division_detail[divname]',$this->lang->line('NAME_BN'),'required');
-        $this->form_validation->set_rules('division_detail[divnameeng]',$this->lang->line('NAME_EN'),'required');
+        $this->form_validation->set_rules('warehouse[warehouse_name]',$this->lang->line('NAME'),'required');
+        $this->form_validation->set_rules('warehouse[status]',$this->lang->line('STATUS'),'required');
 
         if($this->form_validation->run() == FALSE)
         {

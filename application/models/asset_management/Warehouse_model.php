@@ -19,7 +19,7 @@ class Warehouse_model extends CI_Model
         $users = $this->db->get()->result_array();
         foreach($users as &$user)
         {
-            $user['edit_link']=$CI->get_encoded_url('basic_setup/warehouse/index/edit/'.$user['id']);
+            $user['edit_link']=$CI->get_encoded_url('asset_management/warehouse/index/edit/'.$user['id']);
             if($user['status']==$this->config->item('STATUS_ACTIVE'))
             {
                 $user['status_text']=$CI->lang->line('ACTIVE');

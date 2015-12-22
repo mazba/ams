@@ -15,8 +15,8 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
     ?>
 
     <div class="clearfix"></div>
-    <form id="system_save_form" action="<?php echo $CI->get_encoded_url('basic_setup/Division_create/index/save'); ?>" method="post">
-        <input type="hidden" name="id" value="<?php if(isset($warehouse_info['divid'])){echo $warehouse_info['divid'];}else{echo 0;}?>"/>
+    <form id="system_save_form" action="<?php echo $CI->get_encoded_url('asset_management/warehouse/index/save'); ?>" method="post">
+        <input type="hidden" name="id" value="<?php if(isset($warehouse_info['id'])){echo $warehouse_info['id'];}else{echo 0;}?>"/>
         <input type="hidden" name="system_save_new_status"  id="system_save_new_status" value="0"/>
         <div class="row widget">
             <div class="widget-header">
@@ -76,7 +76,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
                     <label class="control-label pull-right"><?php echo $CI->lang->line('STATUS'); ?><span style="color:#FF0000">*</span></label>
                 </div>
                 <div class="col-sm-4 col-xs-8">
-                    <select name="notice_detail[status]" class="form-control" id="module_options">
+                    <select name="warehouse[status]" class="form-control" id="module_options">
                         <?php
                         $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('ACTIVE'),'value'=>$this->config->item('STATUS_ACTIVE')),array('text'=>$CI->lang->line('INACTIVE'),'value'=>$this->config->item('STATUS_INACTIVE'))),'drop_down_selected'=>isset($warehouse_info['status'])?$warehouse_info['status']:$this->config->item('STATUS_ACTIVE')));
                         ?>
