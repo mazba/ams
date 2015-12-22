@@ -40,49 +40,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //COMMON
 $lang['GO_CODE']		= 'জি ও কোড';
 
-// DIVISION
-$lang['DIVISION_NAME']		= 'বিভাগ নাম ';
-$lang['DIVISION_NAME_BN']		= 'বিভাগ নাম ( বাংলা )';
-$lang['DIVISION_NAME_EN']		= 'বিভাগ নাম ( ইংরেজী )';
-$lang['DIVISION_CODE']		= 'বিভাগ কোড';
-
-// ZILLA
-$lang['ZILLA_CREATE_TITLE']		= 'জেলা ব্যবস্থাপনা';
-$lang['ZILLA_NAME_BN']		= 'জেলা নাম  ( বাংলা )';
-
-//UPAZILA
-$lang['UPAZILA_CREATE_TITLE']		= 'উপজেলা ব্যবস্থাপনা';
-$lang['UPAZILA_NAME_BN']		= 'উপজেলা   নাম  ( বাংলা )';
-$lang['UPAZILA_NAME_EN']		= 'উপজেলা   নাম  ( ইংরেজী )';
-// UNION
-$lang['UNION_CREATE_TITLE']		= 'ইউনিয়ন  ব্যবস্থাপনা';
-$lang['UNION_NAME_BN']		= 'ইউনিয়ন    নাম  ( বাংলা )';
-$lang['UNION_NAME_EN']		= 'ইউনিয়ন    নাম  ( ইংরেজী )';
-
-// CITY_CORPORATION
-$lang['CITY_CORPORATION_CREATE_TITLE']		= 'সিটি কর্পোরেশন   ব্যবস্থাপনা';
-$lang['CITY_CORPORATION_NAME_BN']		= 'সিটি কর্পোরেশন     নাম  ( বাংলা )';
-$lang['CITY_CORPORATION_NAME_EN']		= 'সিটি কর্পোরেশন     নাম  ( ইংরেজী )';
-
-// CITY_CORPORATION WARD
-$lang['CITY_CORPORATION_WARD_CREATE_TITLE']		= 'সিটি কর্পোরেশন ওয়ার্ড   ব্যবস্থাপনা';
-$lang['CITY_CORPORATION_WARD_NAME_BN']		= 'সিটি কর্পোরেশন  ওয়ার্ড    নাম  ( বাংলা )';
-$lang['CITY_CORPORATION_WARD_NAME_EN']		= 'সিটি কর্পোরেশন ওয়ার্ড     নাম  ( ইংরেজী )';
-
-// MUNICIPAL
-$lang['MUNICIPAL_CREATE_TITLE']		= 'পৌরসভা     ব্যবস্থাপনা';
-$lang['MUNICIPAL_NAME_BN']		= 'পৌরসভা       নাম  ( বাংলা )';
-$lang['MUNICIPAL_NAME_EN']		= 'পৌরসভা       নাম  ( ইংরেজী )';
-
-// MUNICIPAL WARD
-$lang['MUNICIPAL_WARD_CREATE_TITLE']		= 'পৌরসভা  ওয়ার্ড   ব্যবস্থাপনা';
-$lang['MUNICIPAL_WARD_NAME_BN']		= 'পৌরসভা   ওয়ার্ড    নাম  ( বাংলা )';
-$lang['MUNICIPAL_WARD_NAME_EN']		= 'পৌরসভা  ওয়ার্ড     নাম  ( ইংরেজী )';
-
-// NOTIFICATION
-$lang['DIVISION_NAME_BN_EXISTS']		= 'বিভাগ ( বাংলা ) নামটি বিদ্যমান';
-$lang['DIVISION_NAME_EN_EXISTS']		= 'বিভাগ ( ইংরেজী  ) নামটি বিদ্যমান';
-$lang['DIVISION_CODE_EXISTS']		= 'বিভাগ কোডটি বিদ্যমান';
-
-$lang['ZILLA_NAME_BN_EXISTS']		= 'জেলা নামটি বিদ্যমান';
 

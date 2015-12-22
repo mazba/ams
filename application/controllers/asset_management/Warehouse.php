@@ -19,7 +19,7 @@ class Warehouse extends Root_Controller
         }
         $this->controller_url='asset_management/warehouse';
         $this->load->model("asset_management/warehouse_model");
-        $this->lang->load("basic_setup", $this->get_language());
+        $this->lang->load("asset_management", $this->get_language());
     }
 
     public function index($action='list',$id=0)
