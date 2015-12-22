@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Division_create extends Root_Controller
+class Warehouse extends Root_Controller
 {
     public $permissions;
     public $message;
@@ -11,15 +11,15 @@ class Division_create extends Root_Controller
     {
         parent::__construct();
         $this->message='';
-        $this->permissions=Menu_helper::get_permission('basic_setup/Division_create');
+        $this->permissions=Menu_helper::get_permission('basic_setup/warehouse');
         if($this->permissions)
         {
             $this->permissions['add']=0;
             $this->permissions['delete']=0;
             $this->permissions['view']=0;
         }
-        $this->controller_url='basic_setup/Division_create';
-        $this->load->model("basic_setup/Division_create_model");
+        $this->controller_url='basic_setup/warehouse';
+        $this->load->model("basic_setup/warehouse_model");
         $this->lang->load("basic_setup", $this->get_language());
     }
 
@@ -67,14 +67,14 @@ class Division_create extends Root_Controller
         {
             $this->current_action='list';
             $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/division_create/list","",true));
+            //$ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/list","",true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/Division_create');
+            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/warehouse');
             $ajax['system_page_title']=$this->lang->line("USER_CREATE");
             $this->jsonReturn($ajax);
         }
@@ -107,14 +107,14 @@ class Division_create extends Root_Controller
             );
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/division_create/add_edit",$data,true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/add_edit",$data,true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
 
-            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/Division_create/index/add');
+            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/warehouse/index/add');
             $this->jsonReturn($ajax);
         }
         else
@@ -136,12 +136,12 @@ class Division_create extends Root_Controller
             $data['divisionInfo']=Query_helper::get_info($this->config->item('table_divisions'),'*',array('divid ='.$id),1);
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/division_create/add_edit",$data,true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/add_edit",$data,true));
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/division_create/index/edit/'.$id);
+            $ajax['system_page_url']=$this->get_encoded_url('basic_setup/warehouse/index/edit/'.$id);
             $this->jsonReturn($ajax);
         }
         else
@@ -305,17 +305,17 @@ class Division_create extends Root_Controller
             return false;
         }
         */
-        if($this->Division_create_model->check_existence($this->input->post("division_detail[divname]"),$this->input->post('id'), "divname"))
+        if($this->warehouse_model->check_existence($this->input->post("division_detail[divname]"),$this->input->post('id'), "divname"))
         {
             $this->message = $this->lang->line('DIVISION_NAME_BN_EXISTS');
             return false;
         }
-        if($this->Division_create_model->check_existence($this->input->post("division_detail[divnameeng]"),$this->input->post('id'), "divnameeng"))
+        if($this->warehouse_model->check_existence($this->input->post("division_detail[divnameeng]"),$this->input->post('id'), "divnameeng"))
         {
             $this->message = $this->lang->line('DIVISION_NAME_EN_EXISTS');
             return false;
         }
-        if($this->Division_create_model->check_existence($this->input->post("division_detail[id]"),$this->input->post('id'), "divid"))
+        if($this->warehouse_model->check_existence($this->input->post("division_detail[id]"),$this->input->post('id'), "divid"))
         {
             $this->message = $this->lang->line('DIVISION_CODE_EXISTS');
             return false;
@@ -340,7 +340,7 @@ class Division_create extends Root_Controller
         $divisions = array();
         if($this->permissions['list'])
         {
-            $divisions = $this->Division_create_model->get_record_list();
+            $divisions = $this->warehouse_model->get_record_list();
         }
         $this->jsonReturn($divisions);
     }

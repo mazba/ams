@@ -69,7 +69,6 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => 'vertrigo',
 	'database' => 'asset_mgm',
-	//'database' => 'dcms_data_migrate',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

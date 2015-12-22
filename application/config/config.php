@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/asset_mgm/';
+$config['base_url'] = 'http://localhost/ams/';
 
 /*
 |--------------------------------------------------------------------------
