@@ -1,6 +1,11 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
+$conditions = array();
+foreach($this->config->item('product_condition') as $key=>$dd)
+{
+    $conditions[] = array('text'=>$dd,'value'=>$key);
+}
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -100,10 +105,10 @@ $CI=& get_instance();
                                         </div>
                                         <div class="form-group has-success row">
                                             <div class="col-lg-4">
-                                                <label class="control-label bold" for="unit_price"><?php echo $CI->lang->line('WARRANTY_START_DATE'); ?></label>
+                                                <label class="control-label bold" for="stock_book_no"><?php echo $CI->lang->line('STOCK_BOOK_NO'); ?></label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <input type="text" name="product[warranty_start_date]" value="<?php echo $product['warranty_start_date'];?>" placeholder="<?php echo $CI->lang->line('WARRANTY_START_DATE'); ?>" class="form-control date-picker">
+                                                <input type="text" name="product[stock_book_no]" value="<?php echo $product['stock_book_no'];?>" placeholder="<?php echo $CI->lang->line('STOCK_BOOK_NO'); ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group has-success row">
@@ -118,18 +123,18 @@ $CI=& get_instance();
                                     <div class="col-md-6">
                                         <div class="form-group has-success row">
                                             <div class="col-lg-4">
-                                                <label class="control-label bold" for="warranty_end_date"><?php echo $CI->lang->line('WARRANTY_END_DATE'); ?></label>
+                                                <label class="control-label bold" for="unit_price"><?php echo $CI->lang->line('WARRANTY_START_DATE'); ?></label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <input type="text" name="product[warranty_end_date]" value="<?php echo $product['warranty_end_date'];?>" placeholder="<?php echo $CI->lang->line('WARRANTY_END_DATE'); ?>" class="form-control">
+                                                <input type="text" name="product[warranty_start_date]" value="<?php echo System_helper::display_date($product['warranty_start_date']);?>" placeholder="<?php echo $CI->lang->line('WARRANTY_START_DATE'); ?>" class="form-control date-picker">
                                             </div>
                                         </div>
                                         <div class="form-group has-success row">
                                             <div class="col-lg-4">
-                                                <label class="control-label bold" for="stock_book_no"><?php echo $CI->lang->line('STOCK_BOOK_NO'); ?></label>
+                                                <label class="control-label bold" for="warranty_end_date"><?php echo $CI->lang->line('WARRANTY_END_DATE'); ?></label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <input type="text" name="product[stock_book_no]" value="<?php echo $product['stock_book_no'];?>" placeholder="<?php echo $CI->lang->line('STOCK_BOOK_NO'); ?>" class="form-control">
+                                                <input type="text" name="product[warranty_end_date]" value="<?php echo System_helper::display_date($product['warranty_end_date']);?>" placeholder="<?php echo $CI->lang->line('WARRANTY_END_DATE'); ?>" class="form-control date-picker">
                                             </div>
                                         </div>
                                         <div class="form-group has-success row">
@@ -145,7 +150,7 @@ $CI=& get_instance();
                                                 <label class="control-label bold" for="purchase_order_no"><?php echo $CI->lang->line('PURCHASE_DATE'); ?></label>
                                             </div>
                                             <div class="col-lg-8">
-                                                <input type="text" name="product[purchase_date]" value="<?php echo $product['purchase_date'];?>" placeholder="<?php echo $CI->lang->line('PURCHASE_DATE'); ?>" class="form-control">
+                                                <input type="text" name="product[purchase_date]" value="<?php echo System_helper::display_date($product['purchase_date']);?>" placeholder="<?php echo $CI->lang->line('PURCHASE_DATE'); ?>" class="form-control date-picker">
                                             </div>
                                         </div>
                                         <div class="form-group has-success row">
@@ -159,7 +164,7 @@ $CI=& get_instance();
                                         <div class="form-group has-error row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('CATEGORY'); ?></label></div>
                                             <div class="col-lg-8">
-                                                <select name="manufacture[category_id]" class="form-control" >
+                                                <select name="product[category_id]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$category,'drop_down_selected'=>$product['category_id']));
                                                     ?>
@@ -169,7 +174,7 @@ $CI=& get_instance();
                                         <div class="form-group has-error row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('MANUFACTURE'); ?></label></div>
                                             <div class="col-lg-8">
-                                                <select name="manufacture[manufacture_id]" class="form-control" >
+                                                <select name="product[manufacture_id]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$manufacture,'drop_down_selected'=>$product['manufacture_id']));
                                                     ?>
@@ -180,7 +185,7 @@ $CI=& get_instance();
                                         <div class="form-group has-error row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('WAREHOUSE'); ?></label></div>
                                             <div class="col-lg-8">
-                                                <select name="manufacture[warehouse_id]" class="form-control" >
+                                                <select name="product[warehouse_id]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$warehouse,'drop_down_selected'=>$product['warehouse_id']));
                                                     ?>
@@ -190,9 +195,20 @@ $CI=& get_instance();
                                         <div class="form-group has-success row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('SUPPLIER'); ?></label></div>
                                             <div class="col-lg-8">
-                                                <select name="manufacture[supplier_id]" class="form-control" >
+                                                <select name="product[supplier_id]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$supplier,'drop_down_selected'=>$product['supplier_id']));
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group has-success row">
+                                            <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('CONDITION'); ?></label></div>
+                                            <div class="col-lg-8">
+                                                <select name="product[condition]" class="form-control" >
+                                                    <?php
+                                                    $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$conditions,'drop_down_selected'=>$product['condition']));
                                                     ?>
                                                 </select>
                                             </div>
@@ -201,7 +217,7 @@ $CI=& get_instance();
                                         <div class="form-group has-error row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('STATUS'); ?></label></div>
                                             <div class="col-lg-8">
-                                                <select name="manufacture[status]" class="form-control" >
+                                                <select name="product[status]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('ACTIVE'),'value'=>$this->config->item('STATUS_ACTIVE')),array('text'=>$CI->lang->line('INACTIVE'),'value'=>$this->config->item('STATUS_INACTIVE'))),'drop_down_selected'=>isset($product['status'])?$product['status']:$this->config->item('STATUS_ACTIVE')));
                                                     ?>
@@ -224,7 +240,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        
+        $('.date-picker').datepicker()
     });
 </script>
 

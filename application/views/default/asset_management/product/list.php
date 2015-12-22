@@ -30,7 +30,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        var url = "<?php echo $CI->get_encoded_url('asset_management/manufacture/get_list');?>";
+        var url = "<?php echo $CI->get_encoded_url('asset_management/product/get_list');?>";
 
         // prepare the data
         var source =
@@ -39,9 +39,10 @@ $CI=& get_instance();
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
-                { name: 'manufacture_name', type: 'string' },
-                { name: 'manufacture_code', type: 'string' },
-                { name: 'manufacture_description', type: 'string' },
+                { name: 'product_name', type: 'string' },
+                { name: 'product_code', type: 'string' },
+                { name: 'item_unit', type: 'string' },
+                { name: 'status_text', type: 'string' },
                 { name: 'status', type: 'string' }
             ],
             id: 'id',
@@ -66,9 +67,9 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_NAME'); ?>', dataField: 'manufacture_name', width:'30%'},
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_CODE'); ?>', dataField: 'manufacture_code', width:'10%'},
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_DESCRIPTION'); ?>', dataField: 'manufacture_description', width:'50%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'60%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_CODE'); ?>', dataField: 'product_code', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('ITEM_UNIT'); ?>', dataField: 'item_unit', width:'20%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
                 ]
             });

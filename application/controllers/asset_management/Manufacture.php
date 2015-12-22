@@ -250,8 +250,8 @@ class Manufacture extends Root_Controller
 
     private function system_batch_edit()
     {
-        //        $selected_ids=$this->input->post('selected_ids');
-        //        $this->system_edit($selected_ids[0]);
+                $selected_ids=$this->input->post('selected_ids');
+                $this->system_edit($selected_ids[0]);
     }
 
     private function system_batch_delete()

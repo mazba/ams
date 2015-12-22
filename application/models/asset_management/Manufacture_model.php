@@ -30,7 +30,7 @@ class Manufacture_model extends CI_Model
             }
             else
             {
-                $user['status_text']=$result['status'];
+                $result['status_text']=$result['status'];
             }
         }
         return $results;
