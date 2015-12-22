@@ -14,7 +14,6 @@ class Warehouse extends Root_Controller
         $this->permissions=Menu_helper::get_permission('basic_setup/warehouse');
         if($this->permissions)
         {
-            $this->permissions['add']=0;
             $this->permissions['delete']=0;
             $this->permissions['view']=0;
         }
@@ -96,14 +95,17 @@ class Warehouse extends Root_Controller
             $ajax['status']=true;
             $data=array();
 
-            $data['title']=$this->lang->line("CREATE_NEW_USER");
+            $data['title']=$this->lang->line("CREATE_NEW_WAREHOUSE");
 
-            $data['divisionInfo'] = array
+            $data['warehouse_info'] = array
             (
                 'id'=>'',
-                'divid'=>'',
-                'divname'=>'',
-                'divnameeng'=>''
+                'warehouse_name'=>'',
+                'warehouse_code'=>'',
+                'warehouse_address'=>'',
+                'warehouse_capacity'=>'',
+                'warehouse_description'=>'',
+                'status'=>'',
             );
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
@@ -132,8 +134,8 @@ class Warehouse extends Root_Controller
             $ajax['status']=true;
             $data=array();
 
-            $data['title']=$this->lang->line("EDIT_USER");
-            $data['divisionInfo']=Query_helper::get_info($this->config->item('table_divisions'),'*',array('divid ='.$id),1);
+            $data['title']=$this->lang->line("EDIT_WAREHOUSE");
+            $data['warehouse_info']=Query_helper::get_info($this->config->item('table_warehouse'),'*',array('id ='.$id),1);
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("basic_setup/warehouse/add_edit",$data,true));

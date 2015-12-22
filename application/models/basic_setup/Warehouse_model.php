@@ -14,12 +14,24 @@ class Warehouse_model extends CI_Model
     {
         $CI =& get_instance();
         //$this->db->select('*');
-        $this->db->from($CI->config->item('table_divisions'));
+        $this->db->from($CI->config->item('table_warehouse'));
 
         $users = $this->db->get()->result_array();
         foreach($users as &$user)
         {
             $user['edit_link']=$CI->get_encoded_url('basic_setup/warehouse/index/edit/'.$user['id']);
+            if($user['status']==$this->config->item('STATUS_ACTIVE'))
+            {
+                $user['status_text']=$CI->lang->line('ACTIVE');
+            }
+            else if($user['status']==$this->config->item('STATUS_INACTIVE'))
+            {
+                $user['status_text']=$CI->lang->line('INACTIVE');
+            }
+            else
+            {
+                $user['status_text']=$user['status'];
+            }
         }
         return $users;
     }
