@@ -69,10 +69,10 @@ $CI=& get_instance();
 
                 columns: [
                     { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'user_name', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('USERNAME'); ?>', dataField: 'username', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'username', width:'20%'},
                     { text: '<?php echo $CI->lang->line('EMAIL'); ?>', dataField: 'email', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('MOBILE'); ?>', dataField: 'mobile', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('GROUP'); ?>', dataField: 'group_name',filtertype: 'checkedlist', width:'12%'},
+                    { text: '<?php echo $CI->lang->line('MOBILE_NUMBER'); ?>', dataField: 'mobile', width:'15%'},
+                    { text: '<?php echo $CI->lang->line('GROUP_NAME'); ?>', dataField: 'group_name',filtertype: 'checkedlist', width:'12%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text',filtertype: 'checkedlist', width:'10%'}
                 ]
             });

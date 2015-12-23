@@ -14,8 +14,9 @@ class Ticket_issue extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_issue');
         if($this->permissions)
         {
+            //$this->permissions['edit']=0;
             $this->permissions['delete']=0;
-            $this->permissions['view']=0;
+            //$this->permissions['view']=0;
         }
         $this->controller_url='ticket_management/ticket_issue';
         $this->load->model("ticket_management/ticket_issue_model");
@@ -48,7 +49,7 @@ class Ticket_issue extends Root_Controller
         }
         elseif($action=='batch_details')
         {
-            $this->system_batch_details();
+            $this->system_batch_details($id);
         }
         elseif($action=='batch_delete')
         {
@@ -73,7 +74,7 @@ class Ticket_issue extends Root_Controller
                 $ajax['system_message']=$this->message;
             }
             $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_issue');
-            $ajax['system_page_title']=$this->lang->line("product_category");
+            $ajax['system_page_title']=$this->lang->line("LIST_TICKET_ISSUE");
             $this->jsonReturn($ajax);
         }
         else
@@ -85,7 +86,6 @@ class Ticket_issue extends Root_Controller
 
     private function system_add()
     {
-
 
         if($this->permissions['add'])
         {
@@ -110,13 +110,16 @@ class Ticket_issue extends Root_Controller
             if($user->user_group_level==$this->config->item('END_GROUP_ID') || $user->user_group_level==$this->config->item('TOP_MANAGEMENT_GROUP_ID') || $user->user_group_level==$this->config->item('SUPPORT_GROUP_ID') || $user->user_group_level==$this->config->item('OPERATOR_GROUP_ID'))
             {
                 $user_condition=array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$user->id);
+                $data['products'] = $this->ticket_issue_model->get_product($user->id);
             }
             else
             {
                 $user_condition=array('status = '.$this->config->item('STATUS_ACTIVE'));
+                $data['products'] = array();
             }
+
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), $user_condition);
-            $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
+            // $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), $product_condition);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_issue/add_edit",$data,true));
 
             if($this->message)
@@ -142,16 +145,47 @@ class Ticket_issue extends Root_Controller
             $ajax['status']=true;
             $data=array();
 
-            $data['title']=$this->lang->line("EDIT_CATEGORY");
+            $data['title']=$this->lang->line("EDIT_TICKET_ISSUE");
             $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),'*',array('id ='.$id),1);
-            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
-            $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
+
+            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
+            $data['products'] = $this->ticket_issue_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_issue/add_edit",$data,true));
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
             $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_issue/index/edit/'.$id);
+            $this->jsonReturn($ajax);
+        }
+        else
+        {
+            $ajax['status']=true;
+            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
+            $this->jsonReturn($ajax);
+        }
+    }
+
+    private function system_batch_details($id)
+    {
+        if($this->permissions['view'])
+        {
+            $this->current_action='view';
+            $ajax['status']=true;
+            $data=array();
+
+            $data['title']=$this->lang->line("VIEW_DETAILS_TICKET_ISSUE");
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),'*',array('id ='.$id),1);
+
+            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
+            $data['products'] = $this->ticket_issue_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_issue/details",$data,true));
+            if($this->message)
+            {
+                $ajax['system_message']=$this->message;
+            }
+
+            $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_issue/index/batch_details/'.$id);
             $this->jsonReturn($ajax);
         }
         else
@@ -338,6 +372,13 @@ class Ticket_issue extends Root_Controller
         $this->jsonReturn($ticket_issues);
     }
 
-
+    public function ajax_product_load()
+    {
+        $user_id=$this->input->post('user_id');
+        $products = $this->ticket_issue_model->get_product($user_id);
+        $ajax['status']=true;
+        $ajax['system_content'][]=array("id"=>"#product_id","html"=>$this->load_view("dropdown",array('drop_down_options'=>$products),true));
+        $this->jsonReturn($ajax);
+    }
 
 }

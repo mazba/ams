@@ -64,7 +64,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script type="text/javascript">
         var base_url = "<?php echo base_url(); ?>";
         var site_url = "<?php echo site_url(); ?>";
-        var display_date_format = "yy-mm-dd";
+        var display_date_format = "dd-mm-yy";
         var SELCET_ONE_ITEM = "<?php echo $CI->lang->line('SELECT_ONE_ITEM'); ?>";
         var DELETE_CONFIRM = "<?php echo $CI->lang->line('DELETE_CONFIRM'); ?>";
 

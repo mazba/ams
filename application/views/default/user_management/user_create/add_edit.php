@@ -95,7 +95,7 @@ $CI=& get_instance();
                                 <div class="form-group has-success row">
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('DATE_OF_BIRTH'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <input type="text" name="user_detail[dob]" value="<?php echo $userInfo['dob']?date('d-m-Y',$userInfo['dob']):'';?>" placeholder="<?php echo $CI->lang->line('DATE_OF_BIRTH'); ?>" class="form-control datepicker">
+                                        <input type="text" name="user_detail[dob]" value="<?php echo $userInfo['dob']?date('m/d/Y',$userInfo['dob']):'';?>" placeholder="<?php echo $CI->lang->line('DATE_OF_BIRTH'); ?>" class="form-control date-picker">
                                     </div>
                                 </div>
                                 <div class="form-group has-error row">
@@ -172,8 +172,9 @@ $CI=& get_instance();
 <script type="text/javascript">
     $(document).ready(function ()
     {
+
         turn_off_triggers();
-        
+        $('.date-picker').datepicker()
     });
 </script>
 

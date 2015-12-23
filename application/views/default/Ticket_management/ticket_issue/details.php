@@ -126,11 +126,31 @@ $user=User_helper::get_user();
                                 <div class="form-group has-error row" style="<?php if(!($ticket['id']>0)){echo 'display:none';} ?>" id="module_container">
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <select name="ticket[status]" class="form-control" >
+                                        <label class="control-label bold" for="name_en">
                                             <?php
-                                            $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('PENDING'),'value'=>$this->config->item('STATUS_PENDING')),array('text'=>$CI->lang->line('RESOLVE'),'value'=>$this->config->item('STATUS_RESOLVE'))),'drop_down_selected'=>isset($ticket['status'])?$ticket['status']:$this->config->item('STATUS_PENDING')));
+
+                                            if($ticket['status']==$this->config->item('STATUS_PENDING'))
+                                            {
+                                                ?>
+                                                <label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('PENDING'); ?></label>
+                                                <?php
+                                            }
+                                            elseif($ticket['status']==$this->config->item('STATUS_RESOLVE'))
+                                            {
+                                                ?>
+                                                <label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE'); ?></label>
+                                                <?php
+                                            }
+                                            else
+                                            {
+                                                ?>
+
+                                                <?php
+                                            }
+
                                             ?>
-                                        </select>
+                                        </label>
+
                                     </div>
                                 </div>
                             </div>

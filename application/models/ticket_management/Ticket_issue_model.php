@@ -38,7 +38,7 @@ class Ticket_issue_model extends CI_Model
         //echo $this->db->last_query();
         foreach($users as &$user)
         {
-            $user['edit_link']=$CI->get_encoded_url('ticket_management/ticket_issue/index/edit/'.$user['id']);
+            $user['edit_link']=$CI->get_encoded_url('ticket_management/ticket_issue/index/batch_details/'.$user['id']);
             if($user['status']==$this->config->item('STATUS_PENDING'))
             {
                 $user['status_text']=$CI->lang->line('PENDING');
@@ -54,6 +54,31 @@ class Ticket_issue_model extends CI_Model
             $user['create_date_time']=date('h:i A - d M,y',$user['create_date']);
         }
         return $users;
+    }
+
+    public function get_product($user_id, $product_id=0)
+    {
+        if(!empty($product_id))
+        {
+            $this->db->where('product.id',$product_id);
+        }
+        $CI =& get_instance();
+        $this->db->select('product.id value, product.product_name text');
+        $CI->db->from($CI->config->item('table_product_assign').' product_assign');
+        $CI->db->join($CI->config->item('table_product').' product','product.id = product_assign.product_id', 'LEFT');
+        $CI->db->join($CI->config->item('table_users').' users','users.id = product_assign.user_id', 'LEFT');
+        $CI->db->where('product_assign.status',$this->config->item('STATUS_ACTIVE'));
+        $CI->db->where('users.id', $user_id);
+        $result=$this->db->get()->result_array();
+        //echo $this->db->last_query();
+        if(sizeof($result)>0)
+        {
+            return $result;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
