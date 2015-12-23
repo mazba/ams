@@ -67,5 +67,24 @@ $lang['COMPANY_OFFICE_PHONE']		= 'প্রতিষ্ঠানের ফোন
 $lang['CONTACT_PERSON']		= 'যোগাযোগ ব্যক্তির নাম';
 $lang['CONTACT_PERSON_PHONE']		= 'যোগাযোগ ব্যক্তির মোবাইল নাম্বার';
 $lang['COMPANY_OFFICE_FAX']		= 'প্রতিষ্ঠানেরর ফ্যাক্স নাম্বার';
+$lang['PRODUCT_CODE']		= 'প্রোডাক্ট কোড';
+$lang['SERIAL_NUMBER']		= 'ক্রমিক সংখ্যা';
+$lang['UNIT_PRICE']		= 'ইউনিট মূল্য';
+$lang['ITEM_UNIT']		= 'আইটেম ইউনিট';
+$lang['SORT_DESCRIPTION'] = 'সংক্ষিপ্ত বর্ণনা';
+$lang['SPECIFICATION'] = 'স্পেসিফিকেশন';
+$lang['MODEL_NO'] = 'মডেল নাম্বার';
+$lang['STOCK_BOOK_NO'] = 'স্টক বই সংখ্যা';
+$lang['REMARKS'] = 'মন্তব্য';
+$lang['WARRANTY_START_DATE'] = 'ওয়্যারেন্টি শুরুর তারিখ';
+$lang['WARRANTY_END_DATE'] = 'ওয়্যারেন্টি শেষ তারিখ';
+$lang['PURCHASE_ORDER_NO'] = 'ক্রয় অর্ডার সংখ্যা';
+$lang['PURCHASE_DATE'] = 'ক্রয়ের তারিখ';
+$lang['OTHERS'] = 'অন্যান্য';
+$lang['CATEGORY'] = 'ক্যটাগরি';
+$lang['MANUFACTURE'] = 'প্রস্তুতকারক';
+$lang['WAREHOUSE'] = 'পণ্যাগার';
+$lang['SUPPLIER'] = 'সরবরাহকারী';
+$lang['CONDITION'] = 'অবস্থা';
 
 
