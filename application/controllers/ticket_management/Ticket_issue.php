@@ -232,7 +232,7 @@ class Ticket_issue extends Root_Controller
             }
             else
             {
-                $ticket_detail['status']=$this->config->item('STATUS_ACTIVE');
+                $ticket_detail['status']=$this->config->item('STATUS_PENDING');
                 $ticket_detail['create_by']=$user->id;
                 $ticket_detail['create_date']=time();
 

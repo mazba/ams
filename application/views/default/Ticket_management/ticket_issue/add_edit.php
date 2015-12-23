@@ -35,7 +35,7 @@ $CI=& get_instance();
                             <input type="hidden" name="system_save_new_status"  id="system_save_new_status" value="0"/>
                             <div class="form-body">
                                 <div class="form-group has-error row" >
-                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('USER_NAME'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('NAME'); ?></label></div>
                                     <div class="col-lg-8">
                                         <select name="ticket[user_id]" class="form-control" >
                                             <?php
@@ -59,7 +59,7 @@ $CI=& get_instance();
                                         <label class="control-label bold" for="name_en"><?php echo $CI->lang->line('SUBJECT'); ?></label>
                                     </div>
                                     <div class="col-lg-8">
-                                        <input type="text" name="ticket[subject]" value="<?php echo $ticket['subject'];?>" placeholder="<?php echo $CI->lang->line('USER_NAME'); ?>" class="form-control">
+                                        <input type="text" name="ticket[subject]" value="<?php echo $ticket['subject'];?>" placeholder="<?php echo $CI->lang->line('SUBJECT'); ?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group has-success row">
@@ -73,7 +73,7 @@ $CI=& get_instance();
                                     <div class="col-lg-8">
                                         <select name="ticket[status]" class="form-control" >
                                             <?php
-                                            $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('ACTIVE'),'value'=>$this->config->item('STATUS_ACTIVE')),array('text'=>$CI->lang->line('INACTIVE'),'value'=>$this->config->item('STATUS_INACTIVE'))),'drop_down_selected'=>isset($ticket['status'])?$ticket['status']:$this->config->item('STATUS_ACTIVE')));
+                                            $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('PENDING'),'value'=>$this->config->item('STATUS_PENDING')),array('text'=>$CI->lang->line('RESOLVE'),'value'=>$this->config->item('STATUS_RESOLVE'))),'drop_down_selected'=>isset($ticket['status'])?$ticket['status']:$this->config->item('STATUS_PENDING')));
                                             ?>
                                         </select>
                                     </div>

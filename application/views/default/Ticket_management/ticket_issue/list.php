@@ -67,10 +67,11 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('TICKET'); ?>', dataField: 'token', width:'20%'},
+                    //{ text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'token', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'id', width:'15%'},
                     { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'40%'},
                     { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'17%'},
-                    { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'15%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
                 ]
             });

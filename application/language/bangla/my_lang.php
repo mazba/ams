@@ -31,6 +31,8 @@ $lang['SELECT'] = '--- নির্বাচন করুন ---';
 $lang['SELECT_ALL'] = 'সকল নির্বাচন করুন';
 $lang['ACTIVE'] = 'সক্রিয়';
 $lang['INACTIVE'] = 'নিষ্ক্রিয়';
+$lang['PENDING'] = 'অপেক্ষারত।';
+$lang['RESOLVE'] = 'সমাধান করা হয়েছে।';
 
 $lang['CODE'] = 'কোড';
 $lang['ADDRESS'] = 'ঠিকানা';

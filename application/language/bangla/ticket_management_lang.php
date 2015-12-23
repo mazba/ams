@@ -39,3 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //COMMON
 $lang['NEW_TICKET_ISSUE']		= 'নতুন টিকেট ইস্যু';
+$lang['PRODUCT_NAME']		= 'পণ্যের নাম';
+$lang['SUBJECT']		= 'বিষয়';
+$lang['TIME']		= 'সময়';
+$lang['TOKEN']		= 'টোকেন';

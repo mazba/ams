@@ -39,19 +39,19 @@ class Ticket_issue_model extends CI_Model
         foreach($users as &$user)
         {
             $user['edit_link']=$CI->get_encoded_url('ticket_management/ticket_issue/index/edit/'.$user['id']);
-            if($user['status']==$this->config->item('STATUS_ACTIVE'))
+            if($user['status']==$this->config->item('STATUS_PENDING'))
             {
-                $user['status_text']=$CI->lang->line('ACTIVE');
+                $user['status_text']=$CI->lang->line('PENDING');
             }
-            else if($user['status']==$this->config->item('STATUS_INACTIVE'))
+            else if($user['status']==$this->config->item('STATUS_RESOLVE'))
             {
-                $user['status_text']=$CI->lang->line('INACTIVE');
+                $user['status_text']=$CI->lang->line('RESOLVE');
             }
             else
             {
                 $user['status_text']=$user['status'];
             }
-            $user['create_date_time']=date('h:i:s A d M, Y',$user['create_date']);
+            $user['create_date_time']=date('h:i A - d M,y',$user['create_date']);
         }
         return $users;
     }
