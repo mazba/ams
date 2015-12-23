@@ -14,7 +14,7 @@ class Ticket_assign extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_assign');
         if($this->permissions)
         {
-            $this->permissions['edit']=0;
+            //$this->permissions['edit']=0;
             $this->permissions['delete']=0;
             //$this->permissions['view']=0;
         }
@@ -73,7 +73,7 @@ class Ticket_assign extends Root_Controller
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_issue');
+            $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_assign');
             $ajax['system_page_title']=$this->lang->line("LIST_TICKET_ASSIGN");
             $this->jsonReturn($ajax);
         }
@@ -99,27 +99,13 @@ class Ticket_assign extends Root_Controller
             $data['ticket'] = array
             (
                 'id'=>'',
+                'ticket_issue_id'=>'',
                 'user_id'=>'',
-                'product_id'=>'',
-                'subject'=>'',
-                'ticket_issue_description'=>'',
                 'status'=>'',
             );
-            $user=User_helper::get_user();
 
-            if($user->user_group_level==$this->config->item('END_GROUP_ID') || $user->user_group_level==$this->config->item('TOP_MANAGEMENT_GROUP_ID') || $user->user_group_level==$this->config->item('SUPPORT_GROUP_ID') || $user->user_group_level==$this->config->item('OPERATOR_GROUP_ID'))
-            {
-                $user_condition=array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$user->id);
-                $data['products'] = $this->ticket_assign_model->get_product($user->id);
-            }
-            else
-            {
-                $user_condition=array('status = '.$this->config->item('STATUS_ACTIVE'));
-                $data['products'] = array();
-            }
-
-            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), $user_condition);
-            // $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), $product_condition);
+            $data['users'] = $this->ticket_assign_model->get_user();
+            $data['ticket_issues'] = $this->ticket_assign_model->get_ticket_issue();
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/add_edit",$data,true));
 
             if($this->message)
@@ -148,8 +134,11 @@ class Ticket_assign extends Root_Controller
             $data['title']=$this->lang->line("EDIT_TICKET_ASSIGN");
             $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('id ='.$id),1);
 
+            //$data['users'] = $this->ticket_assign_model->get_user();
+            $data['ticket_issues'] = $this->ticket_assign_model->get_ticket_issue($data['ticket']['user_id']);
+
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
-            $data['products'] = $this->ticket_assign_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
+            //$data['products'] = $this->ticket_assign_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/add_edit",$data,true));
             if($this->message)
             {
@@ -175,10 +164,11 @@ class Ticket_assign extends Root_Controller
             $data=array();
 
             $data['title']=$this->lang->line("VIEW_DETAILS_TICKET_ASSIGN");
-            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('id ='.$id),1);
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('user_id ='.$id),1);
 
-            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
-            $data['products'] = $this->ticket_assign_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
+            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$id));
+            $data['ticket_issues'] = $this->ticket_assign_model->get_ticket_assign($id);
+            //$data['products'] = $this->ticket_assign_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/details",$data,true));
             if($this->message)
             {
@@ -229,40 +219,43 @@ class Ticket_assign extends Root_Controller
         }
         else
         {
-            $ticket_detail = $this->input->post('ticket');
+            $user_id=$this->input->post('user_id');
+            //$row_id=$this->input->post('row_id');
+            $ticket_issue_id=$this->input->post('ticket_issue_id');
+            $count=count($this->input->post('row_id'));
 
             if($id>0)
             {
-                unset($ticket_detail['id']);
-
-                $ticket_detail['update_by']=$user->id;
-                $ticket_detail['update_date']=time();
-
-                $this->db->trans_start();  //DB Transaction Handle START
-
-                Query_helper::update($this->config->item('table_ticket_assign'),$ticket_detail,array("id = ".$id));
-
-                $this->db->trans_complete();   //DB Transaction Handle END
-
-                if ($this->db->trans_status() === TRUE)
-                {
-                    $this->message=$this->lang->line("MSG_UPDATE_SUCCESS");
-                    $save_and_new=$this->input->post('system_save_new_status');
-                    if($save_and_new==1)
-                    {
-                        $this->system_add();
-                    }
-                    else
-                    {
-                        $this->system_list();
-                    }
-                }
-                else
-                {
-                    $ajax['status']=false;
-                    $ajax['system_message']=$this->lang->line("MSG_UPDATE_FAIL");
-                    $this->jsonReturn($ajax);
-                }
+                //                unset($ticket_detail['id']);
+                //
+                //                $ticket_detail['update_by']=$user->id;
+                //                $ticket_detail['update_date']=time();
+                //
+                //                $this->db->trans_start();  //DB Transaction Handle START
+                //
+                //                Query_helper::update($this->config->item('table_ticket_assign'),$ticket_detail,array("id = ".$id));
+                //
+                //                $this->db->trans_complete();   //DB Transaction Handle END
+                //
+                //                if ($this->db->trans_status() === TRUE)
+                //                {
+                //                    $this->message=$this->lang->line("MSG_UPDATE_SUCCESS");
+                //                    $save_and_new=$this->input->post('system_save_new_status');
+                //                    if($save_and_new==1)
+                //                    {
+                //                        $this->system_add();
+                //                    }
+                //                    else
+                //                    {
+                //                        $this->system_list();
+                //                    }
+                //                }
+                //                else
+                //                {
+                //                    $ajax['status']=false;
+                //                    $ajax['system_message']=$this->lang->line("MSG_UPDATE_FAIL");
+                //                    $this->jsonReturn($ajax);
+                //                }
             }
             else
             {
@@ -270,9 +263,22 @@ class Ticket_assign extends Root_Controller
                 $ticket_detail['create_by']=$user->id;
                 $ticket_detail['create_date']=time();
 
-                $this->db->trans_start();  //DB Transaction Handle START
+                $ticket_issue_detail['status']=$this->config->item('STATUS_ASSIGN');
+                $ticket_issue_detail['create_by']=$user->id;
+                $ticket_issue_detail['create_date']=time();
 
-                Query_helper::add($this->config->item('table_ticket_assign'),$ticket_detail);
+                $this->db->trans_start();  //DB Transaction Handle START
+                for($i=0;$i<$count;$i++)
+                {
+                    if(isset($ticket_issue_id[$i]))
+                    {
+                        //echo $ticket_issue_id[$i]."<br />";
+                        $ticket_detail['user_id']=$user_id;
+                        $ticket_detail['ticket_issue_id']=$ticket_issue_id[$i];
+                        Query_helper::add($this->config->item('table_ticket_assign'),$ticket_detail);
+                        Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
+                    }
+                }
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -343,14 +349,7 @@ class Ticket_assign extends Root_Controller
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('ticket[user_id]',$this->lang->line('USER_NAME'),'required');
-        $this->form_validation->set_rules('ticket[product_id]',$this->lang->line('PRODUCT_NAME'),'required');
-        $this->form_validation->set_rules('ticket[subject]',$this->lang->line('SUBJECT'),'required');
-
-        if($this->input->post('id')>0)
-        {
-            $this->form_validation->set_rules('ticket[status]',$this->lang->line('STATUS'),'required');
-        }
+        $this->form_validation->set_rules('user_id',$this->lang->line('USER_NAME'),'required');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -372,13 +371,5 @@ class Ticket_assign extends Root_Controller
         $this->jsonReturn($ticket_assigns);
     }
 
-    public function ajax_product_load()
-    {
-        $user_id=$this->input->post('user_id');
-        $products = $this->ticket_assign_model->get_product($user_id);
-        $ajax['status']=true;
-        $ajax['system_content'][]=array("id"=>"#product_id","html"=>$this->load_view("dropdown",array('drop_down_options'=>$products),true));
-        $this->jsonReturn($ajax);
-    }
 
 }

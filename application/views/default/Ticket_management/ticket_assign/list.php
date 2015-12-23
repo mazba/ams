@@ -30,7 +30,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        var url = "<?php echo $CI->get_encoded_url('ticket_management/ticket_issue/get_list');?>";
+        var url = "<?php echo $CI->get_encoded_url('ticket_management/ticket_assign/get_list');?>";
 
         // prepare the data
         var source =
@@ -39,11 +39,8 @@ $CI=& get_instance();
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
-                { name: 'token', type: 'string' },
-                { name: 'subject', type: 'string' },
-                { name: 'product_name', type: 'string' },
-                { name: 'create_date_time', type: 'string' },
-                { name: 'status_text', type: 'string' }
+                { name: 'name_bn', type: 'string' },
+                { name: 'ticket_issue_id', type: 'string' }
             ],
             id: 'id',
             url: url
@@ -67,12 +64,8 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    //{ text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'token', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'id', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'40%'},
-                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'17%'},
-                    { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'name_bn', width:'70%'},
+                    { text: '<?php echo $CI->lang->line('NUMBER_OF_ISSUE'); ?>', dataField: 'ticket_issue_id', width:'27%'}
                 ]
             });
         //for Double Click to edit

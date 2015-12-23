@@ -25,7 +25,8 @@ $config['STATUS_REJECT']=2;   // USER DENY
 $config['STATUS_SUSPEND']=3;
 $config['STATUS_TEMPORARY_SUSPEND']=4;
 $config['STATUS_PENDING']=5;
-$config['STATUS_RESOLVE']=6;
+$config['STATUS_ASSIGN']=6;
+$config['STATUS_RESOLVE']=7;
 $config['STATUS_DELETE']=99;
 
 //////// USER HIGHER KEY

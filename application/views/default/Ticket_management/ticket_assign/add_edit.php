@@ -2,6 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
 $user=User_helper::get_user();
+
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -31,98 +32,91 @@ $user=User_helper::get_user();
                         </div>
                     </div>
                     <div class="portlet-body form">
-                        <form id="system_save_form" action="<?php echo $CI->get_encoded_url('ticket_management/ticket_issue/index/save'); ?>" method="post">
+                        <form id="system_save_form" action="<?php echo $CI->get_encoded_url('ticket_management/ticket_assign/index/save'); ?>" method="post">
                             <input type="hidden" name="id" value="<?php echo $ticket['id'];?>"/>
                             <input type="hidden" name="system_save_new_status"  id="system_save_new_status" value="0"/>
                             <div class="form-body">
                                 <div class="form-group has-error row" >
-                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('NAME'); ?></label></div>
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('USER_NAME'); ?></label></div>
                                     <div class="col-lg-8">
-                                        <?php
-                                        if(sizeof($users)<2)
-                                        {
+                                        <select name="user_id" class="form-control" id="user_id">
+                                            <?php
+                                            $CI->load_view('dropdown',array('drop_down_options'=>$users,'drop_down_selected'=>$ticket['user_id']));
                                             ?>
-                                            <label class="control-label bold" for="name_bn"><?php echo $users[0]['text'];?></label>
-                                            <input type="hidden" name="ticket[user_id]" value="<?php echo $users[0]['value'];?>" class="form-control" />
-                                        <?php
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <select name="ticket[user_id]" class="form-control" id="user_id">
-                                                <?php
-                                                $CI->load_view('dropdown',array('drop_down_options'=>$users,'drop_down_selected'=>$ticket['user_id']));
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="portlet light tasks-widget">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart theme-font hide"></i>
+                                            <span class="caption-subject font-blue-madison bold uppercase"><?php echo $this->lang->line('TICKET');?></span>
+                                            <span class="caption-helper"><?php echo sizeof($ticket_issues);?> <?php echo $this->lang->line('PENDING');?></span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="task-content">
+                                            <div data-handle-color="#D7DCE2" data-rail-visible1="0" data-always-visible="1"  class="" data-initialized="1">
+                                                <ul class="feeds">
+                                                    <?php
+                                                    //$ticket_issues='';
+                                                    if(empty($ticket_issues))
+                                                    {
+                                                        ?>
+                                                        <li>
+                                                            <div class="task-title text-center">
+                                                                <span class="label label-sm label-danger"><?php echo $CI->lang->line('DATA_NOT_FOUND'); ?></span>
+                                                                    <span class="task-bell">
+                                                                        <i class="fa fa-bell-o"></i>
+                                                                    </span>
+                                                            </div>
+                                                        </li>
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach($ticket_issues as $ticket_issue)
+                                                        {
+                                                        ?>
+                                                            <li>
+                                                                <div class="col1">
+                                                                    <div class="cont">
+                                                                        <div class="cont-col1">
+                                                                            <div class="label label-sm label-danger">
+                                                                                <i class="fa fa-bullhorn"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="cont-col2">
+                                                                            <div class="desc">
+                                                                                <input type="hidden" name="row_id[]" value="<?php echo $ticket_issue['id'];?>" />
+                                                                                <input type="checkbox" name="ticket_issue_id[]" value="<?php echo $ticket_issue['id'];?>" class="checkbox-inline">
+                                                                                <?php echo $ticket_issue['subject'];?>
+
+                                                                                <span class="label label-sm label-primary"><?php echo $ticket_issue['name_bn'];?></span>
+                                                                                <span class="label label-sm label-success"><?php echo $ticket_issue['product_name'];?></span>
+                                                                                <span class="label label-sm label-danger"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
+                                                                                <span class="badge badge-warning"><?php echo $ticket_issue['id'];?></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col2">
+                                                                    <div class="date">
+                                                                        <?php echo date('d M,y',$ticket_issue['create_date']);?>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        <?php
+                                                        }
+                                                    }
                                                 ?>
-                                            </select>
-                                            <?php
-                                        }
-                                        ?>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group has-error row" >
-                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('PRODUCT_NAME'); ?></label></div>
-                                    <div class="col-lg-8">
-                                        <?php
-                                        if($ticket['id']>0)
-                                        {
-                                            ?>
-                                            <label class="control-label bold" for="name_bn"><?php echo $products[0]['text'];?></label>
-                                            <input type="hidden" name="ticket[product_id]" value="<?php echo $products[0]['value'];?>" class="form-control" />
-                                            <?php
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <select name="ticket[product_id]" class="form-control" id="product_id" >
-                                                <?php
-                                                $CI->load_view('dropdown',array('drop_down_options'=>$products,'drop_down_selected'=>$ticket['product_id']));
-                                                ?>
-                                            </select>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                                <div class="form-group has-error row">
-                                    <div class="col-lg-2">
-                                        <label class="control-label bold" for="name_en"><?php echo $CI->lang->line('SUBJECT'); ?></label>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <?php
-                                        if($ticket['id']>0)
-                                        {
-                                            ?>
-                                            <label class="control-label bold" for="name_en"><?php echo $ticket['subject'];?></label>
-                                            <?php
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <input type="text" name="ticket[subject]" value="<?php echo $ticket['subject'];?>" placeholder="<?php echo $CI->lang->line('SUBJECT'); ?>" class="form-control">
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                                <div class="form-group has-success row">
-                                    <div class="col-lg-2"><label class="control-label bold" for="controller"><?php echo $CI->lang->line('DESCRIPTION'); ?></label></div>
-                                    <div class="col-lg-8">
-                                        <?php
-                                        if($ticket['id']>0)
-                                        {
-                                            ?>
-                                            <label class="control-label bold" for="name_en"><?php echo $ticket['ticket_issue_description'];?></label>
-                                            <?php
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <textarea class="form-control" name="ticket[ticket_issue_description]"  rows="3"><?php echo $ticket['ticket_issue_description'];?></textarea>
-                                            <?php
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
+
                                 <div class="form-group has-error row" style="<?php if(!($ticket['id']>0)){echo 'display:none';} ?>" id="module_container">
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
                                     <div class="col-lg-8">
@@ -149,24 +143,24 @@ $user=User_helper::get_user();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        $(document).on("change","#user_id",function()
-        {
-            $.ajax({
-                url: '<?php echo $CI->get_encoded_url('ticket_management/ticket_issue/ajax_product_load'); ?>',
-                type: 'POST',
-                dataType: "JSON",
-                data:{user_id: $(this).val()},
-                success: function (data, status)
-                {
-
-                },
-                error: function (xhr, desc, err)
-                {
-                    console.log("error");
-                }
-            });
-
-        });
+        //        $(document).on("change","#user_id",function()
+        //        {
+        //            $.ajax({
+        //                url: '<?php //echo $CI->get_encoded_url('ticket_management/ticket_issue/ajax_product_load'); ?>//',
+        //                type: 'POST',
+        //                dataType: "JSON",
+        //                data:{user_id: $(this).val()},
+        //                success: function (data, status)
+        //                {
+        //
+        //                },
+        //                error: function (xhr, desc, err)
+        //                {
+        //                    console.log("error");
+        //                }
+        //            });
+        //
+        //        });
     });
 </script>
 
