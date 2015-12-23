@@ -86,5 +86,9 @@ $lang['MANUFACTURE'] = 'প্রস্তুতকারক';
 $lang['WAREHOUSE'] = 'পণ্যাগার';
 $lang['SUPPLIER'] = 'সরবরাহকারী';
 $lang['CONDITION'] = 'অবস্থা';
+$lang['USER'] = 'ব্যবহারকারী';
+$lang['ASSIGN_DATE'] = 'বরাদ্দের তারিখ ';
+$lang['RETURN_DATE'] = 'রিটার্ন তারিখ ';
+$lang['PRODUCT'] = 'প্রোডাক্ট ';
 
 
