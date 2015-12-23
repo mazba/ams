@@ -42,6 +42,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
         <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/bootstrap-toastr/toastr.min.css"/>
         <!-- END PAGE LEVEL PLUGIN STYLES -->
         <!-- BEGIN PAGE STYLES -->
         <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
@@ -57,6 +58,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--    Start jqx    -->
         <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/jq/jqx.base.css">
         <!--    End jqx    -->
+        <!--    Common CSS    -->
+        <link rel="stylesheet" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/css/system.css">
+        <!--    End Common    -->
 
     </head>
 
@@ -114,6 +118,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"  type="text/javascript"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/pages/scripts/ui-toastr.js"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
@@ -129,6 +136,21 @@ License: You must have a valid license purchased only from themeforest(the above
         jQuery(document).ready(function() {
             Metronic.init(); // init metronic core components
             Layout.init(); // init current layout
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "1000",
+                "hideDuration": "1000",
+                "timeOut": "4000",
+                "extendedTimeOut": "9000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
         });
     </script>
     <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/jq/jqxcore.js"></script>
@@ -151,7 +173,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/jq/jqxdatatable.js"></script>
     <!-- END JAVASCRIPTS -->
     <!-- Menu Toggle Script -->
-    <div id="system_loading"><img src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/spinner.gif"></div>
+<!--    <div id="system_loading"><img src="--><?php //echo base_url().'assets/templates/'.$CI->get_template(); ?><!--/images/spinner.gif"></div>-->
+    <div id="system_loading"><img src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/img/loading-spinner-default.gif"></div>
     <div id="system_message"></div>
     <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/system_common.js"></script>
 

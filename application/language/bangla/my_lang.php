@@ -81,4 +81,5 @@ $lang['TOTAL_COMPONENT'] = 'মোট কম্পোনেন্ট';
 $lang['TOTAL_TASKS'] = 'মোট  টাস্ক ';
 $lang['TOTAL_MODULE'] = 'মোট মডিউল';
 $lang['LAST_MODIFIED'] = 'সর্বশেষ সংশোধিত';
+$lang['LOG_OUT'] = 'লগ আউট';
 // End User Role Controller
