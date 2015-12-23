@@ -14,7 +14,7 @@ class Ticket_issue extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_issue');
         if($this->permissions)
         {
-            //$this->permissions['edit']=0;
+            $this->permissions['edit']=0;
             $this->permissions['delete']=0;
             //$this->permissions['view']=0;
         }
@@ -35,14 +35,14 @@ class Ticket_issue extends Root_Controller
         {
             $this->system_add();
         }
-        elseif($action=='batch_edit')
-        {
-            $this->system_batch_edit();
-        }
-        elseif($action=='edit')
-        {
-            $this->system_edit($id);
-        }
+//        elseif($action=='batch_edit')
+//        {
+//            $this->system_batch_edit();
+//        }
+//        elseif($action=='edit')
+//        {
+//            $this->system_edit($id);
+//        }
         elseif($action=='save')
         {
             $this->system_save();
@@ -166,7 +166,7 @@ class Ticket_issue extends Root_Controller
         }
     }
 
-    private function system_batch_details($id)
+    private function details($id)
     {
         if($this->permissions['view'])
         {
@@ -299,44 +299,13 @@ class Ticket_issue extends Root_Controller
         }
     }
 
-    private function system_batch_edit()
+    private function system_batch_details()
     {
-        //        $selected_ids=$this->input->post('selected_ids');
-        //        $this->system_edit($selected_ids[0]);
+        $selected_ids=$this->input->post('selected_ids');
+        $this->details($selected_ids[0]);
     }
 
-    private function system_batch_delete()
-    {
-        //        if($this->permissions['delete'])
-        //        {
-        //            $user=User_helper::get_user();
-        //            $selected_ids=$this->input->post('selected_ids');
-        //            $this->db->trans_start();  //DB Transaction Handle START
-        //            foreach($selected_ids as $id)
-        //            {
-        //                Query_helper::update($this->config->item('table_divisions'),array('status'=>99,'update_by'=>$user->id,'update_date'=>time()),array("id = ".$id));
-        //            }
-        //            $this->db->trans_complete();   //DB Transaction Handle END
-        //
-        //            if ($this->db->trans_status() === TRUE)
-        //            {
-        //                $this->message=$this->lang->line("MSG_DELETE_SUCCESS");
-        //                $this->system_list();
-        //            }
-        //            else
-        //            {
-        //                $ajax['status']=false;
-        //                $ajax['system_message']=$this->lang->line("MSG_DELETE_FAIL");
-        //                $this->jsonReturn($ajax);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            $ajax['status']=false;
-        //            $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
-        //            $this->jsonReturn($ajax);
-        //        }
-    }
+
 
     private function check_validation()
     {

@@ -75,9 +75,9 @@ $CI=& get_instance();
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
                 ]
             });
-        //for Double Click to edit
+        //for Double Click to view
         <?php
-            if($CI->permissions['edit'])
+            if($CI->permissions['view'])
             {
                 ?>
             $('#system_dataTable').on('rowDoubleClick', function (event)
