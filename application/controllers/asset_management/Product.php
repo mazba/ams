@@ -85,11 +85,8 @@ class Product extends Root_Controller
 
     private function system_add()
     {
-
-
         if($this->permissions['add'])
         {
-
             $this->current_action='add';
             $ajax['status']=true;
             $data=array();

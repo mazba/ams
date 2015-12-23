@@ -107,9 +107,9 @@ class Root_Controller extends CI_Controller
     {
         $ajax['status']=true;
 
-        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>'');
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("login","",true));
-        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+//        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_content'][]=array("id"=>"#system_header","html"=>"","",true);
 
         if($message)

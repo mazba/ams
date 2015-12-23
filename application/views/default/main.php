@@ -77,6 +77,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <div id="top_header">
             <?php
+            if($user)
             $CI->load_view('header');
             ?>
         </div>
@@ -144,7 +145,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 "onclick": null,
                 "showDuration": "1000",
                 "hideDuration": "1000",
-                "timeOut": "4000",
+                "timeOut": "4500",
                 "extendedTimeOut": "9000",
                 "showEasing": "swing",
                 "hideEasing": "linear",
