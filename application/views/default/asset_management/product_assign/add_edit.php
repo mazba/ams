@@ -2,6 +2,8 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
 ?>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/select2/select2.css"/>
+<script type="text/javascript" src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/plugins/select2/select2.min.js"></script>
 <div class="page-content-wrapper">
     <div class="page-content">
         <div id="system_action_button_container" class="system_action_button_container">
@@ -33,10 +35,12 @@ $CI=& get_instance();
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-md-7 col-md-offset-2">
+
+
                                         <div class="form-group has-error row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('PRODUCT'); ?></label></div>
                                             <div class="col-lg-7" id="product_wrp">
-                                                <select name="product_assign[product_id][]" class="form-control" >
+                                                <select name="product_assign[product_id][]" class="form-control select2me" style="margin-bottom: 10px">
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$product));
                                                     ?>
@@ -90,21 +94,27 @@ $CI=& get_instance();
         <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
-<div id="product" style="display: none">
-    <select name="product_assign[product_id][]" class="form-control" style="margin-top:10px;">
-        <?php
-        $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$product));
-        ?>
-    </select>
-</div>
 <script type="text/javascript">
     $(document).ready(function ()
     {
         turn_off_triggers();
         $('.date-picker').datepicker()
-        $('#add_new').on('click',function(){
-            var html = $('#product').html();
-            $('#product_wrp').append(html)
+        $("#product_wrp").children("select").select2();
+        $("#add_new").click(function () {
+            $("#product_wrp")
+                .children("select")
+                // call destroy to revert the changes made by Select2
+                .select2("destroy")
+                .end()
+                .append(
+                    // clone the row and insert it in the DOM
+                    $("#product_wrp")
+                        .children("select")
+                        .first()
+                        .clone()
+                );
+            // enable Select2 on the select elements
+            $("#product_wrp").children("select").select2();
         });
     });
 </script>

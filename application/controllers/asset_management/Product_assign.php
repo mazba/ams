@@ -16,6 +16,7 @@ class Product_assign extends Root_Controller
         {
             $this->permissions['delete']=0;
             $this->permissions['view']=0;
+            $this->permissions['edit']=0;
         }
         $this->controller_url='asset_management/Product_assign';
         $this->load->model("asset_management/Product_assign_model");
@@ -34,25 +35,17 @@ class Product_assign extends Root_Controller
         {
             $this->system_add();
         }
-        elseif($action=='batch_edit')
-        {
-            $this->system_batch_edit();
-        }
-        elseif($action=='edit')
-        {
-            $this->system_edit($id);
-        }
+//        elseif($action=='batch_edit')
+//        {
+//            $this->system_batch_edit();
+//        }
+//        elseif($action=='edit')
+//        {
+//            $this->system_edit($id);
+//        }
         elseif($action=='save')
         {
             $this->system_save();
-        }
-//        elseif($action=='batch_details')
-//        {
-//            $this->system_batch_details();
-//        }
-        elseif($action=='batch_delete')
-        {
-            $this->system_batch_delete();
         }
         else
         {
@@ -100,8 +93,8 @@ class Product_assign extends Root_Controller
                 'product_name'=>'',
                 'product_code'=>'',
             );
-            $data['product'] = Query_helper::get_list($this->config->item('table_product'),'product_name',array('status = 1'));
-            $data['user'] = Query_helper::get_list($this->config->item('table_users'),'name_en',array('status = 1','user_group_id ='.$this->config->item('END_GROUP_ID')));
+            $data['product'] = $this->Product_assign_model->get_unassigned_products();
+            $data['user'] = Query_helper::get_list($this->config->item('table_users'),'name_en',array('status = 1'));
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("asset_management/product_assign/add_edit",$data,true));
 
@@ -172,8 +165,10 @@ class Product_assign extends Root_Controller
         else
         {
             $data = $this->input->post('product_assign');
+
             $data['create_by']=$user->id;
             $data['create_date']=time();
+            $data['status'] = 1;
 
             $data['assign_date']= strtotime($data['assign_date']);
             $data['return_date']= strtotime($data['return_date']);
@@ -211,12 +206,6 @@ class Product_assign extends Root_Controller
                 $this->jsonReturn($ajax);
             }
         }
-    }
-
-    private function system_batch_edit()
-    {
-                $selected_ids=$this->input->post('selected_ids');
-                $this->system_edit($selected_ids[0]);
     }
 
     private function check_validation()

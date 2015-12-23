@@ -40,8 +40,10 @@ $CI=& get_instance();
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
                 { name: 'product_name', type: 'string' },
-                { name: 'product_code', type: 'string' },
-                { name: 'item_unit', type: 'string' },
+                { name: 'user_name', type: 'string' },
+                { name: 'remarks', type: 'string' },
+                { name: 'assign_date', type: 'string' },
+                { name: 'return_date', type: 'string' },
                 { name: 'status_text', type: 'string' },
                 { name: 'status', type: 'string' }
             ],
@@ -62,15 +64,17 @@ $CI=& get_instance();
                 columnsresize: true,
                 pagesize:10,
                 pagesizeoptions: ['10', '20', '30', '50','100','150'],
-                selectionmode: 'checkbox',
+//                selectionmode: 'checkbox',
                 altrows: true,
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'60%'},
-                    { text: '<?php echo $CI->lang->line('PRODUCT_CODE'); ?>', dataField: 'product_code', width:'10%'},
-                    { text: '<?php echo $CI->lang->line('ITEM_UNIT'); ?>', dataField: 'item_unit', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('ASSIGN_DATE'); ?>', dataField: 'assign_date', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('RETURN_DATE'); ?>', dataField: 'return_date', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('REMARKS'); ?>', dataField: 'remarks', width:'40%'},
+//                    { text: '<?php //echo $CI->lang->line('STATUS'); ?>//', dataField: 'status_text', width:'10%'}
                 ]
             });
         //for Double Click to edit

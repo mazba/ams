@@ -118,7 +118,7 @@ class Product extends Root_Controller
                 'stock_book_no'=>'',
                 'purchase_order_no'=>'',
                 'purchase_date'=>'',
-                'status'=>'',
+                'status'=>1,
                 'remarks'=>'',
                 'others'=>'',
             );
