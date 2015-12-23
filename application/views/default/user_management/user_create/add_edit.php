@@ -80,7 +80,7 @@ $CI=& get_instance();
                                         <input type="password" name="user_detail[confirm_password]" value="" placeholder="<?php echo $CI->lang->line('CONFIRM_PASSWORD'); ?>" class="form-control">
                                     </div>
                                 </div>
-                                <div class="form-group has-success row">
+                                <div class="form-group has-error row">
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('EMAIL'); ?></label></div>
                                     <div class="col-lg-8">
                                         <input type="text" name="user_detail[email]" value="<?php echo $userInfo['email'];?>" placeholder="<?php echo $CI->lang->line('EMAIL'); ?>" class="form-control">
