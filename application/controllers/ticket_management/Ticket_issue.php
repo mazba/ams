@@ -14,7 +14,7 @@ class Ticket_issue extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_issue');
         if($this->permissions)
         {
-            //$this->permissions['edit']=0;
+            $this->permissions['edit']=0;
             $this->permissions['delete']=0;
             //$this->permissions['view']=0;
         }
@@ -170,7 +170,7 @@ class Ticket_issue extends Root_Controller
     {
         if($this->permissions['view'])
         {
-            $this->current_action='view';
+            $this->current_action='batch_details';
             $ajax['status']=true;
             $data=array();
 
