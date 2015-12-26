@@ -155,7 +155,18 @@ License: You must have a valid license purchased only from themeforest(the above
         jQuery(document).ready(function() {
             Metronic.init(); // init metronic core components
             Layout.init(); // init current layout
-
+            // init background slide images
+            $.backstretch([
+                    "<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/background/1.jpg",
+                    "<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/background/2.jpg",
+                    "<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/background/3.jpg",
+                    "<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/background/4.jpg",
+                    "<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/images/background/5.jpg",
+                ], {
+                    fade: 100,
+                    duration: 10000
+                }
+            );
             toastr.options = {
                 "closeButton": true,
                 "debug": false,

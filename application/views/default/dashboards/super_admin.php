@@ -1,23 +1,30 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $CI =& get_instance();
-$user=User_helper::get_user();
+$user = User_helper::get_user();
 $recent_ticket_issue = Dashboard_helper::get_recent_ticket_issue();
+$warehouse_product_info = Dashboard_helper::get_warehouse_product_info();
+$ticket_status_info = Dashboard_helper::get_ticket_status_info();
 
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
         <!-- BEGIN PAGE CONTENT INNER -->
         <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="portlet light ">
+            <div class="col-md-6">
+                <div class="portlet box">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-share font-blue-steel hide"></i>
-                            <span class="caption-subject font-blue-steel bold uppercase"><?php echo $CI->lang->line('RECENT_TICKET_ISSUE'); ?></span>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('RECENT_TICKET_ISSUE'); ?>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse external">
+                            </a>
+                            <a href="javascript:;" class="remove external">
+                            </a>
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+                        <div data-always-visible="1" data-rail-visible="0">
                             <ul class="feeds">
                                 <?php
                                 foreach($recent_ticket_issue as $ticket)
@@ -77,12 +84,118 @@ $recent_ticket_issue = Dashboard_helper::get_recent_ticket_issue();
                         </div>
                         <div class="scroller-footer">
                             <div class="btn-arrow-link pull-right">
-                                <a href="#">See All Records</a>
+                                <a href="<?php echo base_url().'ticket_management/ticket_issue' ?>"><?php echo $CI->lang->line('SEE_ALL_RECORDS') ?></a>
                                 <i class="icon-arrow-right"></i>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('TICKET_AND_REQUEST'); ?>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse external">
+                            </a>
+                            <a href="javascript:;" class="remove external">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+            </div>
+            <div class="col-md-6">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('PRODUCT'); ?>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse external">
+                            </a>
+                            <a href="javascript:;" class="remove external">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <i class="fa fa-bank"></i> <?php echo $CI->lang->line('WAREHOUSE'); ?>
+                                    </th>
+                                    <th>
+                                        <i class="fa fa-cubes"></i> <?php echo $CI->lang->line('NO_OF_PRODUCT'); ?>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach ($warehouse_product_info as $warehouse) {
+                                    ?>
+                                    <tr>
+                                        <td class="highlight">
+                                            <div class="warning">
+                                            </div>
+                                            <a href="#" class="external">
+                                                <?php echo $warehouse['warehouse_name'] ?> </a>
+                                        </td>
+                                        <td>
+                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo $warehouse['number_of_product'] ?></div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+
+                                ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS'); ?>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse external">
+                            </a>
+                            <a href="javascript:;" class="remove external">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END SAMPLE TABLE PORTLET-->
             </div>
         </div>
         <!-- END PAGE CONTENT INNER -->

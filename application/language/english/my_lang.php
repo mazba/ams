@@ -81,6 +81,7 @@ $lang['KEYWORD_SETUP'] = ' Keyword ';
 // End User Group Management Controller
 // User campus management Controller
 $lang['THE_COMBINATION_OF_BRANCH_EDU_TYPE_VERSION_MEDIUM_SHIFT_NOT_UNIQUE'] = 'The Combination of Branch, Education type, Version, Medium, Shift is already Exists';
+$lang['LOGIN_TO_YOUR_ACCOUNT'] = 'Login to your account';
 
 // End Campus Management Controller
 

@@ -48,7 +48,7 @@ class Product_assign_model extends CI_Model
         $CI->db->from($CI->config->item('table_product_assign').' pa');
         $CI->db->select('pa.id');
         $CI->db->where('pa.status', 1);
-        $sub = $this->db->get_compiled_select();
+        $sub = $CI->db->get_compiled_select();
 
         $CI->db->from($CI->config->item('table_product').' product');
         $CI->db->select('product.product_name, product.id');
