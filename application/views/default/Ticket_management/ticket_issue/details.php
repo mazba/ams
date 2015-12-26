@@ -153,6 +153,34 @@ $user=User_helper::get_user();
 
                                     </div>
                                 </div>
+                                <?php
+                                if(!empty($ticket_assign['remarks']))
+                                {
+                                    ?>
+                                    <div class="form-group has-error row" id="module_container">
+                                        <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE_REMARKS'); ?></label></div>
+                                        <div class="col-lg-8">
+                                            <label class="control-label bold" for="name_en">
+                                                <?php
+                                                echo $ticket_assign['remarks'];
+                                                ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group has-error row" id="module_container">
+                                        <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE_DATE'); ?></label></div>
+                                        <div class="col-lg-8">
+                                            <label class="control-label bold" for="name_en">
+                                                <?php
+                                                echo date('d M,Y',$ticket_assign['resolved_date']);
+                                                ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
                             </div>
                         </form>
                     </div>

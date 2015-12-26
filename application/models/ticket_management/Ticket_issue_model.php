@@ -33,7 +33,7 @@ class Ticket_issue_model extends CI_Model
         $this->db->from($CI->config->item('table_ticket_issue'));
         $this->db->join($CI->config->item('table_users').' core_01_users','core_01_users.id = ticket_issue.user_id', 'LEFT');
         $this->db->join($CI->config->item('table_product').' product','product.id = ticket_issue.product_id', 'LEFT');
-
+        $this->db->order_by('ticket_issue.id','DESC');
         $users = $this->db->get()->result_array();
         //echo $this->db->last_query();
         foreach($users as &$user)

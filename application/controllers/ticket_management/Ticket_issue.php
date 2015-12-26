@@ -14,7 +14,7 @@ class Ticket_issue extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_issue');
         if($this->permissions)
         {
-            $this->permissions['edit']=0;
+            //$this->permissions['edit']=0;
             $this->permissions['delete']=0;
             //$this->permissions['view']=0;
         }
@@ -176,9 +176,9 @@ class Ticket_issue extends Root_Controller
 
             $data['title']=$this->lang->line("VIEW_DETAILS_TICKET_ISSUE");
             $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),'*',array('id ='.$id),1);
-
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
             $data['products'] = $this->ticket_issue_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
+            $data['ticket_assign']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('ticket_issue_id ='.$id),1);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_issue/details",$data,true));
             if($this->message)
             {

@@ -91,12 +91,11 @@ $user=User_helper::get_user();
                                                                             <div class="desc">
                                                                                 <input type="hidden" name="row_id[]" value="<?php echo $ticket_issue['id'];?>" />
                                                                                 <input type="checkbox" name="ticket_issue_id[]" value="<?php echo $ticket_issue['id'];?>" class="checkbox-inline">
-                                                                                <?php echo $ticket_issue['subject'];?>
-
-                                                                                <span class="label label-sm label-primary"><?php echo $ticket_issue['name_bn'];?></span>
-                                                                                <span class="label label-sm label-success"><?php echo $ticket_issue['product_name'];?></span>
-                                                                                <span class="label label-sm label-danger"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
-                                                                                <span class="badge badge-warning"><?php echo $ticket_issue['id'];?></span>
+                                                                                <span class="" title="<?php echo $this->lang->line('SUBJECT');?>"><?php echo $ticket_issue['subject'];?></span>
+                                                                                <span class="label label-sm label-primary" title="<?php echo $this->lang->line('NAME');?>"><?php echo $ticket_issue['name_bn'];?></span>
+                                                                                <span class="label label-sm label-success" title="<?php echo $this->lang->line('PRODUCT_NAME');?>"><?php echo $ticket_issue['product_name'];?></span>
+                                                                                <span class="label label-sm label-danger" title="<?php echo $this->lang->line('TIME');?>"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
+                                                                                <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo $ticket_issue['id'];?></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
