@@ -109,38 +109,71 @@ class Root_Controller extends CI_Controller
 
         $ajax['system_content'][]=array("id"=>"#top_header","html"=>'');
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("login","",true));
-//        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-        $ajax['system_content'][]=array("id"=>"#system_header","html"=>"","",true);
+        $ajax['system_content'][]=array("id"=>"#system_sidebar","html"=>"","",true);
 
         if($message)
         {
             $ajax['system_message']=$message;
         }
         $ajax['system_page_url']=base_url().'home/login/';
-        //$ajax['system_page_title']=$this->lang->line("LOGIN");
+        $ajax['system_page_title']=$this->lang->line("LOGIN");
         $this->jsonReturn($ajax);
     }
+//    public function login_page($message="")
+//    {
+//        $ajax['status']=true;
+//
+//        $ajax['system_content'][]=array("id"=>"#top_header","html"=>'');
+//        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("login","",true));
+////        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+//        $ajax['system_content'][]=array("id"=>"#system_header","html"=>"","",true);
+//
+//        if($message)
+//        {
+//            $ajax['system_message']=$message;
+//        }
+//        $ajax['system_page_url']=base_url().'home/login/';
+//        //$ajax['system_page_title']=$this->lang->line("LOGIN");
+//        $this->jsonReturn($ajax);
+//    }
+//    public function dashboard_page($message="")
+//    {
+//        $ajax['status']=true;
+//        $user=User_helper::get_user();
+//        if($user->user_group_id==$this->config->item('UISC_GROUP_ID'))
+//        {
+//            $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_header","html"=>$this->load_view("header","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper_footer","html"=>$this->load_view("footer","",true));
+//        }
+//        else
+//        {
+//            $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_header","html"=>$this->load_view("header","",true));
+//            $ajax['system_content'][]=array("id"=>"#system_wrapper_footer","html"=>$this->load_view("footer","",true));
+//        }
+//
+//        if($message)
+//        {
+//            $ajax['system_message']=$message;
+//        }
+//
+//        $ajax['system_page_url']=base_url().'home/dashboard/';
+//        $ajax['system_page_title']=$this->lang->line("DASHBOARD");
+//        $this->jsonReturn($ajax);
+//    }
     public function dashboard_page($message="")
     {
         $ajax['status']=true;
-        $user=User_helper::get_user();
-        if($user->user_group_id==$this->config->item('UISC_GROUP_ID'))
-        {
-            $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home","",true));
-            $ajax['system_content'][]=array("id"=>"#system_header","html"=>$this->load_view("header","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_footer","html"=>$this->load_view("footer","",true));
-        }
-        else
-        {
-            $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home","",true));
-            $ajax['system_content'][]=array("id"=>"#system_header","html"=>$this->load_view("header","",true));
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_footer","html"=>$this->load_view("footer","",true));
-        }
-
+        $user = User_helper::get_user();
+        $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
+        $ajax['system_content'][]=array("id"=>"#system_sidebar","html"=>$this->load_view("sidebar_left","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("home","",true));
+        $ajax['system_content'][]=array("id"=>"#system_wrapper_footer","html"=>$this->load_view("footer","",true));
         if($message)
         {
             $ajax['system_message']=$message;

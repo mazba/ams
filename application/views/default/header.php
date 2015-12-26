@@ -64,7 +64,9 @@ $user = User_helper::get_user();
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 								<span class="username username-hide-on-mobile">
-								Nick
+								<?php
+                                echo $user->name_bn;
+                                ?>
 								</span>
                             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
                             <img alt="" class="img-circle" src="../../assets/admin/layout4/img/avatar9.jpg"/>

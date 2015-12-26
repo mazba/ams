@@ -83,12 +83,30 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     <!-- BEGIN CONTAINER -->
     <div class="page-container">
-        <?php
-        if($user)
-        {
-            $CI->load_view('sidebar_left');
-        }
-        ?>
+        <!-- BEGIN SIDEBAR -->
+
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    <div id="system_sidebar">
+                    <?php
+                        if($user)
+                        $CI->load_view('sidebar_left');
+                    ?>
+                    </div>
+                    <!-- END SIDEBAR MENU -->
+                </div>
+            </div>
+        <!-- END SIDEBAR -->
         <div id="system_wrapper" class="wrapper">
 
         </div>
@@ -130,8 +148,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/scripts/metronic.js" type="text/javascript"></script>
-    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout/scripts/layout.js" type="text/javascript"></script>
-    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout/scripts/demo.js" type="text/javascript"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout4/scripts/layout.js" type="text/javascript"></script>
+    <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout4/scripts/demo.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
     <script>
         jQuery(document).ready(function() {

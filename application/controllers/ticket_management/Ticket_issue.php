@@ -51,10 +51,10 @@ class Ticket_issue extends Root_Controller
         {
             $this->system_batch_details($id);
         }
-        elseif($action=='batch_delete')
-        {
-            $this->system_batch_delete();
-        }
+//        elseif($action=='batch_delete')
+//        {
+//            $this->system_batch_delete();
+//        }
         else
         {
             $this->system_list();
@@ -170,6 +170,8 @@ class Ticket_issue extends Root_Controller
     {
         if($this->permissions['view'])
         {
+            if(is_array($id))
+                $id = $id[0];
             $this->current_action='batch_details';
             $ajax['status']=true;
             $data=array();
@@ -299,10 +301,11 @@ class Ticket_issue extends Root_Controller
         }
     }
 
-    private function system_batch_details()
+    private function system_batch_details($ids)
     {
-        $selected_ids=$this->input->post('selected_ids');
-        $this->details($selected_ids[0]);
+        if(!$ids)
+        $ids=$this->input->post('selected_ids');
+        $this->details($ids);
     }
 
 
