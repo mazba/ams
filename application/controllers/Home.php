@@ -8,7 +8,6 @@ class Home extends Root_Controller
         $ajax['status']=true;
         $ajax['system_content'][]=array("id"=>"#top_header","html"=>$this->load_view("header","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("website","",true));
-        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_content'][]=array("id"=>"#system_wrapper_footer","html"=>$this->load_view("footer","",true));
 
         $ajax['system_page_url']=base_url();
@@ -87,7 +86,6 @@ class Home extends Root_Controller
         $ajax['status']=true;
 
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("forget_password","",true));
-        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_page_url']=$this->get_encoded_url('home/forget_password');
         //$ajax['system_page_url']=base_url();
         $ajax['system_page_title']=$this->lang->line("FORGET_PASSWORD_TITLE");
@@ -97,7 +95,6 @@ class Home extends Root_Controller
     {
         $ajax['status']=true;
         $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("forget_password","",true));
-        $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
         $ajax['system_page_url']=$this->get_encoded_url('home/forget_password');
         $ajax['system_page_title']=$this->lang->line("FORGET_PASSWORD_TITLE");
         $this->jsonReturn($ajax);

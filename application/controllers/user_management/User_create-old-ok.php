@@ -61,7 +61,6 @@ class User_create extends Root_Controller
         {
             $this->current_action='list';
             $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_management/user_create/system_list","",true));
 
             if($this->message)
@@ -118,7 +117,6 @@ class User_create extends Root_Controller
 
             //$data['groups']=Query_helper::get_info($this->config->item('table_user_group'),array("concat_ws('~', id, level) value",'name_'.$this->get_language_code().' text'),array('status !=99', 'id !='.$this->config->item('UISC_GROUP_ID')));
             $data['divisions']=Query_helper::get_info($this->config->item('table_divisions'),array('divid value', 'divname text'), array());
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_management/user_create/system_add_edit",$data,true));
 
             if($this->message)
@@ -176,7 +174,6 @@ class User_create extends Root_Controller
             $data['municipals']=Query_helper::get_info($this->config->item('table_municipals'),array('municipalid value', 'municipalname text'), array('visible = 1', 'zillaid = '.$zilla_id));
             $data['municipal_wards']=Query_helper::get_info($this->config->item('table_municipal_wards'),array('wardid value', 'wardname text'), array('visible = 1', 'zillaid = '.$zilla_id, 'municipalid = '.$municipal_id));
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_management/user_create/system_add_edit",$data,true));
             if($this->message)
             {

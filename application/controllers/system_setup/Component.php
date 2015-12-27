@@ -62,7 +62,6 @@ class Component extends Root_Controller
             $this->current_action='list';
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/component/system_list","",true));
 
             if($this->message)
@@ -96,7 +95,6 @@ class Component extends Root_Controller
             $data['component_info']['ordering']=1;
             $data['component_info']['status']=1;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/component/system_add_edit",$data,true));
             if($this->message)
             {
@@ -122,7 +120,6 @@ class Component extends Root_Controller
             $data['title']=$this->lang->line("EDIT_COMPONENT");
             $data['component_info']=Query_helper::get_info($this->config->item('table_component'),'*',array('id ='.$id),1);
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/component/system_add_edit",$data,true));
             if($this->message)
             {
@@ -255,7 +252,6 @@ class Component extends Root_Controller
             $data['components']=$this->Component_model->get_component_details($selected_ids);
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/component/system_details",$data,true));
             $this->jsonReturn($ajax);
         }

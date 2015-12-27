@@ -233,6 +233,24 @@ class Ticket_issue extends Root_Controller
         {
             $ticket_detail = $this->input->post('ticket');
 
+            $dir = $this->config->item("file_upload");
+
+            $uploaded = System_helper::upload_file($dir['ticket_issue'],1024,'gif|jpg|png|xls|xlsx|pdf|doc|docx');
+
+            if(array_key_exists('issue_attachment',$uploaded))
+            {
+                if($uploaded['issue_attachment']['status'])
+                {
+                    $ticket_detail['issue_attachment'] = $uploaded['issue_attachment']['info']['file_name'];
+                }
+                else
+                {
+                    $ajax['status']=false;
+                    $ajax['system_message']=$this->message.=$uploaded['issue_attachment']['message'].'<br>';
+                    $this->jsonReturn($ajax);
+                }
+            }
+
             if($id>0)
             {
                 unset($ticket_detail['id']);

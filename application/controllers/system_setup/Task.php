@@ -61,7 +61,6 @@ class Task extends Root_Controller
             $this->current_action='list';
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/task/system_list","",true));
 
             if($this->message)
@@ -102,7 +101,6 @@ class Task extends Root_Controller
             $data['components_list']=Query_helper::get_info($this->config->item('table_component'),array('id value','name_'.$this->get_language_code().' text'),array('status !=99'));
             $data['module_list']=array();
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/task/system_add_edit",$data,true));
             if($this->message)
             {
@@ -130,7 +128,6 @@ class Task extends Root_Controller
             $data['components_list']=Query_helper::get_info($this->config->item('table_component'),array('id value','name_'.$this->get_language_code().' text'),array('status !=99'));
             $data['module_list']=Query_helper::get_info($this->config->item('table_module'),array('id value','name_'.$this->get_language_code().' text'),array('status !=99','component_id ='.$data['task_info']['component_id']));
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/task/system_add_edit",$data,true));
             if($this->message)
             {
@@ -271,7 +268,6 @@ class Task extends Root_Controller
             $data['tasks']=$this->Task_model->get_task_details($selected_ids);
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/task/system_details",$data,true));
             $this->jsonReturn($ajax);
         }

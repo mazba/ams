@@ -62,7 +62,6 @@ class User_group_management extends Root_Controller
             $this->current_action='list';
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_group/user_group_management/system_list","",true));
 
             if($this->message)
@@ -96,7 +95,6 @@ class User_group_management extends Root_Controller
             $data['user_group_info']['level']=0;
             $data['user_levels']=Query_helper::get_info($this->config->item('table_user_group'),array('name_bn text','id value'),array('id <='.$this->config->item('user_level_max')));
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_group/user_group_management/system_add_edit",$data,true));
             if($this->message)
             {
@@ -123,7 +121,6 @@ class User_group_management extends Root_Controller
             $data['user_group_info']=Query_helper::get_info($this->config->item('table_user_group'),'*',array('id ='.$id),1);
             $data['user_levels']=Query_helper::get_info($this->config->item('table_user_group'),array('name_bn text','id value'),array('id <='.$this->config->item('user_level_max')));
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_group/user_group_management/system_add_edit",$data,true));
             if($this->message)
             {
@@ -255,7 +252,6 @@ class User_group_management extends Root_Controller
             $data['user_groups']=$this->User_group_management_model->get_user_group_details($selected_ids);
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_group/user_group_management/system_details",$data,true));
             $this->jsonReturn($ajax);
         }

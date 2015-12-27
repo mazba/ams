@@ -104,7 +104,7 @@ $autoload['helper'] = array('url','user','query','menu','system','dashboard', 'w
 |
 */
 
-$autoload['config'] = array('system','table','user_group');
+$autoload['config'] = array('system','table');
 
 
 /*

@@ -62,7 +62,6 @@ class Module extends Root_Controller
             $this->current_action='list';
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/module/system_list","",true));
 
             if($this->message)
@@ -98,7 +97,6 @@ class Module extends Root_Controller
             $data['module_info']['status']=1;
             $data['components_list']=Query_helper::get_info($this->config->item('table_component'),array('id value','name_'.$this->get_language_code().' text'),array('status !=99'));
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/module/system_add_edit",$data,true));
             if($this->message)
             {
@@ -125,7 +123,6 @@ class Module extends Root_Controller
             $data['module_info']=Query_helper::get_info($this->config->item('table_module'),'*',array('id ='.$id,'status !=99'),1);
             $data['components_list']=Query_helper::get_info($this->config->item('table_component'),array('id value','name_'.$this->get_language_code().' text'),array('status !=99'));
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/module/system_add_edit",$data,true));
             if($this->message)
             {
@@ -259,7 +256,6 @@ class Module extends Root_Controller
             $data['modules']=$this->Module_model->get_module_details($selected_ids);
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("system_setup/module/system_details",$data,true));
             $this->jsonReturn($ajax);
         }

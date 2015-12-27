@@ -63,7 +63,6 @@ class User_role extends Root_Controller
             $this->current_action='list';
             $ajax['status']=true;
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_group/user_role/system_list","",true));
 
 
@@ -96,7 +95,6 @@ class User_role extends Root_Controller
             $data['id']=$id;
             //$data['component_info']=Query_helper::get_info($this->config->item('table_component'),'*',array('id ='.$id),1);
 
-            $ajax['system_content'][]=array("id"=>"#system_wrapper_top_menu","html"=>$this->load_view("top_menu","",true));
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("user_group/user_role/system_add_edit",$data,true));
 
             if($this->message)

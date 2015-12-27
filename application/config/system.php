@@ -7,7 +7,9 @@ $config['page_size']=100;
 ///// report language folder
 $config['GET_LANGUAGE']="bangla";
 //// upload directories
+$config['file_upload']['users']='images/users';
 $config['file_upload']['supplier']='images/supplier';
+$config['file_upload']['ticket_issue']='images/ticket_issue';
 
 //////// USER LEVEL
 $config['SUPER_ADMIN_GROUP_ID'] = 1;

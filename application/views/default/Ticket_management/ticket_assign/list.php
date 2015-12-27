@@ -14,6 +14,9 @@ $CI=& get_instance();
             <div class="col-md-12">
                 <!-- BEGIN SAMPLE FORM PORTLET-->
                 <div class="portlet box grey-cararra">
+                    <div class="col-lg-12 text-danger h4">
+                        <?php echo $this->lang->line('TOTAL_NOT_ASSIGN_ISSUE');?> ( <?php echo $ticket['number_of_not_assign_issue']?$ticket['number_of_not_assign_issue']:0;?> )
+                    </div>
                     <div class="portlet-body">
                         <div id="system_dataTable">
 
@@ -26,6 +29,7 @@ $CI=& get_instance();
         <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function ()
     {
@@ -64,7 +68,7 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'name_bn', width:'70%'},
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'name_bn',filtertype: 'checkedlist', width:'70%'},
                     { text: '<?php echo $CI->lang->line('NUMBER_OF_ISSUE'); ?>', dataField: 'ticket_issue_id', width:'27%'}
                 ]
             });

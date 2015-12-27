@@ -67,7 +67,8 @@ class Ticket_assign extends Root_Controller
         {
             $this->current_action='list';
             $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/list","",true));
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),array('count(id) number_of_not_assign_issue'),array('status ='.$this->config->item('STATUS_PENDING')),1);
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/list",$data,true));
 
             if($this->message)
             {

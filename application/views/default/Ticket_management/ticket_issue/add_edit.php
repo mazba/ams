@@ -133,6 +133,13 @@ $user=User_helper::get_user();
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group has-error row" >
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('ATTACHMENT'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <div id="imtext" style="width: 150px; height: 150px;float: left"><img src="<?php echo base_url()?>images/upload-icon.png" style="width: 130px; height: 130px; " id="imtext" /></div>
+                                        <input type="file" name="issue_attachment" id="issue_attachment" data-preview-container="#imtext" data-preview-height="30" class="validate[custom[validateMIME[image/jpeg|image/png|image/jpg|image/gif]]]" />
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

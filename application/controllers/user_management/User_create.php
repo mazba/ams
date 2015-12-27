@@ -117,6 +117,7 @@ class User_create extends Root_Controller
                 'picture_name'=>'',
                 'dob'=>'',
                 'type'=>'',
+                'gender'=>1,
                 'status'=>''
             );
 
@@ -246,6 +247,24 @@ class User_create extends Root_Controller
             $date_of_birth=strtotime($userDetail['dob']);
             $userDetail['dob']=$date_of_birth;
 
+            $dir = $this->config->item("file_upload");
+
+            $uploaded = System_helper::upload_file($dir['users'],1024,'gif|jpg|png');
+
+            if(array_key_exists('picture_name',$uploaded))
+            {
+                if($uploaded['picture_name']['status'])
+                {
+                    $userDetail['picture_name'] = $uploaded['picture_name']['info']['file_name'];
+                }
+                else
+                {
+                    $ajax['status']=false;
+                    $ajax['system_message']=$this->message.=$uploaded['picture_name']['message'].'<br>';
+                    $this->jsonReturn($ajax);
+                }
+            }
+
             if($id>0)
             {
                 unset($userDetail['id']);
@@ -365,6 +384,7 @@ class User_create extends Root_Controller
         $this->form_validation->set_rules('user_detail[email]',$this->lang->line('EMAIL'),'required|valid_email');
         $this->form_validation->set_rules('user_detail[designation]',$this->lang->line('DESIGNATION'),'required');
         $this->form_validation->set_rules('user_detail[type]',$this->lang->line('USER_TYPE'),'required');
+        $this->form_validation->set_rules('user_detail[gender]',$this->lang->line('GENDER'),'required');
         //$this->form_validation->set_rules('user_detail[password]',$this->lang->line('PASSWORD'),'required');
         //$this->form_validation->set_rules('user_detail[confirm_password]',$this->lang->line('PASSWORD'),'required');
         //$this->form_validation->set_rules('user_detail[mobile]',$this->lang->line('MOBILE_NUMBER'),'required');
