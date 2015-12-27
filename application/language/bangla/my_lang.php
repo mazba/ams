@@ -90,4 +90,7 @@ $lang['ASSIGN_DATE'] = 'বরাদ্দের তারিখ';
 $lang['RETURN_DATE'] = 'রিটার্ন তারিখ';
 $lang['PRODUCT'] = 'প্রোডাক্ট';
 $lang['SEE_ALL_RECORDS'] = 'সব রেকর্ড দেখুন';
+$lang['REMAIN/PENDING'] = 'অবশিষ্ট/পেন্ডিং';
+$lang['DAYS_REMAIN'] = 'দিন অবশিষ্ট';
+$lang['DAYS_PENDING'] = ' দিন পেন্ডিং';
 // End User Role Controller

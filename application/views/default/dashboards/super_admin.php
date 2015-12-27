@@ -37,7 +37,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                                 <div class="cont-col1">
                                                         <?php
                                                             switch($ticket['status']){
-                                                                case $CI->config->item('STATUS_PENDING'):
+                                                                case $CI->config->item('STATUS_INACTIVE'):
                                                                     echo '<div class="label label-sm label-danger">';
                                                                     echo '<i class="fa fa-spinner"></i>';
                                                                     $status_text = $CI->lang->line('PENDING');
@@ -186,28 +186,53 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                     </div>
                     <div class="portlet-body">
                         <div class="scroller" style="height: 160px;" data-always-visible="1" data-rail-visible="0">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th><?php echo $CI->lang->line('PRODUCT'); ?></th>
-                                    <th><?php echo $CI->lang->line('ASSIGN_DATE'); ?></th>
-                                    <th><?php echo $CI->lang->line('RETURN_DATE'); ?></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                foreach($get_product_list as $product){
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $product['product_name'] ?></td>
-                                        <td><?php echo System_helper::display_date($product['assign_date']) ?></td>
-                                        <td><?php echo System_helper::display_date($product['return_date']) ?></td>
-                                    </tr>
-                                    <?php
-                                }
+                            <?php
+                            if(!count($get_product_list)){
+                                echo '<h3 class="text-center"><span class="label label-danger">'.$CI->lang->line('NO_DATA_FOUND').'</span></h3>';
+                            }
+                            else {
                                 ?>
-                                </tbody>
-                            </table>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><?php echo $CI->lang->line('PRODUCT'); ?></th>
+                                        <th><?php echo $CI->lang->line('ASSIGN_DATE'); ?></th>
+                                        <th><?php echo $CI->lang->line('RETURN_DATE'); ?></th>
+                                        <th><?php echo $CI->lang->line('REMAIN/PENDING'); ?></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    foreach ($get_product_list as $product) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $product['product_name'] ?></td>
+                                            <td><?php echo System_helper::display_date($product['assign_date']) ?></td>
+                                            <td><?php echo System_helper::display_date($product['return_date']) ?></td>
+                                            <td>
+                                                <?php
+                                                $total_date = $product['return_date'] - $product['assign_date'];
+                                                $remain_date = $product['return_date'] - time();
+                                                if ($remain_date > 0) {
+                                                    echo '<span class="label label-info">';
+                                                    echo floor(($remain_date / 60 / 60 / 24)) . ' ' . $CI->lang->line('DAYS_REMAIN');
+                                                    echo '</span>';
+                                                } else {
+                                                    echo '<span class="label label-danger">';
+                                                    echo floor((time() - $product['return_date']) / 60 / 60 / 24) . ' ' . $CI->lang->line('DAYS_PENDING');
+                                                    echo '</span>';
+                                                }
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                    </tbody>
+                                </table>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

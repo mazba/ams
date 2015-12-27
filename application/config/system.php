@@ -69,3 +69,6 @@ $config['user_level_max']=13;
 $config['ticket_comment_end_user']=1;
 $config['ticket_comment_manager']=2;
 $config['ticket_comment_support_user']=3;
+// requisition type
+$config['requisition_type'][1]='Hardware';
+$config['requisition_type'][2]='Software';
