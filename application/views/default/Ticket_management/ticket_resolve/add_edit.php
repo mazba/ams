@@ -121,17 +121,10 @@ $user=User_helper::get_user();
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group has-success row">
-                                        <div class="col-lg-2">
-                                            <label class="control-label bold" for="purchase_order_no"><?php echo $CI->lang->line('RESOLVE_DATE'); ?></label>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <input type="text" name="ticket[resolved_date]" value="<?php echo System_helper::display_date($ticket['resolved_date']);?>" placeholder="<?php echo $CI->lang->line('RESOLVE_DATE'); ?>" class="form-control date-picker">
-                                        </div>
-                                    </div>
+
                                     <div class="form-group has-error row" style="<?php if(!($ticket['id']>0)){echo 'display:none';} ?>" id="module_container">
                                         <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-4">
                                             <select name="ticket[status]" class="form-control" >
                                                 <?php
                                                 $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('PENDING'),'value'=>$this->config->item('STATUS_PENDING')),array('text'=>$CI->lang->line('RESOLVE'),'value'=>$this->config->item('STATUS_RESOLVE'))),'drop_down_selected'=>isset($ticket['status'])?$ticket['status']:$this->config->item('STATUS_PENDING')));
@@ -139,6 +132,16 @@ $user=User_helper::get_user();
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="form-group has-success row">
+                                        <div class="col-lg-2">
+                                            <label class="control-label bold" for="purchase_order_no"><?php echo $CI->lang->line('RESOLVE_DATE'); ?></label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <input type="text" name="ticket[resolved_date]" value="<?php echo System_helper::display_date($ticket['resolved_date']);?>" placeholder="<?php echo $CI->lang->line('RESOLVE_DATE'); ?>" class="form-control date-picker">
+                                        </div>
+                                    </div>
+
                                     <div class="form-group has-error row" >
                                         <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE_REMARKS'); ?></label></div>
                                         <div class="col-lg-8">

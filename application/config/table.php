@@ -24,3 +24,4 @@ $config['table_ticket_assign'] = 'ticket_assign';
 $config['table_ticket_issue'] = 'ticket_issue';
 $config['table_warehouse'] = 'warehouse';
 $config['table_designation'] = 'designation';
+$config['table_ticket_resolve_status'] = 'ticket_resolve_status';

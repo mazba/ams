@@ -136,6 +136,7 @@ class Ticket_resolve extends Root_Controller
             $data['title']=$this->lang->line("EDIT_TICKET_RESOLVE");
             $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('id ='.$id),1);
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
+            $data['ticket_status']=Query_helper::get_info($this->config->item('table_ticket_resolve_status'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
             $data['ticket_issues'] = $this->ticket_resolve_model->get_ticket_assign($data['ticket']['id']);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_resolve/add_edit",$data,true));
             if($this->message)

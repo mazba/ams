@@ -18,7 +18,7 @@ class Ticket_assign_model extends CI_Model
                             users.name_bn");
         $this->db->from($CI->config->item('table_ticket_assign'));
         $this->db->join($CI->config->item('table_users').' users','users.id = ticket_assign.user_id', 'LEFT');
-        $this->db->where('ticket_assign.status ='. $this->config->item('STATUS_INACTIVE'));
+        $this->db->where('ticket_assign.status ='. $this->config->item('STATUS_ASSIGN'));
         $this->db->group_by('ticket_assign.user_id');
         $users = $this->db->get()->result_array();
         //echo $this->db->last_query();
@@ -94,9 +94,9 @@ class Ticket_assign_model extends CI_Model
                             ticket_assign.ticket_issue_id');
         $CI->db->from($CI->config->item('table_ticket_assign').' ticket_assign');
         $CI->db->join($CI->config->item('table_ticket_issue').' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id','INNER');
-        $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_assign.user_id','INNER');
+        $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_issue.user_id','INNER');
         $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','INNER');
-        $CI->db->where('ticket_assign.status',$this->config->item('STATUS_PENDING'));
+        $CI->db->where('ticket_assign.status',$this->config->item('STATUS_ASSIGN'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
         $result=$this->db->get()->result_array();
         //echo $this->db->last_query();

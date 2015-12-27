@@ -156,7 +156,7 @@ class Ticket_assign extends Root_Controller
         }
     }
 
-    private function system_batch_details($id)
+    private function system_batch_details($user_id)
     {
         if($this->permissions['view'])
         {
@@ -165,9 +165,9 @@ class Ticket_assign extends Root_Controller
             $data=array();
 
             $data['title']=$this->lang->line("VIEW_DETAILS_TICKET_ASSIGN");
-            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('user_id ='.$id),1); //, 'status ='.$this->config->item('STATUS_INACTIVE')
-            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$id));
-            $data['ticket_issues'] = $this->ticket_assign_model->get_ticket_assign($id);
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('user_id ='.$user_id),1); //, 'status ='.$this->config->item('STATUS_INACTIVE')
+            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$user_id));
+            $data['ticket_issues'] = $this->ticket_assign_model->get_ticket_assign($user_id);
 
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/details",$data,true));
             if($this->message)
@@ -175,7 +175,7 @@ class Ticket_assign extends Root_Controller
                 $ajax['system_message']=$this->message;
             }
 
-            $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_assign/index/batch_details/'.$id);
+            $ajax['system_page_url']=$this->get_encoded_url('ticket_management/ticket_assign/index/batch_details/'.$user_id);
             $this->jsonReturn($ajax);
         }
         else
@@ -264,8 +264,8 @@ class Ticket_assign extends Root_Controller
                 $ticket_detail['create_date']=time();
 
                 $ticket_issue_detail['status']=$this->config->item('STATUS_ASSIGN');
-                $ticket_issue_detail['create_by']=$user->id;
-                $ticket_issue_detail['create_date']=time();
+                $ticket_issue_detail['update_by']=$user->id;
+                $ticket_issue_detail['update_date']=time();
 
                 $this->db->trans_start();  //DB Transaction Handle START
                 for($i=0;$i<$count;$i++)
@@ -275,7 +275,7 @@ class Ticket_assign extends Root_Controller
                         $ticket_detail['user_id']=$user_id;
                         $ticket_detail['ticket_issue_id']=$ticket_issue_id[$i];
                         Query_helper::add($this->config->item('table_ticket_assign'),$ticket_detail);
-                        //Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
+                        Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
                     }
                 }
 
@@ -349,7 +349,12 @@ class Ticket_assign extends Root_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('user_id',$this->lang->line('USER_NAME'),'required');
-
+        $count=count($this->input->post('row_id'));
+        if($count<1)
+        {
+            $this->message=$this->lang->line('TICKET_NOT_FOUND');
+            return false;
+        }
         if($this->form_validation->run() == FALSE)
         {
             $this->message=validation_errors();

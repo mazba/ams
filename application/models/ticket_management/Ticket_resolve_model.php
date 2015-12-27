@@ -25,30 +25,36 @@ class Ticket_resolve_model extends CI_Model
                             `ticket_issue`.`subject`,
                             product.product_name,
                             users.name_bn,
+                            users_assign.name_bn support_name,
                             ticket_assign.resolved_date");
         $this->db->from($CI->config->item('table_ticket_assign').' ticket_assign');
         $this->db->join($CI->config->item('table_ticket_issue').' ticket_issue','ticket_issue.id = ticket_assign.ticket_issue_id', 'INNER');
         $this->db->join($CI->config->item('table_users').' users','users.id = ticket_issue.user_id', 'INNER');
+        $this->db->join($CI->config->item('table_users').' users_assign','users_assign.id = ticket_assign.user_id', 'INNER');
         $this->db->join($CI->config->item('table_product').' product','product.id = ticket_issue.product_id', 'INNER');
-        $this->db->where('ticket_assign.status ='. $this->config->item('STATUS_PENDING'));
+        $this->db->where('ticket_assign.status ='. $this->config->item('STATUS_ASSIGN'));
         $this->db->order_by('ticket_assign.ticket_issue_id', 'DESC');
         $users = $this->db->get()->result_array();
         //echo $this->db->last_query();
         foreach($users as &$user)
         {
             $user['edit_link']=$CI->get_encoded_url('ticket_management/ticket_resolve/index/edit/'.$user['id']);
-            if($user['status']==$this->config->item('STATUS_PENDING'))
-            {
-                $user['status_text']=$CI->lang->line('PENDING');
-            }
-            else if($user['status']==$this->config->item('STATUS_RESOLVE'))
-            {
-                $user['status_text']=$CI->lang->line('RESOLVE');
-            }
-            else
-            {
-                $user['status_text']=$user['status'];
-            }
+            //            if($user['status']==$this->config->item('STATUS_ASSIGN'))
+            //            {
+            //                $user['status_text']=$CI->lang->line('ASSIGN');
+            //            }
+            //            else if($user['status']==$this->config->item('STATUS_RESOLVE'))
+            //            {
+            //                $user['status_text']=$CI->lang->line('RESOLVE');
+            //            }
+            //            else if($user['status']==$this->config->item('STATUS_REJECT'))
+            //            {
+            //                $user['status_text']=$CI->lang->line('REJECT');
+            //            }
+            //            else
+            //            {
+            //                $user['status_text']=$user['status'];
+            //            }
             $user['create_date_time']=date('h:i A - d M,y',$user['create_date']);
         }
        return $users;
@@ -122,7 +128,7 @@ class Ticket_resolve_model extends CI_Model
         $CI->db->join($CI->config->item('table_ticket_issue').' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id','INNER');
         $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_issue.user_id','INNER');
         $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','INNER');
-        $CI->db->where('ticket_assign.status',$this->config->item('STATUS_PENDING'));
+        $CI->db->where('ticket_assign.status',$this->config->item('STATUS_ASSIGN'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
         $result=$this->db->get()->result_array();
         //echo $this->db->last_query();

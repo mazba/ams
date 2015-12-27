@@ -22,7 +22,7 @@ $config['OPERATOR_GROUP_ID'] = 7;
 
 ///////// SYSTEM STATUS VALUE
 $config['STATUS_INACTIVE']=0; // TICKET PENDING, TICKET ASSIGN,
-$config['STATUS_ACTIVE']=1; // TICKET RESOLVE,
+$config['STATUS_ACTIVE']=1; //
 $config['STATUS_ASSIGN']=2; // UN USE
 $config['STATUS_REJECT']=3;   //
 $config['STATUS_RESOLVE']=4;   //

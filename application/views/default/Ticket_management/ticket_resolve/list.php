@@ -44,7 +44,7 @@ $CI=& get_instance();
                 { name: 'name_bn', type: 'string' },
                 { name: 'product_name', type: 'string' },
                 { name: 'create_date_time', type: 'string' },
-                { name: 'status_text', type: 'string' }
+                { name: 'support_name', type: 'string' }
             ],
             id: 'id',
             url: url
@@ -69,11 +69,11 @@ $CI=& get_instance();
 
                 columns: [
                     { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'ticket_issue_id', width:'5%'},
-                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'30%'},
-                    { text: '<?php echo $CI->lang->line('ISSUE_FROM'); ?>', dataField: 'name_bn', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'17%'},
+                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'37%'},
+                    { text: '<?php echo $CI->lang->line('ISSUE_FROM'); ?>', dataField: 'name_bn', width:'15%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'10%'},
                     { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('SUPPORT_NAME'); ?>', dataField: 'support_name', width:'15%'}
                 ]
             });
         //for Double Click to edit
