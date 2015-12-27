@@ -83,4 +83,13 @@ $lang['TOTAL_MODULE'] = 'মোট মডিউল';
 $lang['LAST_MODIFIED'] = 'সর্বশেষ সংশোধিত';
 $lang['LOG_OUT'] = 'লগ আউট';
 $lang['LOGIN_TO_YOUR_ACCOUNT'] = 'আপনার অ্যাকাউন্টে লগ ইন করুন ';
+$lang['RECENT_TICKET_ISSUE'] = 'সাম্প্রতিক টিকেট';
+$lang['WAREHOUSE_WISE_PRODUCT_INFO'] = 'ওয়্যারহাউজ অনুযায়ী প্রোডাক্টের  সংখ্যা ';
+$lang['MY_PRODUCTS_LIST'] = 'আমার প্রোডাক্ট তালিকা';
+$lang['WAREHOUSE'] = 'ওয়্যারহাউজ';
+$lang['NO_OF_PRODUCT'] = 'প্রোডাক্টের সংখ্যা';
+$lang['ASSIGN_DATE'] = 'বরাদ্দের তারিখ';
+$lang['RETURN_DATE'] = 'রিটার্ন তারিখ';
+$lang['PRODUCT'] = 'প্রোডাক্ট';
+$lang['SEE_ALL_RECORDS'] = 'সব রেকর্ড দেখুন';
 // End User Role Controller

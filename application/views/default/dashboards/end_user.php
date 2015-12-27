@@ -1,9 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $CI =& get_instance();
 $user = User_helper::get_user();
-$recent_ticket_issue = Dashboard_helper::get_recent_ticket_issue();
-$warehouse_product_info = Dashboard_helper::get_warehouse_product_info();
-//$ticket_status_info = Dashboard_helper::get_ticket_status_info();
+$recent_ticket_issue = Dashboard_helper::get_recent_ticket_issue_by_user();
 $get_product_list = Dashboard_helper::get_my_product_list();
 
 ?>
@@ -25,7 +23,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="scroller" style="height: 160px;" data-always-visible="1" data-rail-visible="0">
+                        <div class="scroller" style="height: 270px;" data-always-visible="1" data-rail-visible="0">
                             <ul class="feeds">
                                 <?php
                                 foreach($recent_ticket_issue as $ticket)
@@ -91,86 +89,9 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                         </div>
                     </div>
                 </div>
-                <!-- BEGIN SAMPLE TABLE PORTLET-->
-                <div class="portlet box green">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('TICKET_AND_REQUEST'); ?>
-                        </div>
-                        <div class="tools">
-                            <a href="javascript:;" class="collapse external">
-                            </a>
-                            <a href="javascript:;" class="remove external">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="scroller" style="height: 160px;" data-always-visible="1" data-rail-visible="0">
-                            <table class="table table-bordered table-hover">
-                                <tbody>
-                                <tr>
-                                    <td>fdsa</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
                 <!-- END SAMPLE TABLE PORTLET-->
             </div>
             <div class="col-md-6">
-                <!-- BEGIN SAMPLE TABLE PORTLET-->
-                <div class="portlet box green">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('WAREHOUSE_WISE_PRODUCT_INFO'); ?> &nbsp;<span class="label label-warning"><?php echo count($warehouse_product_info) ?></span>
-                        </div>
-                        <div class="tools">
-                            <a href="javascript:;" class="collapse external">
-                            </a>
-                            <a href="javascript:;" class="remove external">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="scroller" style="height: 189px;" data-always-visible="1" data-rail-visible="0">
-                            <table class="table table-striped table-bordered table-advance table-hover">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <i class="fa fa-bank"></i> <?php echo $CI->lang->line('WAREHOUSE'); ?>
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-cubes"></i> <?php echo $CI->lang->line('NO_OF_PRODUCT'); ?>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                foreach ($warehouse_product_info as $warehouse) {
-                                    ?>
-                                    <tr>
-                                        <td class="highlight">
-                                            <div class="warning">
-                                            </div>
-                                            <a href="#" class="external">
-                                                <?php echo $warehouse['warehouse_name'] ?> </a>
-                                        </td>
-                                        <td>
-                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo $warehouse['number_of_product'] ?></div>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-
-                                ?>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- END SAMPLE TABLE PORTLET-->
                 <!-- BEGIN SAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
@@ -185,7 +106,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="scroller" style="height: 160px;" data-always-visible="1" data-rail-visible="0">
+                        <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
@@ -197,6 +118,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                 <tbody>
                                 <?php
                                 foreach($get_product_list as $product){
+                                    
                                     ?>
                                     <tr>
                                         <td><?php echo $product['product_name'] ?></td>

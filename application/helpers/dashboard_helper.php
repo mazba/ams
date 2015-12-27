@@ -26,13 +26,8 @@ class Dashboard_helper
         $CI->db->select('warehouse.warehouse_name');
         $CI->db->where("product.id NOT IN ($sub)", NULL, FALSE);
         $CI->db->group_by('warehouse.id');
-        $CI->db->join($CI->config->item('table_warehouse').' warehouse' ,'warehouse.id = product.warehouse_id','RIGHT' );
+        $CI->db->join($CI->config->item('table_warehouse').' warehouse' ,'warehouse.id = product.warehouse_id','LEFT OUTER' );
         $results = $CI->db->get()->result_array();
-//        echo '<pre>';
-//        print_r($results);
-//        echo '</pre>';
-//        die;
-
         return $results;
     }
     // get_warehouse_product_info
@@ -56,6 +51,18 @@ class Dashboard_helper
         $CI->db->where('pa.user_id',$user->id);
         $CI->db->where('pa.status',1);
         $CI->db->join($CI->config->item('table_product').' product' ,'product.id = pa.product_id','LEFT' );
+        $results = $CI->db->get()->result_array();
+        return $results;
+    }
+//    get_recent_ticket_issue_by_user
+    public static function get_recent_ticket_issue_by_user()
+    {
+        $user = User_helper::get_user();
+        $CI = & get_instance();
+        $CI->db->from($CI->config->item('table_ticket_issue').' ticket_issue');
+        $CI->db->where('user_id',$user->id);
+        $CI->db->limit(5);
+        $CI->db->order_by('id','DESC');
         $results = $CI->db->get()->result_array();
         return $results;
     }
