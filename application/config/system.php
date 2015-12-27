@@ -21,14 +21,14 @@ $config['SUPPORT_GROUP_ID'] = 6;
 $config['OPERATOR_GROUP_ID'] = 7;
 
 ///////// SYSTEM STATUS VALUE
-$config['STATUS_INACTIVE']=0; // SERVICE PROPOSED
-$config['STATUS_ACTIVE']=1; // SERVICE, USER APPROVED
-$config['STATUS_REJECT']=2;   // USER DENY
+$config['STATUS_INACTIVE']=0; // TICKET RESOLVE,
+$config['STATUS_ACTIVE']=1; // TICKET PENDING,
+$config['STATUS_REJECT']=2;   //
 $config['STATUS_SUSPEND']=3;
 $config['STATUS_TEMPORARY_SUSPEND']=4;
-$config['STATUS_PENDING']=5;
-$config['STATUS_ASSIGN']=6;
-$config['STATUS_RESOLVE']=7;
+$config['STATUS_PENDING']=5; // UN USE
+$config['STATUS_ASSIGN']=6; // UN USE
+$config['STATUS_RESOLVE']=7; // UN USE
 $config['STATUS_DELETE']=99;
 
 //////// USER HIGHER KEY

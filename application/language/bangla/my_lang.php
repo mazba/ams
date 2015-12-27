@@ -31,19 +31,17 @@ $lang['SELECT'] = '--- নির্বাচন করুন ---';
 $lang['SELECT_ALL'] = 'সকল নির্বাচন করুন';
 $lang['ACTIVE'] = 'সক্রিয়';
 $lang['INACTIVE'] = 'নিষ্ক্রিয়';
-$lang['PENDING'] = 'অপেক্ষারত।';
-$lang['RESOLVE'] = 'সমাধান করা হয়েছে।';
+$lang['PENDING'] = 'অপেক্ষমান';
+$lang['RESOLVE'] = 'সমাধান করা হয়েছে';
+$lang['ASSIGN'] = 'টিকেট বরাদ্দ করা হয়েছে';
+$lang['REJECT'] = 'টিকেট প্রত্যাখ্যান করা হয়েছে';
+
 
 $lang['CODE'] = 'কোড';
 $lang['ADDRESS'] = 'ঠিকানা';
 $lang['CAPACITY'] = 'ধারণক্ষমতা';
 
 // Common Message
-$lang['DIGITAL_CENTER'] = 'ডিজিটাল সেন্টার';
-$lang['UDC'] = 'ইউডিসি';
-$lang['PDC'] = 'পিডিসি';
-$lang['CDC'] = 'সিডিসি';
-$lang['CENTER_TYPE'] = 'সেন্টারের ধরন';
 $lang['YOU_DONT_HAVE_ACCESS'] = 'অ্যাক্সেস করতে আপনার যথেষ্ট অনুমতি নেই';
 $lang['MSG_UPDATE_SUCCESS'] = 'সফলভাবে আপডেট করা হয়েছে ';
 $lang['MSG_UPDATE_FAIL'] = 'আপডেট হয়নি';
