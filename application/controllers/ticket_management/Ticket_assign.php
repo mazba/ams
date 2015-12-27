@@ -67,7 +67,7 @@ class Ticket_assign extends Root_Controller
         {
             $this->current_action='list';
             $ajax['status']=true;
-            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),array('count(id) number_of_not_assign_issue'),array('status ='.$this->config->item('STATUS_PENDING')),1);
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),array('count(id) number_of_not_assign_issue'),array('status ='.$this->config->item('STATUS_INACTIVE')),1);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/list",$data,true));
 
             if($this->message)
@@ -165,11 +165,10 @@ class Ticket_assign extends Root_Controller
             $data=array();
 
             $data['title']=$this->lang->line("VIEW_DETAILS_TICKET_ASSIGN");
-            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('user_id ='.$id),1);
-
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('user_id ='.$id),1); //, 'status ='.$this->config->item('STATUS_INACTIVE')
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$id));
             $data['ticket_issues'] = $this->ticket_assign_model->get_ticket_assign($id);
-            //$data['products'] = $this->ticket_assign_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
+
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_assign/details",$data,true));
             if($this->message)
             {
@@ -260,7 +259,7 @@ class Ticket_assign extends Root_Controller
             }
             else
             {
-                $ticket_detail['status']=$this->config->item('STATUS_PENDING');
+                $ticket_detail['status']=$this->config->item('STATUS_ASSIGN');
                 $ticket_detail['create_by']=$user->id;
                 $ticket_detail['create_date']=time();
 
@@ -273,11 +272,10 @@ class Ticket_assign extends Root_Controller
                 {
                     if(isset($ticket_issue_id[$i]))
                     {
-                        //echo $ticket_issue_id[$i]."<br />";
                         $ticket_detail['user_id']=$user_id;
                         $ticket_detail['ticket_issue_id']=$ticket_issue_id[$i];
                         Query_helper::add($this->config->item('table_ticket_assign'),$ticket_detail);
-                        Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
+                        //Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
                     }
                 }
 

@@ -40,6 +40,7 @@ $CI=& get_instance();
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
                 { name: 'token', type: 'string' },
+                { name: 'name_bn', type: 'string' },
                 { name: 'subject', type: 'string' },
                 { name: 'product_name', type: 'string' },
                 { name: 'create_date_time', type: 'string' },
@@ -68,11 +69,12 @@ $CI=& get_instance();
 
                 columns: [
                     //{ text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'token', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'id', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'40%'},
-                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'17%'},
+                    { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'id', width:'5%'},
+                    { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'name_bn', filtertype:'list', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', filtertype:'list', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', filtertype:'list', width:'17%'},
                     { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'10%'}
                 ]
             });
         //for Double Click to view
