@@ -64,3 +64,8 @@ $config['report_component_id']=3;
 //////////// User Level ///////////
 $config['user_level_min']=2;
 $config['user_level_max']=13;
+
+/////// TICKET ISSUE COMMENT TYPE
+$config['ticket_comment_end_user']=1;
+$config['ticket_comment_manager']=2;
+$config['ticket_comment_support_user']=3;

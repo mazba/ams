@@ -136,8 +136,9 @@ class Ticket_resolve extends Root_Controller
             $data['title']=$this->lang->line("EDIT_TICKET_RESOLVE");
             $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('id ='.$id),1);
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
-            $data['ticket_status']=Query_helper::get_info($this->config->item('table_ticket_resolve_status'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
+            $data['ticket_status']=Query_helper::get_info($this->config->item('table_ticket_resolve_status'),array('id value', 'name text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
             $data['ticket_issues'] = $this->ticket_resolve_model->get_ticket_assign($data['ticket']['id']);
+            $data['comments']=Query_helper::get_info($this->config->item('table_ticket_resolve_comment'),'*',array('ticket_assign_id ='.$id),1);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_resolve/add_edit",$data,true));
             if($this->message)
             {
@@ -217,26 +218,25 @@ class Ticket_resolve extends Root_Controller
         }
         else
         {
-            $ticket_detail=$this->input->post('ticket');
-            $count=count($this->input->post('row_id'));
+            $comment_detail=$this->input->post('comment');
+
+            echo "<pre>";
+            print_r($comment_detail);
+            echo "</pre>";
+            die();
 
             if($id>0)
             {
-                unset($ticket_detail['id']);
+                unset($comment_detail['id']);
 
-                $ticket_detail['update_by']=$user->id;
-                $ticket_detail['update_date']=time();
-                $ticket_detail['resolved_date']=strtotime($ticket_detail['resolved_date']);
-                $ticket_detail['actual_resolved_date']=strtotime($ticket_detail['resolved_date']);
-
-                $ticket_issue_detail['status']=$ticket_detail['status'];
-                $ticket_issue_detail['update_by']=$user->id;
-                $ticket_issue_detail['update_date']=time();
+                $comment_detail['update_by']=$user->id;
+                $comment_detail['update_date']=time();
+                $comment_detail['resolved_date']=strtotime($comment_detail['resolved_date']);
+                $comment_detail['actual_resolved_date']=strtotime($comment_detail['resolved_date']);
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::update($this->config->item('table_ticket_assign'),$ticket_detail,array("id = ".$id));
-                Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_detail['ticket_issue_id']));
+                Query_helper::add($this->config->item('table_ticket_resolve_comment'),$comment_detail);
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -262,9 +262,9 @@ class Ticket_resolve extends Root_Controller
             }
             else
             {
-                //                $ticket_detail['status']=$this->config->item('STATUS_PENDING');
-                //                $ticket_detail['create_by']=$user->id;
-                //                $ticket_detail['create_date']=time();
+                //                $comment_detail['status']=$this->config->item('STATUS_PENDING');
+                //                $comment_detail['create_by']=$user->id;
+                //                $comment_detail['create_date']=time();
                 //
                 //                $ticket_issue_detail['status']=$this->config->item('STATUS_ASSIGN');
                 //                $ticket_issue_detail['create_by']=$user->id;
@@ -276,9 +276,9 @@ class Ticket_resolve extends Root_Controller
                 //                    if(isset($ticket_issue_id[$i]))
                 //                    {
                 //                        //echo $ticket_issue_id[$i]."<br />";
-                //                        $ticket_detail['user_id']=$user_id;
-                //                        $ticket_detail['ticket_issue_id']=$ticket_issue_id[$i];
-                //                        Query_helper::add($this->config->item('table_ticket_resolve'),$ticket_detail);
+                //                        $comment_detail['user_id']=$user_id;
+                //                        $comment_detail['ticket_issue_id']=$ticket_issue_id[$i];
+                //                        Query_helper::add($this->config->item('table_ticket_resolve'),$comment_detail);
                 //                        Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
                 //                    }
                 //                }
@@ -352,8 +352,8 @@ class Ticket_resolve extends Root_Controller
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('ticket[status]',$this->lang->line('STATUS'),'required');
-        $this->form_validation->set_rules('ticket[remarks]',$this->lang->line('RESOLVE_REMARKS'),'required');
+        //$this->form_validation->set_rules('ticket[status]',$this->lang->line('STATUS'),'required');
+        //$this->form_validation->set_rules('ticket[remarks]',$this->lang->line('RESOLVE_REMARKS'),'required');
 
         if($this->form_validation->run() == FALSE)
         {

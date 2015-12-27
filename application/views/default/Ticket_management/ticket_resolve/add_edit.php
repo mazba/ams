@@ -35,6 +35,7 @@ $user=User_helper::get_user();
                         <form id="system_save_form" action="<?php echo $CI->get_encoded_url('ticket_management/ticket_resolve/index/save'); ?>" method="post">
                             <input type="hidden" name="id" value="<?php echo $ticket['id'];?>"/>
                             <input type="hidden" name="system_save_new_status"  id="system_save_new_status" value="0"/>
+                            <input type="hidden" name="ticket[ticket_issue_id]" value="<?php echo $ticket['ticket_issue_id'];?>"/>
                             <div class="form-body">
                                 <div class="form-group has-error row" >
                                     <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVER_NAME'); ?></label></div>
@@ -101,7 +102,7 @@ $user=User_helper::get_user();
                                                                             <span class="label label-sm label-primary" title="<?php echo $this->lang->line('NAME');?>"><?php echo $ticket_issue['name_bn'];?></span>
                                                                             <span class="label label-sm label-success" title="<?php echo $this->lang->line('PRODUCT_NAME');?>"><?php echo $ticket_issue['product_name'];?></span>
                                                                             <span class="label label-sm label-danger" title="<?php echo $this->lang->line('TIME');?>"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
-                                                                            <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo $ticket_issue['id'];?></span>
+                                                                            <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo $ticket_issue['ticket_issue_id'];?></span>
 
                                                                         </div>
                                                                     </div>
@@ -112,7 +113,7 @@ $user=User_helper::get_user();
                                                                     </div>
                                                                 </div>
                                                             </li>
-                                                            <input type="hidden" name="ticket[ticket_issue_id]" value="<?php echo $ticket['ticket_issue_id'];?>"/>
+
                                                             <?php
                                                         }
                                                     }
@@ -122,12 +123,12 @@ $user=User_helper::get_user();
                                         </div>
                                     </div>
 
-                                    <div class="form-group has-error row" style="<?php if(!($ticket['id']>0)){echo 'display:none';} ?>" id="module_container">
+                                    <div class="form-group has-error row" >
                                         <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('STATUS'); ?></label></div>
                                         <div class="col-lg-4">
-                                            <select name="ticket[status]" class="form-control" >
+                                            <select name="ticket[support_status]" class="form-control" >
                                                 <?php
-                                                $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('PENDING'),'value'=>$this->config->item('STATUS_PENDING')),array('text'=>$CI->lang->line('RESOLVE'),'value'=>$this->config->item('STATUS_RESOLVE'))),'drop_down_selected'=>isset($ticket['status'])?$ticket['status']:$this->config->item('STATUS_PENDING')));
+                                                $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$ticket_status,'drop_down_selected'=>array()));
                                                 ?>
                                             </select>
                                         </div>
@@ -138,15 +139,106 @@ $user=User_helper::get_user();
                                             <label class="control-label bold" for="purchase_order_no"><?php echo $CI->lang->line('RESOLVE_DATE'); ?></label>
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="text" name="ticket[resolved_date]" value="<?php echo System_helper::display_date($ticket['resolved_date']);?>" placeholder="<?php echo $CI->lang->line('RESOLVE_DATE'); ?>" class="form-control date-picker">
+                                            <input type="text" name="comment[resolved_date]" value="" placeholder="<?php echo $CI->lang->line('RESOLVE_DATE'); ?>" class="form-control date-picker">
                                         </div>
                                     </div>
 
                                     <div class="form-group has-error row" >
                                         <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE_REMARKS'); ?></label></div>
                                         <div class="col-lg-8">
-                                            <textarea name="ticket[remarks]"  class="form-control" rows="3"><?php echo $ticket['remarks'];?></textarea>
+                                            <textarea name="comment[remarks]"  class="form-control" rows="3"></textarea>
                                         </div>
+                                    </div>
+
+                                        <!-- BEGIN PORTLET-->
+
+                                        <?php
+                                        if(!empty($comments))
+                                        {
+                                           ?>
+                                            <div class="portlet">
+                                                <div class="portlet-title line">
+                                                    <div class="caption">
+                                                        <i class="fa fa-comments"></i><?php echo $this->lang->line('COMMENT');?>
+                                                    </div>
+                                                </div>
+                                                    <div id="chats" class="portlet-body">
+                                                        <div class="scroller " style="position: relative; overflow: hidden; width: auto; height: 300px;">
+                                                            <div data-rail-visible1="1" data-always-visible="1" style="height: 300px; overflow: hidden; width: auto;" class="scroller" data-initialized="1">
+                                                                <ul class="chats">
+                                                                <?php
+                                                                foreach($comments as $comment)
+                                                                {
+                                                                    if($comment['type']==$this->config->item('ticket_comment_end_user') || $comment['type']==$this->config->item('ticket_comment_manager'))
+                                                                    {
+                                                                        $in_out_class='in';
+                                                                    }
+                                                                    elseif($comment['type']==$this->config->item('ticket_comment_end_user') || $comment['type']==$this->config->item('ticket_comment_manager'))
+                                                                    {
+                                                                        $in_out_class='out';
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $in_out_class='';
+                                                                    }
+                                                                    ?>
+                                                                    <li class="<?php echo $in_out_class;?>">
+                                                                        <img src="../../assets/admin/layout/img/avatar1.jpg" alt="" class="avatar">
+                                                                        <div class="message">
+                                                                            <span class="arrow">
+                                                                            </span>
+                                                                            <a class="name" href="#">
+                                                                                Bob Nilson </a>
+                                                                                <span class="datetime">
+                                                                                at 20:09 </span>
+                                                                                <span class="body">
+                                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                                    <li class="in">
+                                                                        <img src="../../assets/admin/layout/img/avatar1.jpg" alt="" class="avatar">
+                                                                        <div class="message">
+                                                                            <span class="arrow">
+                                                                            </span>
+                                                                            <a class="name" href="#">
+                                                                                Bob Nilson </a>
+                                                                                <span class="datetime">
+                                                                                at 20:09 </span>
+                                                                                <span class="body">
+                                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="out">
+                                                                        <img src="../../assets/admin/layout/img/avatar2.jpg" alt="" class="avatar">
+                                                                        <div class="message">
+                                                                        <span class="arrow">
+                                                                        </span>
+                                                                            <a class="name" href="#">
+                                                                                Lisa Wong </a>
+                                                                                <span class="datetime">
+                                                                                at 20:11 </span>
+                                                                                <span class="body">
+                                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
+                                                                        </div>
+                                                                    </li>
+
+
+
+                                                                </ul>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+
+
+                                        <!-- END PORTLET-->
                                     </div>
 
                                 </div>
@@ -188,3 +280,35 @@ $user=User_helper::get_user();
     });
 </script>
 
+<script>
+    jQuery(document).ready(function() {
+        $('.scroller').each(function() {
+            if ($(this).attr("data-initialized")) {
+                return; // exit
+            }
+
+            var height;
+
+            if ($(this).attr("data-height")) {
+                height = $(this).attr("data-height");
+            } else {
+                height = $(this).css('height');
+            }
+
+            $(this).slimScroll({
+                allowPageScroll: true, // allow page scroll when the element scroll is ended
+                size: '7px',
+                color: ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
+                wrapperClass: ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
+                railColor: ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#eaeaea'),
+//                position: isRTL ? 'left' : 'right',
+                height: height,
+                alwaysVisible: ($(this).attr("data-always-visible") == "1" ? true : false),
+                railVisible: ($(this).attr("data-rail-visible") == "1" ? true : false),
+                disableFadeOut: true
+            });
+
+            $(this).attr("data-initialized", "1");
+        });
+    });
+</script>
