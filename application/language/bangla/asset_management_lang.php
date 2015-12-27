@@ -90,7 +90,6 @@ $lang['USER'] = 'ব্যবহারকারী';
 $lang['ASSIGN_DATE'] = 'বরাদ্দের তারিখ ';
 $lang['RETURN_DATE'] = 'রিটার্ন তারিখ ';
 $lang['PRODUCT'] = 'প্রোডাক্ট ';
-$lang['LOGIN_TO_YOUR_ACCOUNT'] = 'আপনার অ্যাকাউন্টে লগ ইন করুন ';
 
 
 

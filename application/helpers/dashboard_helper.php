@@ -28,6 +28,11 @@ class Dashboard_helper
         $CI->db->group_by('warehouse.id');
         $CI->db->join($CI->config->item('table_warehouse').' warehouse' ,'warehouse.id = product.warehouse_id','RIGHT' );
         $results = $CI->db->get()->result_array();
+//        echo '<pre>';
+//        print_r($results);
+//        echo '</pre>';
+//        die;
+
         return $results;
     }
     // get_warehouse_product_info
@@ -40,6 +45,19 @@ class Dashboard_helper
 //        $CI->db->group_by('warehouse.id');
 //        $results = $CI->db->get()->result_array();
 //        return $results;
+    }
+    // get_my_product_list
+    public static function get_my_product_list()
+    {
+        $CI = & get_instance();
+        $user =  User_helper::get_user();
+        $CI->db->from($CI->config->item('table_product_assign').' pa');
+        $CI->db->select('product.product_name,pa.assign_date,pa.return_date');
+        $CI->db->where('pa.user_id',$user->id);
+        $CI->db->where('pa.status',1);
+        $CI->db->join($CI->config->item('table_product').' product' ,'product.id = pa.product_id','LEFT' );
+        $results = $CI->db->get()->result_array();
+        return $results;
     }
 
 }

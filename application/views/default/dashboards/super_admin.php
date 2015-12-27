@@ -3,7 +3,8 @@ $CI =& get_instance();
 $user = User_helper::get_user();
 $recent_ticket_issue = Dashboard_helper::get_recent_ticket_issue();
 $warehouse_product_info = Dashboard_helper::get_warehouse_product_info();
-$ticket_status_info = Dashboard_helper::get_ticket_status_info();
+//$ticket_status_info = Dashboard_helper::get_ticket_status_info();
+$get_product_list = Dashboard_helper::get_my_product_list();
 
 ?>
 <div class="page-content-wrapper">
@@ -11,7 +12,7 @@ $ticket_status_info = Dashboard_helper::get_ticket_status_info();
         <!-- BEGIN PAGE CONTENT INNER -->
         <div class="row">
             <div class="col-md-6">
-                <div class="portlet box">
+                <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('RECENT_TICKET_ISSUE'); ?>
@@ -122,7 +123,7 @@ $ticket_status_info = Dashboard_helper::get_ticket_status_info();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('PRODUCT'); ?>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('WAREHOUSE_INFO'); ?> &nbsp;<span class="label label-warning"><?php echo count($warehouse_product_info) ?></span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">
@@ -132,7 +133,7 @@ $ticket_status_info = Dashboard_helper::get_ticket_status_info();
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div class="table-scrollable">
+                        <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
                             <table class="table table-striped table-bordered table-advance table-hover">
                                 <thead>
                                 <tr>
@@ -174,7 +175,7 @@ $ticket_status_info = Dashboard_helper::get_ticket_status_info();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS'); ?>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS'); ?> <span class="label label-warning"><?php echo count($get_product_list) ?></span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">
@@ -186,10 +187,25 @@ $ticket_status_info = Dashboard_helper::get_ticket_status_info();
                     <div class="portlet-body">
                         <div class="table-scrollable">
                             <table class="table table-bordered table-hover">
-                                <tbody>
+                                <thead>
                                 <tr>
-
+                                    <th><?php echo $CI->lang->line('PRODUCT'); ?></th>
+                                    <th><?php echo $CI->lang->line('ASSIGN_DATE'); ?></th>
+                                    <th><?php echo $CI->lang->line('RETURN_DATE'); ?></th>
                                 </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach($get_product_list as $product){
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $product['product_name'] ?></td>
+                                        <td><?php echo System_helper::display_date($product['assign_date']) ?></td>
+                                        <td><?php echo System_helper::display_date($product['return_date']) ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
