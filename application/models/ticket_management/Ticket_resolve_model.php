@@ -76,13 +76,48 @@ class Ticket_resolve_model extends CI_Model
                             ticket_issue.id ticket_issue_id,
                             users.name_bn,
                             ticket_issue.ticket_issue_description,
-                            ticket_assign.ticket_issue_id');
+                            ticket_assign.ticket_issue_id,
+                            ticket_issue.issue_attachment,
+                            ticket_issue.status ticket_issue_status
+                            ');
         $CI->db->from($CI->config->item('table_ticket_assign').' ticket_assign');
         $CI->db->join($CI->config->item('table_ticket_issue').' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id','INNER');
         $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_issue.user_id','INNER');
         $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','INNER');
         $CI->db->where('ticket_assign.status',$this->config->item('STATUS_ASSIGN'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
+        $result=$this->db->get()->result_array();
+        //echo $this->db->last_query();
+        if(sizeof($result)>0)
+        {
+            return $result;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function get_ticket_comments($ticket_issue_id=0)
+    {
+
+        $CI =& get_instance();
+        $this->db->select('ticket_resolve_status.`name` resolve_status,
+                            ticket_resolve_comment.`comment`,
+                            ticket_resolve_comment.resolved_date,
+                            ticket_resolve_comment.type,
+                            ticket_resolve_comment.`status`,
+                            users.name_en user_name,
+                            users.picture_name,
+                            ticket_resolve_comment.id,
+                            ticket_resolve_comment.create_by,
+                            ticket_resolve_comment.create_date,
+                            ticket_resolve_comment.ticket_issue_id');
+        $CI->db->from($CI->config->item('table_ticket_resolve_comment').' ticket_resolve_comment');
+        $CI->db->join($CI->config->item('table_ticket_resolve_status').' ticket_resolve_status', 'ticket_resolve_status.id = ticket_resolve_comment.ticket_status_id','LEFT');
+        $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_resolve_comment.create_by','INNER');
+        $CI->db->where('ticket_resolve_comment.ticket_issue_id ='.$ticket_issue_id);
+        $CI->db->order_by('ticket_resolve_comment.id', 'DESC');
         $result=$this->db->get()->result_array();
         //echo $this->db->last_query();
         if(sizeof($result)>0)
