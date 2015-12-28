@@ -51,6 +51,14 @@ class Ticket_issue_model extends CI_Model
             {
                 $user['status_text']=$CI->lang->line('ASSIGN');
             }
+            else if($user['status']==$this->config->item('STATUS_RESOLVE'))
+            {
+                $user['status_text']=$CI->lang->line('RESOLVE');
+            }
+            else if($user['status']==$this->config->item('STATUS_REJECT'))
+            {
+                $user['status_text']=$CI->lang->line('REJECT');
+            }
             else
             {
                 $user['status_text']=$user['status'];

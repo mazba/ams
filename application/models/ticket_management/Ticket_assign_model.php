@@ -63,7 +63,7 @@ class Ticket_assign_model extends CI_Model
         $CI->db->from($CI->config->item('table_ticket_issue').' ticket_issue');
         $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_issue.user_id','INNER');
         $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','LEFT');
-        $CI->db->where('ticket_issue.status',$this->config->item('STATUS_INACTIVE'));
+        $CI->db->where('ticket_issue.status ='.$this->config->item('STATUS_INACTIVE').' OR ticket_issue.status ='.$this->config->item('STATUS_REJECT'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
         $result=$this->db->get()->result_array();
         //echo $this->db->last_query();

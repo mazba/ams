@@ -265,7 +265,7 @@ class Ticket_resolve extends Root_Controller
                     {
                         unset($ticket_assign_detail['status']);
                     }
-                    Query_helper::update($this->config->item('table_ticket_issue'),$ticket_assign_detail,array("id = ".$id));
+                    Query_helper::update($this->config->item('table_ticket_assign'),$ticket_assign_detail,array("id = ".$id));
                 }
                 elseif($user->user_group_level==$this->config->item('END_GROUP_ID'))
                 {
