@@ -90,6 +90,11 @@ $lang['USER'] = 'ব্যবহারকারী';
 $lang['ASSIGN_DATE'] = 'বরাদ্দের তারিখ ';
 $lang['RETURN_DATE'] = 'রিটার্ন তারিখ ';
 $lang['PRODUCT'] = 'প্রোডাক্ট ';
+$lang['CREATE_NEW_REQUISITION'] = 'নতুন রিকুইজিশন তৈরি করুন ';
+$lang['REQUISITION_TITLE'] = 'রিকুইজিশন টাইটেল ';
+$lang['REQUISITION_TYPE'] = 'রিকুইজিশন টাইপ ';
+$lang['REQUISITION_ID'] = 'রিকুইজিশন আইডি ';
+$lang['REQUISITIONS_DETAILS'] = 'রিকুইজিশন ডিটেলস  ';
 
 
 

@@ -57,16 +57,6 @@ $re_type[] = array('text'=>$dd,'value'=>$key);
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group has-error row">
-                                    <div class="col-lg-2"><label class="control-label bold"><?php echo $CI->lang->line('STATUS'); ?></label></div>
-                                    <div class="col-lg-8">
-                                        <select name="requisition[status]" class="form-control" >
-                                            <?php
-                                            $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>array(array('text'=>$CI->lang->line('ACTIVE'),'value'=>$this->config->item('STATUS_ACTIVE')),array('text'=>$CI->lang->line('INACTIVE'),'value'=>$this->config->item('STATUS_INACTIVE')))));
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>

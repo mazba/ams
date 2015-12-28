@@ -38,11 +38,11 @@ $CI=& get_instance();
             dataType: "json",
             dataFields: [
                 { name: 'id', type: 'int' },
-                { name: 'edit_link', type: 'string' },
-                { name: 'manufacture_name', type: 'string' },
-                { name: 'manufacture_code', type: 'string' },
-                { name: 'manufacture_description', type: 'string' },
-                { name: 'status', type: 'string' }
+                { name: 'link', type: 'string' },
+                { name: 'requisition_id', type: 'string' },
+                { name: 'requisition_title', type: 'string' },
+                { name: 'requisition_type', type: 'string' },
+                { name: 'user_name', type: 'string' }
             ],
             id: 'id',
             url: url
@@ -66,26 +66,26 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_NAME'); ?>', dataField: 'manufacture_name', width:'30%'},
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_CODE'); ?>', dataField: 'manufacture_code', width:'10%'},
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_DESCRIPTION'); ?>', dataField: 'manufacture_description', width:'50%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('REQUISITION_ID'); ?>', dataField: 'requisition_id', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('REQUISITION_TITLE'); ?>', dataField: 'requisition_title', width:'43%'},
+                    { text: '<?php echo $CI->lang->line('REQUISITION_TYPE'); ?>', dataField: 'requisition_type', width:'16%'},
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'18%'}
                 ]
             });
         //for Double Click to edit
         <?php
-            if($CI->permissions['edit'])
+            if($CI->permissions['view'])
             {
                 ?>
             $('#system_dataTable').on('rowDoubleClick', function (event)
             {
 
-                var edit_link=$('#system_dataTable').jqxGrid('getrows')[event.args.rowindex].edit_link;
-
+                var link = $('#system_dataTable').jqxGrid('getrows')[event.args.rowindex].link;
                 $.ajax({
-                    url: edit_link,
+                    url: link,
                     type: 'POST',
                     dataType: "JSON",
+                    data:{selected_ids:[$('#system_dataTable').jqxGrid('getrows')[event.args.rowindex].id]},
                     success: function (data, status)
                     {
 

@@ -26,3 +26,4 @@ $config['table_warehouse'] = 'warehouse';
 $config['table_designation'] = 'designation';
 $config['table_ticket_resolve_status'] = 'ticket_resolve_status';
 $config['table_ticket_resolve_comment'] = 'ticket_resolve_comment';
+$config['table_requisition'] = 'requisition';
