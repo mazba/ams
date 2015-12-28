@@ -34,12 +34,16 @@ class Dashboard_helper
     public static function get_ticket_status_info()
     {
         $CI = & get_instance();
-//        $CI->db->from($CI->config->item('table_ticket_issue').' ticket_issue');
-//        $CI->db->select('COUNT(product.id) as number_of_product');
-//        $CI->db->select('warehouse.warehouse_name');
-//        $CI->db->group_by('warehouse.id');
-//        $results = $CI->db->get()->result_array();
-//        return $results;
+        $CI->db->from($CI->config->item('table_ticket_issue').' ticket_issue');
+        $CI->db->select('count(ticket_issue.id) number_of_ticket, status');
+        $CI->db->group_by('ticket_issue.status');
+        $results = $CI->db->get()->result_array();
+        $data = array();
+        foreach($results as $dd)
+        {
+            $data[$dd['status']] = $dd['number_of_ticket'];
+        }
+        return $data;
     }
     // get_my_product_list
     public static function get_my_product_list()
@@ -65,6 +69,23 @@ class Dashboard_helper
         $CI->db->order_by('id','DESC');
         $results = $CI->db->get()->result_array();
         return $results;
+    }
+//    get_requisition_info
+    public static function get_requisition_info()
+    {
+        $data =array();
+        $CI = & get_instance();
+        $CI->db->from($CI->config->item('table_requisition').' requisition');
+        $CI->db->select('count(requisition.id) total_requisition');
+        $results = $CI->db->get()->result_array();
+        $data['total_requisition'] = isset($results[0]['total_requisition']) ? $results[0]['total_requisition'] : 0;
+
+        $CI->db->from($CI->config->item('table_requisition').' requisition');
+        $CI->db->select('count(requisition.id) today_requisition');
+        $CI->db->where('requisition.create_date >',strtotime("today midnight"));
+        $results = $CI->db->get()->result_array();
+        $data['today_requisition'] = isset($results[0]['today_requisition']) ? $results[0]['today_requisition'] : 0;
+        return $data;
     }
 
 }

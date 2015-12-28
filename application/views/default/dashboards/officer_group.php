@@ -5,7 +5,6 @@ $recent_ticket_issue = Dashboard_helper::get_recent_ticket_issue();
 $warehouse_product_info = Dashboard_helper::get_warehouse_product_info();
 $ticket_status_info = Dashboard_helper::get_ticket_status_info();
 $get_product_list = Dashboard_helper::get_my_product_list();
-$get_requisition_info = Dashboard_helper::get_requisition_info();
 
 ?>
 <div class="page-content-wrapper">
@@ -96,7 +95,7 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('TICKET_AND_REQUISITION_INFO'); ?>
+                            <i class="fa fa-ticket"></i><?php echo $CI->lang->line('TICKET_INFO'); ?>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">
@@ -107,46 +106,25 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
                     </div>
                     <div class="portlet-body">
                         <div class="scroller" style="height: 186px;" data-always-visible="1" data-rail-visible="0">
-                            <div class="col-md-6">
-                                <span class="label label-success" style="margin: 0px 0px 5px 64px; float:left;"> <i class="fa  fa-ticket "></i> <?php echo $CI->lang->line('TICKET'); ?></span>
-                                <div class="table-scrollable table-scrollable-borderless">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                        <tr>
-                                            <?php
-                                            $a = 0;
-                                            $b = 0;
-                                            $c = 0;
-                                            ?>
-                                            <th><?php echo $CI->lang->line('PENDING_TICKET'); ?></th><td><span class="badge badge-danger"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_INACTIVE')]) ? $a = $ticket_status_info[$CI->config->item('STATUS_INACTIVE')] : '0' ?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th><?php echo $CI->lang->line('RESOLVED_TICKET'); ?></th><td><span class="badge badge-success"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_RESOLVE')]) ? $b = $ticket_status_info[$CI->config->item('STATUS_RESOLVE')] : '0' ?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th><?php echo $CI->lang->line('ASSIGNED_TICKET'); ?></th><td><span class="badge badge-warning"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_ASSIGN')]) ? $c = $ticket_status_info[$CI->config->item('STATUS_ASSIGN')] : '0' ?></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th><?php echo $CI->lang->line('TOTAL_TICKET'); ?></th><td><span class="badge badge-info"><?php echo $a+$b+$c; ?></span></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <span class="label label-success" style="margin: 0px 0px 5px 64px; float:left;"><i class="fa fa-hand-o-up"></i> <?php echo $CI->lang->line('REQUISITION'); ?></span>
-                                <div class="table-scrollable table-scrollable-borderless">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <th><?php echo $CI->lang->line('TODAY_REQUISITION'); ?></th><td><span class="badge badge-danger"><?php echo $get_requisition_info['today_requisition']; ?></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th><?php echo $CI->lang->line('TOTAL_REQUISITION'); ?></th><td><span class="badge badge-info"><?php echo $get_requisition_info['total_requisition']; ?></span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="table-scrollable table-scrollable-borderless">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <?php
+                                        $a = 0;
+                                        $b = 0;
+                                        $c = 0;
+                                        ?>
+                                        <th><?php echo $CI->lang->line('PENDING_TICKET'); ?></th><td><span class="badge badge-danger"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_INACTIVE')]) ? $a = $ticket_status_info[$CI->config->item('STATUS_INACTIVE')] : '0' ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th><?php echo $CI->lang->line('ASSIGNED_TICKET'); ?></th><td><span class="badge badge-warning"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_ASSIGN')]) ? $c = $ticket_status_info[$CI->config->item('STATUS_ASSIGN')] : '0' ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th><?php echo $CI->lang->line('TOTAL_TICKET'); ?></th><td><span class="badge badge-info"><?php echo $a+$b+$c; ?></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

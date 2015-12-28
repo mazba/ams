@@ -93,4 +93,6 @@ $lang['SEE_ALL_RECORDS'] = 'সব রেকর্ড দেখুন';
 $lang['REMAIN/PENDING'] = 'অবশিষ্ট/পেন্ডিং';
 $lang['DAYS_REMAIN'] = 'দিন অবশিষ্ট';
 $lang['DAYS_PENDING'] = ' দিন পেন্ডিং';
+$lang['TICKET_AND_REQUISITION_INFO'] = 'টিকেট এবং রিকুইজিশন সম্পর্কিত তথ্য ';
+$lang['TICKET_INFO'] = 'টিকেট সম্পর্কিত তথ্য ';
 // End User Role Controller
