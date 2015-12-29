@@ -69,7 +69,7 @@ $user = User_helper::get_user();
                                 ?>
 								</span>
                             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                            <img alt="" class="img-circle" src="../../assets/admin/layout4/img/avatar9.jpg"/>
+                            <img alt="" class="img-circle" src="<?php echo base_url().$CI->config->item('file_upload')['users'].'/'.$user->picture_name ?>"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>

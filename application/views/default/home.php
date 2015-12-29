@@ -21,6 +21,14 @@ else if($user->user_group_id==$CI->config->item('OFFICER_GROUP_ID'))
 {
     $CI->load_view('dashboards/officer_group');
 }
+else if($user->user_group_id==$CI->config->item('SUPPORT_GROUP_ID'))
+{
+    $CI->load_view('dashboards/support_user');
+}
+else if($user->user_group_id==$CI->config->item('OPERATOR_GROUP_ID'))
+{
+    $CI->load_view('dashboards/operator_group');
+}
 else
 {
     echo '<br><br><br><br><br>';
