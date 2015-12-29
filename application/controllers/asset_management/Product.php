@@ -248,6 +248,7 @@ class Product extends Root_Controller
                 $data['warranty_start_date']= strtotime($data['warranty_start_date']);
                 $data['warranty_end_date']= strtotime($data['warranty_end_date']);
                 $data['purchase_date']= strtotime($data['purchase_date']);
+                $data['quantity']= 1;
                 $this->db->trans_start();  //DB Transaction Handle START
 
                 Query_helper::add($this->config->item('table_product'),$data);
