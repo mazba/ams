@@ -10,7 +10,7 @@ $CI =& get_instance();
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
         <form class="login-form" action="<?php echo $CI->get_encoded_url("home/login");?>" method="post">
-            <h3 class="form-title" style="color: #4b8df9; font-weight: bold"><?php echo $CI->lang->line('LOGIN_TO_YOUR_ACCOUNT'); ?></h3>
+            <h3 class="form-title" style="color:red;font-weight: bold;text-align: center; text-shadow: 1px 1px 1px #eee;"><?php echo $CI->lang->line('LOGIN_TO_YOUR_ACCOUNT'); ?></h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
 			<span>
@@ -33,7 +33,7 @@ $CI =& get_instance();
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn blue pull-right">
+                <button type="submit" class="btn green pull-right">
                     <?php echo $CI->lang->line('LOGIN'); ?> <i class="m-icon-swapright m-icon-white"></i>
                 </button>
             </div>

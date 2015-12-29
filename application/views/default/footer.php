@@ -7,7 +7,7 @@
  */
 ?>
 <div class="page-footer-inner">
-    2014 &copy; Metronic by keenthemes.
+    2016 &copy; <a href="http://softbdltd.com">Softbd Ltd.</a>
 </div>
 <div class="scroll-to-top">
     <i class="icon-arrow-up"></i>
