@@ -207,6 +207,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div id="system_loading"><img src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/global/img/loading-spinner-default.gif"></div>
     <div id="system_message"></div>
     <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/system_common.js"></script>
+    <script type="text/javascript" src="<?php echo base_url().'assets/'; ?>js/ams_common.js"></script>
 
 </body>
 
