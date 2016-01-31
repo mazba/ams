@@ -215,7 +215,8 @@ class Product extends Root_Controller
                 $data['warranty_end_date']= strtotime($data['warranty_end_date']);
                 $data['purchase_date']= strtotime($data['purchase_date']);
                 $data['update_date']=time();
-
+                $data['product_code']= $data['product_code'][0];
+                $data['serial_number']= $data['serial_number'][0];
                 $this->db->trans_start();  //DB Transaction Handle START
                 Query_helper::update($this->config->item('table_product'),$data,array("id = ".$id));
                 $this->db->trans_complete();   //DB Transaction Handle END
@@ -249,9 +250,19 @@ class Product extends Root_Controller
                 $data['warranty_end_date']= strtotime($data['warranty_end_date']);
                 $data['purchase_date']= strtotime($data['purchase_date']);
                 $data['quantity']= 1;
-                $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::add($this->config->item('table_product'),$data);
+                $product_code = $data['product_code'];
+                $serial_number = $data['serial_number'];
+                unset($data['product_code']);
+                unset($data['serial_number']);
+
+                $this->db->trans_start();  //DB Transaction Handle START
+                foreach($product_code as $key=>$code)
+                {
+                    $data['product_code'] = $code;
+                    $data['serial_number'] = $serial_number[$key];
+                    Query_helper::add($this->config->item('table_product'),$data);
+                }
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 

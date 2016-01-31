@@ -105,7 +105,7 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
                             </a>
                         </div>
                     </div>
-                    <div class="portlet-body">
+                    <div class="portlet-body ticket-and-requisition">
                         <div class="scroller" style="height: 186px;" data-always-visible="1" data-rail-visible="0">
                             <div class="col-md-6">
                                 <span class="label label-success" style="margin: 0px 0px 5px 64px; float:left;"> <i class="fa  fa-ticket "></i> <?php echo $CI->lang->line('TICKET'); ?></span>

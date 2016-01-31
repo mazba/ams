@@ -47,28 +47,33 @@ foreach($this->config->item('product_condition') as $key=>$dd)
                                                 <input type="text" name="product[product_name]" value="<?php echo $product['product_name'];?>" placeholder="<?php echo $CI->lang->line('NAME'); ?>" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="form-group has-error row">
-                                            <div class="col-lg-4">
-                                                <label class="control-label bold" for="product_code"><?php echo $CI->lang->line('PRODUCT_CODE'); ?></label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" name="product[product_code]" value="<?php echo $product['product_code'];?>" placeholder="<?php echo $CI->lang->line('CODE'); ?>" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group has-error row">
-                                            <div class="col-lg-4">
-                                                <label class="control-label bold" for="serial_number"><?php echo $CI->lang->line('SERIAL_NUMBER'); ?></label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" name="product[serial_number]" value="<?php echo $product['serial_number'];?>" placeholder="<?php echo $CI->lang->line('SERIAL_NUMBER'); ?>" class="form-control">
-                                            </div>
-                                        </div>
+
                                         <div class="form-group has-error row">
                                             <div class="col-lg-4">
                                                 <label class="control-label bold" for="unit_price"><?php echo $CI->lang->line('UNIT_PRICE'); ?></label>
                                             </div>
                                             <div class="col-lg-8">
                                                 <input type="text" name="product[unit_price]" value="<?php echo $product['unit_price'];?>" placeholder="<?php echo $CI->lang->line('UNIT_PRICE'); ?>" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-error row">
+                                            <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('CATEGORY'); ?></label></div>
+                                            <div class="col-lg-8">
+                                                <select name="product[category_id]" class="form-control" >
+                                                    <?php
+                                                    $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$category,'drop_down_selected'=>$product['category_id']));
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-error row">
+                                            <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('WAREHOUSE'); ?></label></div>
+                                            <div class="col-lg-8">
+                                                <select name="product[warehouse_id]" class="form-control" >
+                                                    <?php
+                                                    $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$warehouse,'drop_down_selected'=>$product['warehouse_id']));
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group has-success row">
@@ -162,32 +167,11 @@ foreach($this->config->item('product_condition') as $key=>$dd)
                                             </div>
                                         </div>
                                         <div class="form-group has-error row">
-                                            <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('CATEGORY'); ?></label></div>
-                                            <div class="col-lg-8">
-                                                <select name="product[category_id]" class="form-control" >
-                                                    <?php
-                                                    $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$category,'drop_down_selected'=>$product['category_id']));
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group has-error row">
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('MANUFACTURE'); ?></label></div>
                                             <div class="col-lg-8">
                                                 <select name="product[manufacture_id]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$manufacture,'drop_down_selected'=>$product['manufacture_id']));
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group has-error row">
-                                            <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('WAREHOUSE'); ?></label></div>
-                                            <div class="col-lg-8">
-                                                <select name="product[warehouse_id]" class="form-control" >
-                                                    <?php
-                                                    $CI->load_view('dropdown',array('drop_down_default_option'=>false,'drop_down_options'=>$warehouse,'drop_down_selected'=>$product['warehouse_id']));
                                                     ?>
                                                 </select>
                                             </div>
@@ -225,6 +209,61 @@ foreach($this->config->item('product_condition') as $key=>$dd)
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <hr style="border-color: #fce99d"/>
+                                        <?php
+                                        if(!$product['id'])
+                                        {
+                                            ?>
+                                            <div class="col-md-4">
+                                                <div class="form-group has-error row">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label bold" for="product_code"><?php echo $CI->lang->line('NUMBER_OF_PRODUCT'); ?></label>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <input type="number" id="number_of_product" value="" placeholder="Number Of Product" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <div id="product_wrp">
+                                        <div class="col-md-12" id="base_product_row">
+                                            <div class="col">
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-error row">
+                                                        <div class="col-lg-1">
+                                                            <span style="margin-top: 5px" class="badge badge-success">1</span>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <label class="control-label bold" for="product_code"><?php echo $CI->lang->line('PRODUCT_CODE'); ?></label>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <input type="text" name="product[product_code][]" value="<?php echo $product['product_code'];?>" placeholder="<?php echo $CI->lang->line('CODE'); ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group has-error row">
+                                                        <div class="col-lg-4">
+                                                            <label class="control-label bold" for="serial_number"><?php echo $CI->lang->line('SERIAL_NUMBER'); ?></label>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <input type="text" name="product[serial_number][]" value="<?php echo $product['serial_number'];?>" placeholder="<?php echo $CI->lang->line('SERIAL_NUMBER'); ?>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="new_product_row" class="col-md-12">
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -240,7 +279,23 @@ foreach($this->config->item('product_condition') as $key=>$dd)
     $(document).ready(function ()
     {
         turn_off_triggers();
-        $('.date-picker').datepicker()
+        $('.date-picker').datepicker();
+        $(document).on('keyup','#number_of_product',function(){
+            var no_of_product = parseInt($(this).val());
+            if(!isNaN(no_of_product) && no_of_product>1 && no_of_product<300)
+            {
+                $('#new_product_row').html('');
+                for(var i=1; i<no_of_product; i++)
+                {
+                    var newItem = $('#new_product_row').append($('#base_product_row').html());
+                    newItem.find('.col:last span').html(i+1)
+                    console.log(newItem)
+                }
+            }
+            else{
+                $('#new_product_row').html('');
+            }
+        });
     });
 </script>
 

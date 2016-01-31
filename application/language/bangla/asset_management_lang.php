@@ -95,6 +95,8 @@ $lang['REQUISITION_TITLE'] = 'রিকুইজিশন টাইটেল ';
 $lang['REQUISITION_TYPE'] = 'রিকুইজিশন টাইপ ';
 $lang['REQUISITION_ID'] = 'রিকুইজিশন আইডি ';
 $lang['REQUISITIONS_DETAILS'] = 'রিকুইজিশন ডিটেলস  ';
+$lang['CREATE_NEW_PRODUCT'] = 'নতুন প্রোডাক্ট তৈরি করুন ';
+$lang['NUMBER_OF_PRODUCT'] = 'পণ্য সংখ্যা';
 
 
 
