@@ -334,7 +334,7 @@ class Ticket_issue extends Root_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('ticket[user_id]',$this->lang->line('USER_NAME'),'required');
-        $this->form_validation->set_rules('ticket[product_id]',$this->lang->line('PRODUCT_NAME'),'required');
+//        $this->form_validation->set_rules('ticket[product_id]',$this->lang->line('PRODUCT_NAME'),'required');
         $this->form_validation->set_rules('ticket[subject]',$this->lang->line('SUBJECT'),'required');
 
         if($this->input->post('id')>0)

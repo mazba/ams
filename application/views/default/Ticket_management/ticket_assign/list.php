@@ -73,32 +73,24 @@ $CI=& get_instance();
                 ]
             });
         //for Double Click to edit
-        <?php
-            if($CI->permissions['edit'])
-            {
-                ?>
-            $('#system_dataTable').on('rowDoubleClick', function (event)
-            {
+        $('#system_dataTable').on('rowDoubleClick', function (event)
+        {
+            var edit_link=$('#system_dataTable').jqxGrid('getrows')[event.args.rowindex].edit_link;
 
-                var edit_link=$('#system_dataTable').jqxGrid('getrows')[event.args.rowindex].edit_link;
+            $.ajax({
+                url: edit_link,
+                type: 'POST',
+                dataType: "JSON",
+                success: function (data, status)
+                {
 
-                $.ajax({
-                    url: edit_link,
-                    type: 'POST',
-                    dataType: "JSON",
-                    success: function (data, status)
-                    {
+                },
+                error: function (xhr, desc, err)
+                {
+                    console.log("error");
 
-                    },
-                    error: function (xhr, desc, err)
-                    {
-                        console.log("error");
-
-                    }
-                });
+                }
             });
-            <?php
-        }
-    ?>
+        });
     });
 </script>

@@ -21,6 +21,7 @@ class Ticket_resolve_model extends CI_Model
         $this->db->select("ticket_assign.id,
                             ticket_assign.ticket_issue_id,
                             ticket_assign.create_date,
+                            ticket_assign.priority,
                             ticket_assign.`status`,
                             `ticket_issue`.`subject`,
                             product.product_name,
@@ -31,11 +32,12 @@ class Ticket_resolve_model extends CI_Model
         $this->db->join($CI->config->item('table_ticket_issue').' ticket_issue','ticket_issue.id = ticket_assign.ticket_issue_id', 'INNER');
         $this->db->join($CI->config->item('table_users').' users','users.id = ticket_issue.user_id', 'INNER');
         $this->db->join($CI->config->item('table_users').' users_assign','users_assign.id = ticket_assign.user_id', 'INNER');
-        $this->db->join($CI->config->item('table_product').' product','product.id = ticket_issue.product_id', 'INNER');
+        $this->db->join($CI->config->item('table_product').' product','product.id = ticket_issue.product_id', 'LEFT');
         $this->db->where('ticket_assign.status ='. $this->config->item('STATUS_ASSIGN'));
         $this->db->order_by('ticket_assign.ticket_issue_id', 'DESC');
         $users = $this->db->get()->result_array();
         //echo $this->db->last_query();
+        $all_priority = $CI->config->item('ticket_priority');
         foreach($users as &$user)
         {
             $user['edit_link']=$CI->get_encoded_url('ticket_management/ticket_resolve/index/edit/'.$user['id']);
@@ -56,6 +58,7 @@ class Ticket_resolve_model extends CI_Model
             //                $user['status_text']=$user['status'];
             //            }
             $user['create_date_time']=date('h:i A - d M,y',$user['create_date']);
+            $user['priority'] = isset($all_priority[$user['priority']])?$all_priority[$user['priority']]:'';
         }
        return $users;
     }
@@ -70,6 +73,7 @@ class Ticket_resolve_model extends CI_Model
         $this->db->select('ticket_issue.`subject`,
                             ticket_assign.`id` ticket_assign_id,
                             ticket_assign.`status`,
+                            ticket_assign.`priority`,
                             ticket_assign.user_id,
                             ticket_issue.create_date,
                             product.product_name,
@@ -83,7 +87,7 @@ class Ticket_resolve_model extends CI_Model
         $CI->db->from($CI->config->item('table_ticket_assign').' ticket_assign');
         $CI->db->join($CI->config->item('table_ticket_issue').' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id','INNER');
         $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_issue.user_id','INNER');
-        $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','INNER');
+        $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','LEFT');
         $CI->db->where('ticket_assign.status',$this->config->item('STATUS_ASSIGN'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
         $result=$this->db->get()->result_array();

@@ -95,6 +95,17 @@ $user=User_helper::get_user();
                                                                                 <span class="label label-sm label-success" title="<?php echo $this->lang->line('PRODUCT_NAME');?>"><?php echo $ticket_issue['product_name'];?></span>
                                                                                 <span class="label label-sm label-danger" title="<?php echo $this->lang->line('TIME');?>"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
                                                                                 <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo $ticket_issue['id'];?></span>
+
+                                                                                <select title="<?php echo $this->lang->line('PRIORITY');?>" name="ticket_priority[]" id="ticket_priority">
+                                                                                    <?php
+                                                                                    foreach($CI->config->item('ticket_priority') as $key=>$priority)
+                                                                                    {
+                                                                                        ?>
+                                                                                        <option value="<?php echo $key ?>"><?php echo $priority ?></option>
+                                                                                        <?php
+                                                                                    }
+                                                                                    ?>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>

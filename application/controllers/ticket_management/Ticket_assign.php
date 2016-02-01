@@ -14,7 +14,7 @@ class Ticket_assign extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_assign');
         if($this->permissions)
         {
-            //$this->permissions['edit']=0;
+            $this->permissions['edit']=0;
             $this->permissions['delete']=0;
             //$this->permissions['view']=0;
         }
@@ -219,9 +219,10 @@ class Ticket_assign extends Root_Controller
         }
         else
         {
-            $user_id=$this->input->post('user_id');
+            $user_id = $this->input->post('user_id');
             //$row_id=$this->input->post('row_id');
-            $ticket_issue_id=$this->input->post('ticket_issue_id');
+            $ticket_issue_id = $this->input->post('ticket_issue_id');
+            $ticket_priority = $this->input->post('ticket_priority');
             $count=count($this->input->post('row_id'));
 
             if($id>0)
@@ -274,6 +275,7 @@ class Ticket_assign extends Root_Controller
                     {
                         $ticket_detail['user_id']=$user_id;
                         $ticket_detail['ticket_issue_id']=$ticket_issue_id[$i];
+                        $ticket_detail['priority']=$ticket_priority[$i];
                         Query_helper::add($this->config->item('table_ticket_assign'),$ticket_detail);
                         Query_helper::update($this->config->item('table_ticket_issue'),$ticket_issue_detail,array("id = ".$ticket_issue_id[$i]));
                     }

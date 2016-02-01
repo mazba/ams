@@ -43,6 +43,8 @@ $lang['PRODUCT_NAME']		= 'পণ্যের নাম';
 $lang['SUBJECT']		= 'বিষয়';
 $lang['TIME']		= 'সময়';
 $lang['TOKEN']		= 'টোকেন';
+$lang['PRIORITY']		= 'Priority';
+$lang['EDIT_TICKET_RESOLVE']= 'টিকেট সমাধান করুণ  ';
 
 
 $lang['VIEW_DETAILS_TICKET_ASSIGN']		= 'নতুন টিকেট ইস্যু';
