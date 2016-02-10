@@ -98,7 +98,7 @@ class User_helper
         $CI->db->join($CI->config->item('table_component').' c','c.id = task.component_id',"INNER");
         $CI->db->join($CI->config->item('table_module').' m','m.id = task.module_id',"INNER");
         $CI->db->where('ugr.user_group_id',$user->user_group_id);
-        $CI->db->where('c.id !=',$CI->config->item('report_component_id'));
+//        $CI->db->where('c.id !=',$CI->config->item('report_component_id'));
 
         $CI->db->where('task.status',1);
         $CI->db->where('m.status',1);

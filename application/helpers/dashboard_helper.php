@@ -17,17 +17,26 @@ class Dashboard_helper
     {
         $CI = & get_instance();
         $CI->db->from($CI->config->item('table_product_assign').' pa');
-        $CI->db->select('pa.id');
+        $CI->db->select('pa.product_id');
         $CI->db->where('pa.status', 1);
         $sub = $CI->db->get_compiled_select();
 
         $CI->db->from($CI->config->item('table_product').' product');
-        $CI->db->select('COUNT(product.id) as number_of_product');
-        $CI->db->select('warehouse.warehouse_name');
+        $CI->db->select('product.warehouse_id,  count(product.id) as number_of_product');
+        $CI->db->group_by('product.warehouse_id');
         $CI->db->where("product.id NOT IN ($sub)", NULL, FALSE);
-        $CI->db->group_by('warehouse.id');
-        $CI->db->join($CI->config->item('table_warehouse').' warehouse' ,'warehouse.id = product.warehouse_id','LEFT OUTER' );
+        $no_of_product = $CI->db->get()->result_array();
+        $product = array();
+        foreach ($no_of_product as $p) {
+            $product[$p['warehouse_id']] = $p['number_of_product'];
+        }
+
+        $CI->db->from($CI->config->item('table_warehouse').' warehouse');
+        $CI->db->select('warehouse.id, warehouse.warehouse_name');
         $results = $CI->db->get()->result_array();
+
+        foreach($results as &$result)
+            $result['number_of_product'] = isset($product[$result['id']]) ? $product[$result['id']] : 0;
         return $results;
     }
     // get_warehouse_product_info

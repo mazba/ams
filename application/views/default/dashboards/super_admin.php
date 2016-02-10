@@ -188,11 +188,15 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
                                         <td class="highlight">
                                             <div class="warning">
                                             </div>
-                                            <a href="#" class="external">
-                                                <?php echo $warehouse['warehouse_name'] ?> </a>
+                                            <a href="#basic" data-toggle="modal" class="external load_product" data-warehouse-id="<?php echo $warehouse['id'] ?>">
+                                                <?php echo $warehouse['warehouse_name'] ?>
+                                            </a>
                                         </td>
                                         <td>
-                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo $warehouse['number_of_product'] ?></div>
+                                            <a class="external" href="#basic" data-toggle="modal" data-warehouse-id="<?php echo $warehouse['id'] ?>">
+                                                <div data-warehouse-id="<?php echo $warehouse['id'] ?>" class="load_product label label-info center-block"><i class="fa fa-cubes "></i> <?php echo $warehouse['number_of_product'] ?>
+                                                </div>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php
@@ -272,11 +276,32 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
                     </div>
                 </div>
                 <!-- END SAMPLE TABLE PORTLET-->
+
             </div>
         </div>
         <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
+
+<div aria-hidden="true" role="basic" tabindex="-1" id="basic" class="modal fade" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                <h4 class="modal-title">Product List</h4>
+            </div>
+            <div class="modal-body" id="product_list">
+
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn default" type="button">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <script>
     jQuery(document).ready(function() {
         $('.scroller').each(function() {
@@ -306,6 +331,29 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
             });
 
             $(this).attr("data-initialized", "1");
+        });
+        $(document).on('click','.load_product',function(){
+            $('#product_list').html('');
+            var warehouseId = $(this).data('warehouse-id');
+            if(warehouseId)
+            {
+                $.ajax({
+                    url: '<?php echo $CI->get_encoded_url('common/get_product_list'); ?>',
+                    type: 'POST',
+                    dataType: "JSON",
+                    data:{warehouseId:warehouseId},
+                    success: function (data, status)
+                    {
+
+                    },
+                    error: function (xhr, desc, err)
+                    {
+                        console.log("error");
+
+                    }
+                });
+            }
+
         });
     });
 </script>

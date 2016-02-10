@@ -7,15 +7,16 @@ class Common extends Root_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model("Common_model");
 
     }
 
-    public function get_notification()
+    public function get_product_list()
     {
-//        $data = array();
-//        $ajax['status']= true;
-//        $ajax['system_content'][]=array("id"=>"#header_notification_bar","html"=>$this->load_view("header_notification_bar",$data,true));
-//        $this->jsonReturn($ajax);
+        $data = $this->Common_model->get_unassigned_product_list($this->input->post('warehouseId'));
+        $ajax['status']= true;
+        $ajax['system_content'][]=array("id"=>"#product_list","html"=>$this->load_view("product_list",array('data'=>$data),true));
+        $this->jsonReturn($ajax);
     }
 
 }

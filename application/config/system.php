@@ -72,3 +72,8 @@ $config['ticket_comment_support_user']=3;
 // requisition type
 $config['requisition_type'][1]='Hardware';
 $config['requisition_type'][2]='Software';
+
+// ticket issue priority
+$config['ticket_priority'][1] = 'High';
+$config['ticket_priority'][2] = 'Medium';
+$config['ticket_priority'][3] = 'Low';
