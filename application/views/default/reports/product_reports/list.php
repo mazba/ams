@@ -67,9 +67,13 @@ $CI=& get_instance();
                                             <div class="col-md-2">
                                                 <input type="radio" checked value="unassigned"  name="product_type" />
                                             </div>
-                                            <label class="col-md-4 control-label">Assigned</label>
+                                            <label class="col-md-4 control-label">Assigned & Unassigned</label>
                                             <div class="col-md-2">
                                                 <input type="radio" value="all"  name="product_type" />
+                                            </div>
+                                            <label class="col-md-4 control-label">Only Assigned</label>
+                                            <div class="col-md-2">
+                                                <input type="radio" value="assigned"  name="product_type" />
                                             </div>
                                         </div>
                                     </div>

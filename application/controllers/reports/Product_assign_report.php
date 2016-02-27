@@ -47,7 +47,7 @@ class Product_assign_report extends Root_Controller
                 $ajax['system_message']=$this->message;
             }
             $ajax['system_page_url']=$this->get_encoded_url('reports/product_assign_report');
-            $ajax['system_page_title']=$this->lang->line("TICKET_RELATED_REPORT");
+            $ajax['system_page_title']=$this->lang->line("TICKET_ASSIGN_RELATED_REPORT");
             $this->jsonReturn($ajax);
         }
         else

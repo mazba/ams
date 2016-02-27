@@ -20,6 +20,7 @@
     <thead>
         <tr style="background: #eee">
             <th>প্রোডাক্ট  নাম</th>
+            <th>পণ্যের সংখ্যা</th>
             <th>প্রোডাক্ট কোড</th>
             <th>ক্রমিক সংখ্যা</th>
             <th>ইউনিট মূল্য</th>
@@ -45,6 +46,7 @@
         ?>
         <tr>
             <td><?php echo $product['product_name'] ?></td>
+            <td><?php echo $product['no_of_product'] ?></td>
             <td><?php echo $product['product_code'] ?></td>
             <td><?php echo $product['serial_number'] ?></td>
             <td><?php echo $product['unit_price'] ?></td>
