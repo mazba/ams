@@ -204,6 +204,115 @@ $user=User_helper::get_user();
                                 }
                                 ?>
 
+
+                                <?php
+                                $ticket_issue_status=$ticket['status'];
+                                if($ticket_issue_status==$this->config->item('STATUS_ASSIGN'))
+                                {
+                                    ?>
+                                    <div class="form-group has-error row" >
+                                        <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE_REMARKS'); ?></label></div>
+                                        <div class="col-lg-8">
+                                            <textarea name="comment[comment]"  class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                else
+                                {
+                                    if($ticket_issue_status==$this->config->item('STATUS_RESOLVE'))
+                                    {
+                                        echo $this->lang->line('RESOLVE');
+                                    }
+                                    else
+                                    {
+                                        //echo $ticket_issue_status;
+                                    }
+                                }
+                                ?>
+
+
+                                <!-- BEGIN PORTLET-->
+
+                                <?php
+
+                                if(!empty($comments))
+                                {
+                                    ?>
+                                    <div class="portlet">
+                                        <div class="portlet-title line">
+                                            <div class="caption">
+                                                <i class="fa fa-comments"></i><?php echo $this->lang->line('COMMENT');?>
+                                            </div>
+                                        </div>
+                                        <div id="chats" class="portlet-body">
+                                            <div class="scroller " style="position: relative; overflow: scroll; width: auto; height: 300px;">
+                                                <div data-rail-visible1="1" data-always-visible="1" style="height: 300px; overflow: scroll; width: auto;" class="scroller" data-initialized="1">
+                                                    <ul class="chats">
+                                                        <?php
+                                                        foreach($comments as $comment)
+                                                        {
+                                                            if($comment['create_by']==$user->id)
+                                                            {
+                                                                $in_out_class='out';
+                                                            }
+                                                            else
+                                                            {
+                                                                $in_out_class='in';
+                                                            }
+                                                            //if($comment['type']==$this->config->item('ticket_comment_end_user') || $comment['type']==$this->config->item('ticket_comment_manager'))
+                                                            //{
+                                                            //    $in_out_class='in';
+                                                            //}
+                                                            //elseif($comment['type']==$this->config->item('ticket_comment_support_user'))
+                                                            //{
+                                                            //    $in_out_class='out';
+                                                            //}
+                                                            //else
+                                                            //{
+                                                            //    $in_out_class='';
+                                                            //}
+                                                            ?>
+                                                            <li class="<?php echo $in_out_class;?>">
+                                                                <img src="<?php echo base_url();?>images/<?php echo $comment['picture_name']?'users/'.$comment['picture_name']:'profile.png';?>" alt="" class="avatar">
+                                                                <div class="message">
+                                                                            <span class="arrow">
+                                                                            </span>
+                                                                    <a class="name" href="#">
+                                                                        <?php echo $comment['user_name'];?>
+                                                                    </a>
+                                                                            <span class="datetime">
+                                                                                at <?php echo date('h:i A - d M,y', $comment['create_date']);?>
+                                                                                <?php
+
+                                                                                if(!empty($comment['resolve_status']))
+                                                                                {
+                                                                                    ?>
+                                                                                    <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>">
+                                                                                    <?php echo $comment['resolve_status'];?>
+                                                                                </span>
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
+
+                                                                            </span>
+                                                                    <span class="body"><?php echo $comment['comment'];?></span>
+                                                                </div>
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <!-- END PORTLET-->
+
+
                             </div>
                         </form>
                     </div>

@@ -93,4 +93,36 @@ class Ticket_issue_model extends CI_Model
         }
     }
 
+    public function get_ticket_comments($ticket_issue_id=0)
+    {
+
+        $CI =& get_instance();
+        $this->db->select('ticket_resolve_status.`name` resolve_status,
+                            ticket_resolve_comment.`comment`,
+                            ticket_resolve_comment.resolved_date,
+                            ticket_resolve_comment.type,
+                            ticket_resolve_comment.`status`,
+                            users.name_en user_name,
+                            users.picture_name,
+                            ticket_resolve_comment.id,
+                            ticket_resolve_comment.create_by,
+                            ticket_resolve_comment.create_date,
+                            ticket_resolve_comment.ticket_issue_id');
+        $CI->db->from($CI->config->item('table_ticket_resolve_comment').' ticket_resolve_comment');
+        $CI->db->join($CI->config->item('table_ticket_resolve_status').' ticket_resolve_status', 'ticket_resolve_status.id = ticket_resolve_comment.ticket_status_id','LEFT');
+        $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_resolve_comment.create_by','LEFT');
+        $CI->db->where('ticket_resolve_comment.ticket_issue_id ='.$ticket_issue_id);
+        $CI->db->order_by('ticket_resolve_comment.id', 'DESC');
+        $result=$this->db->get()->result_array();
+        //echo $this->db->last_query();
+        if(sizeof($result)>0)
+        {
+            return $result;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }

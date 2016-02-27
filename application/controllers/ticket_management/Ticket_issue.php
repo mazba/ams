@@ -170,9 +170,10 @@ class Ticket_issue extends Root_Controller
     {
         if($this->permissions['view'])
         {
+            $this->permissions['edit']=1;
             if(is_array($id))
                 $id = $id[0];
-            $this->current_action='batch_details';
+            $this->current_action='edit';
             $ajax['status']=true;
             $data=array();
 
@@ -181,6 +182,7 @@ class Ticket_issue extends Root_Controller
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
             $data['products'] = $this->ticket_issue_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
             $data['ticket_assign']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('ticket_issue_id ='.$id),1);
+            $data['comments'] = $this->ticket_issue_model->get_ticket_comments($id);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_issue/details",$data,true));
             if($this->message)
             {
@@ -250,7 +252,7 @@ class Ticket_issue extends Root_Controller
                     $this->jsonReturn($ajax);
                 }
             }
-
+            $comment_detail=$this->input->post('comment');
             if($id>0)
             {
                 unset($ticket_detail['id']);
@@ -260,7 +262,12 @@ class Ticket_issue extends Root_Controller
 
                 $this->db->trans_start();  //DB Transaction Handle START
 
-                Query_helper::update($this->config->item('table_ticket_issue'),$ticket_detail,array("id = ".$id));
+                //Query_helper::update($this->config->item('table_ticket_issue'),$ticket_detail,array("id = ".$id));
+                $comment_detail['type']=$this->config->item('ticket_comment_end_user');
+                $comment_detail['ticket_issue_id']=$id;
+                $comment_detail['create_by']=$user->id;
+                $comment_detail['create_date']=time();
+                Query_helper::add($this->config->item('table_ticket_resolve_comment'),$comment_detail);
 
                 $this->db->trans_complete();   //DB Transaction Handle END
 
@@ -322,7 +329,7 @@ class Ticket_issue extends Root_Controller
     private function system_batch_details($ids)
     {
         if(!$ids)
-        $ids=$this->input->post('selected_ids');
+            $ids=$this->input->post('selected_ids');
         $this->details($ids);
     }
 
@@ -332,21 +339,31 @@ class Ticket_issue extends Root_Controller
     {
 
         $this->load->library('form_validation');
-
         $this->form_validation->set_rules('ticket[user_id]',$this->lang->line('USER_NAME'),'required');
-//        $this->form_validation->set_rules('ticket[product_id]',$this->lang->line('PRODUCT_NAME'),'required');
         $this->form_validation->set_rules('ticket[subject]',$this->lang->line('SUBJECT'),'required');
-
         if($this->input->post('id')>0)
         {
-            $this->form_validation->set_rules('ticket[status]',$this->lang->line('STATUS'),'required');
+
+        }
+        else
+        {
+            $this->form_validation->set_rules('ticket[user_id]',$this->lang->line('USER_NAME'),'required');
+            $this->form_validation->set_rules('ticket[product_id]',$this->lang->line('PRODUCT_NAME'),'required');
+            $this->form_validation->set_rules('ticket[subject]',$this->lang->line('SUBJECT'),'required');
+
+            if($this->input->post('id')>0)
+            {
+                $this->form_validation->set_rules('ticket[status]',$this->lang->line('STATUS'),'required');
+            }
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->message=validation_errors();
+                return false;
+            }
+
         }
 
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->message=validation_errors();
-            return false;
-        }
         return true;
     }
 

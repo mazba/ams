@@ -3,6 +3,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
 $user = User_helper::get_user();
 //$modules=User_helper::get_task_module($CI->config->item('system_sidebar02'));
+$dir=$CI->config->item('file_upload');
 ?>
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
@@ -69,7 +70,7 @@ $user = User_helper::get_user();
                                 ?>
 								</span>
                             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                            <img alt="" class="img-circle" src="<?php echo base_url().$CI->config->item('file_upload')['users'].'/'.$user->picture_name ?>"/>
+                            <img alt="" class="img-circle" src="<?php echo base_url().$dir['users'].'/'.$user->picture_name ?>"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
