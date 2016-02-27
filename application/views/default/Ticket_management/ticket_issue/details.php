@@ -128,7 +128,6 @@ $user=User_helper::get_user();
                                     <div class="col-lg-8">
                                         <label class="control-label bold" for="name_en">
                                             <?php
-
                                             if($ticket['status']==$this->config->item('STATUS_INACTIVE'))
                                             {
                                                 ?>
@@ -204,34 +203,6 @@ $user=User_helper::get_user();
                                 }
                                 ?>
 
-
-                                <?php
-                                $ticket_issue_status=$ticket['status'];
-                                if($ticket_issue_status==$this->config->item('STATUS_ASSIGN'))
-                                {
-                                    ?>
-                                    <div class="form-group has-error row" >
-                                        <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('RESOLVE_REMARKS'); ?></label></div>
-                                        <div class="col-lg-8">
-                                            <textarea name="comment[comment]"  class="form-control" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                <?php
-                                }
-                                else
-                                {
-                                    if($ticket_issue_status==$this->config->item('STATUS_RESOLVE'))
-                                    {
-                                        echo $this->lang->line('RESOLVE');
-                                    }
-                                    else
-                                    {
-                                        //echo $ticket_issue_status;
-                                    }
-                                }
-                                ?>
-
-
                                 <!-- BEGIN PORTLET-->
 
                                 <?php
@@ -252,29 +223,37 @@ $user=User_helper::get_user();
                                                         <?php
                                                         foreach($comments as $comment)
                                                         {
-                                                            if($comment['create_by']==$user->id)
+                                                            /*if($comment['create_by']==$user->id)
                                                             {
                                                                 $in_out_class='out';
                                                             }
                                                             else
                                                             {
                                                                 $in_out_class='in';
+                                                            }*/
+                                                            if($comment['type']==$this->config->item('ticket_comment_end_user') || $comment['type']==$this->config->item('ticket_comment_manager'))
+                                                            {
+                                                                $in_out_class='in';
                                                             }
-                                                            //if($comment['type']==$this->config->item('ticket_comment_end_user') || $comment['type']==$this->config->item('ticket_comment_manager'))
-                                                            //{
-                                                            //    $in_out_class='in';
-                                                            //}
-                                                            //elseif($comment['type']==$this->config->item('ticket_comment_support_user'))
-                                                            //{
-                                                            //    $in_out_class='out';
-                                                            //}
-                                                            //else
-                                                            //{
-                                                            //    $in_out_class='';
-                                                            //}
+                                                            elseif($comment['type']==$this->config->item('ticket_comment_support_user'))
+                                                            {
+                                                                $in_out_class='out';
+                                                            }
+                                                            else
+                                                            {
+                                                                $in_out_class='';
+                                                            }
+                                                            if(!empty($comment['picture_name']) && file_exists('images/'.$comment['picture_name']))
+                                                            {
+                                                                $profile_img=base_url().'images/'.$comment['picture_name'];
+                                                            }
+                                                            else
+                                                            {
+                                                                $profile_img=base_url().'images/profile.png';
+                                                            }
                                                             ?>
                                                             <li class="<?php echo $in_out_class;?>">
-                                                                <img src="<?php echo base_url();?>images/<?php echo $comment['picture_name']?'users/'.$comment['picture_name']:'profile.png';?>" alt="" class="avatar">
+                                                                <img src="<?php echo $profile_img;?>" alt="" class="avatar">
                                                                 <div class="message">
                                                                             <span class="arrow">
                                                                             </span>
