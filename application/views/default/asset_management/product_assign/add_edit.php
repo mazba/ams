@@ -113,9 +113,20 @@ $CI=& get_instance();
                         .first()
                         .clone()
                 );
+            $("#product_wrp").append('<a href="#" class="external" onclick="removeIt(this)"><i class="fa fa-times"></i></a>')
             // enable Select2 on the select elements
             $("#product_wrp").children("select").select2();
         });
+        function GetDynamicTextBox(value) {
+            return '<input type="button" value="Remove" class="remove" />'
+        }
+
+        $("body").on("click", ".remove", function () {
+            $(this).closest("div").remove();
+        });
     });
+    function removeIt(ele){
+        console.log(ele);
+    }
 </script>
 

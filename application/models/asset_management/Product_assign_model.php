@@ -51,13 +51,13 @@ class Product_assign_model extends CI_Model
         $sub = $CI->db->get_compiled_select();
 
         $CI->db->from($CI->config->item('table_product').' product');
-        $CI->db->select('product.product_name, product.id');
+        $CI->db->select('product.product_name,product.product_code,product.id');
         $CI->db->where("product.id NOT IN ($sub)", NULL, FALSE);
         $results = $this->db->get()->result_array();
         $data = array();
         foreach($results as $result)
         {
-            $data[] = array('text'=>$result['product_name'],
+            $data[] = array('text'=>$result['product_name']." (".$result['product_code'].")",
                             'value'=>$result['id']);
         }
         return $data;

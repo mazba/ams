@@ -20,13 +20,9 @@
     <thead>
         <tr style="background: #eee">
             <th>প্রোডাক্ট  নাম</th>
-            <th>পণ্যের সংখ্যা</th>
-            <th>অবশিষ্ট</th>
-            <th>হস্তান্তর</th>
+
             <th>প্রোডাক্ট কোড</th>
-            <th>ক্রমিক সংখ্যা</th>
-            <th>ইউনিট মূল্য</th>
-            <th>ক্যটাগরি</th>
+
             <th>পণ্যাগার</th>
             <th>প্রস্তুতকারক</th>
             <th>সরবরাহকারী</th>
@@ -34,7 +30,10 @@
             <th>সংক্ষিপ্ত বর্ণনা</th>
             <th>স্পেসিফিকেশন</th>
             <th>মডেল নাম্বার</th>
+            <th>পণ্যের সংখ্যা</th>
 
+            <th>হস্তান্তর</th>
+            <th>অবশিষ্ট</th>
 
         </tr>
     </thead>
@@ -45,18 +44,6 @@
         ?>
         <tr>
             <td><?php echo $product['product_name'] ?></td>
-            <td style="text-align: center"><span class="label label-primary"><?php echo $product['nub_of_product'] ?></span></td>
-            <td style="text-align: center"><span class="label label-success">
-                     <?php echo $nub_of_product_warehouse = (isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0) ?>
-                 </span>
-            </td>
-            <td style="text-align: center"><span class="label label-warning"> <?php echo $product['nub_of_product']-$nub_of_product_warehouse ?>
-                </span>
-            </td>
-            <td><?php echo $product['product_code'] ?></td>
-
-            <td><?php echo $product['serial_number'] ?></td>
-            <td><?php echo $product['unit_price'] ?></td>
             <td><?php echo $product['category_name'] ?></td>
             <td><?php echo $product['warehouse_name'] ?></td>
             <td><?php echo $product['manufacture_name'] ?></td>
@@ -65,6 +52,15 @@
             <td><?php echo $product['sort_description'] ?></td>
             <td><?php echo $product['specification'] ?></td>
             <td><?php echo $product['model_no'] ?></td>
+            <td style="text-align: center"><span class="label label-primary"><?php echo $product['nub_of_product'] ?></span></td>
+
+            <td style="text-align: center"><span class="label label-warning"> <?php echo $product['nub_of_product']-$nub_of_product_warehouse = (isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0)  ?>
+                </span>
+            </td>
+            <td style="text-align: center"><span class="label label-success">
+                     <?php echo (isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0) ?>
+                 </span>
+            </td>
         </tr>
         <?php
     }
