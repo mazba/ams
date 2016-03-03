@@ -21,8 +21,8 @@
         <tr style="background: #eee">
             <th>প্রোডাক্ট  নাম</th>
             <th>পণ্যের সংখ্যা</th>
-           <th>হস্তান্তর</th>
             <th>অবশিষ্ট</th>
+            <th>হস্তান্তর</th>
             <th>প্রোডাক্ট কোড</th>
             <th>ক্রমিক সংখ্যা</th>
             <th>ইউনিট মূল্য</th>
@@ -34,22 +34,20 @@
             <th>সংক্ষিপ্ত বর্ণনা</th>
             <th>স্পেসিফিকেশন</th>
             <th>মডেল নাম্বার</th>
-            <th>ওয়্যারেন্টি শুরুর তারিখ</th>
-            <th>ওয়্যারেন্টি শেষ তারিখ</th>
-            <th>ক্রয়ের তারিখ</th>
             <th>অবস্থা</th>
 
         </tr>
     </thead>
     <tbody>
     <?php
-    foreach($products as $product)
+    foreach($data['products'] as $product)
     {
-
         ?>
         <tr>
             <td><?php echo $product['product_name'] ?></td>
-            <td><?php echo $product['no_of_product'] ?></td>
+            <td><?php echo $product['nub_of_product'] ?></td>
+            <td><?php echo $nub_of_product_warehouse = (isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0) ?></td>
+            <td><?php echo $product['nub_of_product']-$nub_of_product_warehouse ?></td>
             <td><?php echo $product['status'] ?></td>
             <td><?php echo $product['product_code'] ?></td>
             <td><?php echo $product['serial_number'] ?></td>
@@ -62,10 +60,6 @@
             <td><?php echo $product['sort_description'] ?></td>
             <td><?php echo $product['specification'] ?></td>
             <td><?php echo $product['model_no'] ?></td>
-            <td><?php echo System_helper::display_date($product['warranty_start_date']) ?></td>
-            <td><?php echo System_helper::display_date($product['warranty_end_date']) ?></td>
-            <td><?php echo System_helper::display_date($product['purchase_date']) ?></td>
-            <td><?php echo ($product['status']) ? 'Active' : 'In-active' ?></td>
         </tr>
         <?php
     }

@@ -59,7 +59,7 @@ class CurrentStock extends Root_Controller
     public function get_product_list()
     {
         $inputs = $this->input->post();
-        $data['products'] = $this->CurrentStock_model->get_product_list($inputs);
+        $data['data'] = $this->CurrentStock_model->get_product_list($inputs);
         $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/current_stock/report_format",$data,true));
         $this->jsonReturn($ajax);
     }

@@ -12,6 +12,7 @@ class CurrentStock_model extends CI_Model
 
     public function get_product_list($inputs)
     {
+        $data = [];
         $CI =& get_instance();
 
         //select all from assign_product
@@ -28,22 +29,31 @@ class CurrentStock_model extends CI_Model
         $CI->db->where("product.id NOT IN ($product_ass)", NULL, FALSE);
         $CI->db->group_by('product.product_name');
         $CI->db->join($CI->config->item('table_product_assign').' assign_product','assign_product.product_id = product.id', 'LEFT');
-        $currentStock_product = $CI->db->get()->result_array();
+        $results = $CI->db->get()->result_array();
+        foreach($results as $result){
+            $data['current_product'][$result['product_name']] = $result;
+        }
 
         $CI->db->from($CI->config->item('table_product').' product');
         $CI->db->select('product.id');
         $CI->db->select('count(product.id) nub_of_product');
         $CI->db->select('product.*');
+        $CI->db->select('manufacture.manufacture_name');
+        $CI->db->select('category.category_name');
+        $CI->db->select('supplier.company_name');
+        $CI->db->select('warehouse.warehouse_name');
+        $CI->db->join($CI->config->item('table_manufacture').' manufacture','manufacture.id = product.manufacture_id', 'LEFT');
+        $CI->db->join($CI->config->item('table_product_category').' category','category.id = product.category_id', 'LEFT');
+        $CI->db->join($CI->config->item('table_supplier').' supplier','supplier.id = product.supplier_id', 'LEFT');
+        $CI->db->join($CI->config->item('table_warehouse').' warehouse','warehouse.id = product.warehouse_id', 'LEFT');
         $CI->db->group_by('product.product_name');
-        $all_product = $CI->db->get()->result_array();
-
-        $data['existing_product']=[$currentStock_product];
-        $data['all_product'] = [$all_product];
+        $data['products'] = $CI->db->get()->result_array();
+        return $data;
 //        print_r($data);
 //        die;
 
         echo  '<pre>';
-        print_r($currentStock_product);
+        print_r($data);
         die;
         //Main query
         $CI->db->select('product.*');
