@@ -94,39 +94,41 @@ $CI=& get_instance();
         <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
+<div id="product_drpwn" style="display:none">
+    <div class="newProduct">
+       <div class="col-md-10">
+        <select name="product_assign[product_id][]" class="form-control" style="margin-bottom: 10px">
+            <?php
+            $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$product));
+            ?>
+        </select>
+        </div>
+        <div class="col-md-2">
+            <a href="#" class="external" onclick="removeIt(this)"><i class="fa fa-times"></i></a>
+        </div>  
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function ()
     {
         turn_off_triggers();
         $('.date-picker').datepicker()
-        $("#product_wrp").children("select").select2();
+        $(".select2me").select2();
         $("#add_new").click(function () {
             $("#product_wrp")
                 .children("select")
                 // call destroy to revert the changes made by Select2
                 .select2("destroy")
-                .end()
-                .append(
-                    // clone the row and insert it in the DOM
-                    $("#product_wrp")
-                        .children("select")
-                        .first()
-                        .clone()
-                );
-            $("#product_wrp").append('<a href="#" class="external" onclick="removeIt(this)"><i class="fa fa-times"></i></a>')
+                .end();
+                $("#product_wrp").append($("#product_drpwn").html());
+                // $("#product_wrp select:last").wrap("<div class='newProduct'></div>")
+                // $("#product_wrp .newProduct:last").append('<a href="#" class="external" onclick="removeIt(this)"><i class="fa fa-times"></i></a>')
             // enable Select2 on the select elements
-            $("#product_wrp").children("select").select2();
-        });
-        function GetDynamicTextBox(value) {
-            return '<input type="button" value="Remove" class="remove" />'
-        }
-
-        $("body").on("click", ".remove", function () {
-            $(this).closest("div").remove();
+            $("#product_wrp select").select2();
         });
     });
     function removeIt(ele){
-        console.log(ele);
+        ele.closest('.newProduct').remove();
     }
 </script>
 

@@ -165,7 +165,6 @@ class Product_assign extends Root_Controller
         else
         {
             $data = $this->input->post('product_assign');
-
             $data['create_by']=$user->id;
             $data['create_date']=time();
             $data['status'] = 1;
