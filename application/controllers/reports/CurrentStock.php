@@ -13,7 +13,7 @@ class CurrentStock extends Root_Controller
         $this->message='';
         $this->permissions=Menu_helper::get_permission('reports/CurrentStock');
         $this->controller_url='reports/CurrentStock';
-        $this->load->model("reports/CurrentStock_model");
+        $this->load->model("reports/Current_stock_model");
     }
 
     public function index($action='list',$id=0)
@@ -59,7 +59,7 @@ class CurrentStock extends Root_Controller
     public function get_product_list()
     {
         $inputs = $this->input->post();
-        $data['data'] = $this->CurrentStock_model->get_product_list($inputs);
+        $data['data'] = $this->Current_stock_model->get_product_list($inputs);
         $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/current_stock/report_format",$data,true));
         $this->jsonReturn($ajax);
     }

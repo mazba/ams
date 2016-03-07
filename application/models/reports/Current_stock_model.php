@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class CurrentStock_model extends CI_Model
+class Current_stock_model extends CI_Model
 {
     public function __construct()
     {
