@@ -39,6 +39,10 @@ class Ticket_reports extends Root_Controller
             $data['suppliers'] = Query_helper::get_info($this->config->item('table_supplier'),array('id value','company_name text'),array('status !=99'));
             $data['warehouses'] = Query_helper::get_info($this->config->item('table_warehouse'),array('id value','warehouse_name text'),array('status !=99'));
             $data['categories'] = Query_helper::get_info($this->config->item('table_product_category'),array('id value','category_name text'),array('status !=99'));
+            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'),array('status !=99'));
+            $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), array('status !=99'));
+
+
             $ajax['status']=true;
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("reports/ticket_reports/list",$data,true));
 

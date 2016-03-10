@@ -1,8 +1,8 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-$CI=& get_instance();
+$CI =& get_instance();
 ?>
-<div class="page-content-wrapper">
+<div class="page-content-wrapper" xmlns="http://www.w3.org/1999/html">
     <div class="page-content">
         <!-- BEGIN PAGE CONTENT INNER -->
         <div class="row margin-top-10">
@@ -11,7 +11,7 @@ $CI=& get_instance();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>পণ্যের প্রতিবেদন
+                            <i class="fa fa-cogs"></i>প্রোডাক্টের প্রতিবেদন
                         </div>
                         <div class="tools">
                             <a class="reload" href="javascript:;" data-original-title="" title="">
@@ -19,120 +19,129 @@ $CI=& get_instance();
                         </div>
                     </div>
                     <div class="portlet-body">
+                        <form class="report_form" id="system_save_form"
+                              action="<?php echo $CI->get_encoded_url('reports/Product_reports_view/index/list'); ?>"
+                              method="get">
                         <div class="row form-inline">
-                                <div class="form-body">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">ক্যটাগরি</label>
-                                            <div class="col-md-9">
-                                                <select name="category" class="form-control" id="category">
-                                                    <?php
-                                                    $CI->load_view('dropdown',array('drop_down_options'=>$categories));
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">প্রস্তুতকারক</label>
-                                            <div class="col-md-9">
-                                                <select name="manufacture" class="form-control" id="manufacture">
-                                                    <?php
-                                                    $CI->load_view('dropdown',array('drop_down_options'=>$manufactures));
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">প্রস্তুতকারক</label>
-                                            <div class="col-md-9">
-                                                <select name="supplier" class="form-control" id="supplier">
-                                                    <?php
-                                                    $CI->load_view('dropdown',array('drop_down_options'=>$suppliers));
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label">পণ্যাগার</label>
-                                            <div class="col-md-9">
-                                                <select name="warehouse" class="form-control" id="warehouse">
-                                                    <?php
-                                                    $CI->load_view('dropdown',array('drop_down_options'=>$warehouses));
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group" style="margin-top: 10px">
-                                            <label class="col-md-4 control-label">Unassigned</label>
-                                            <div class="col-md-2">
-                                                <input type="radio" checked value="unassigned"  name="product_type" />
-                                            </div>
-                                            <label class="col-md-4 control-label">Assigned & Unassigned</label>
-                                            <div class="col-md-2">
-                                                <input type="radio" value="all"  name="product_type" />
-                                            </div>
-                                            <label class="col-md-4 control-label">Only Assigned</label>
-                                            <div class="col-md-2">
-                                                <input type="radio" value="assigned"  name="product_type" />
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="form-body">
 
-                                    <div class="col-md-12" style="margin: 10px 0">
-                                        <button id="submit" class="btn btn-success pull-right">রিপোর্ট দেখুন</button>
-                                    </div>
                                     <div class="col-md-12">
-                                        <hr/>
-                                    </div>
-                                    <div class="col-md-12 " id="PrintArea" style="overflow: scroll;padding-top: 22px;">
+                                        <div class="row">
+
+
+                                            <div class="form-group col-md-3">
+                                                <label class="">ক্যটাগরি</label>
+                                                <select name="category" class="form-control " id="category">
+                                                    <?php
+                                                    $CI->load_view('dropdown', array('drop_down_options' => $categories));
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="">প্রস্তুতকারক</label>
+
+                                                <select name="manufacture" class="form-control " id="manufacture">
+                                                    <?php
+                                                    $CI->load_view('dropdown', array('drop_down_options' => $manufactures));
+                                                    ?>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="">সরবরাহকারী</label>
+                                                <select name="supplier" class="form-control " id="supplier">
+                                                    <?php
+                                                    $CI->load_view('dropdown', array('drop_down_options' => $suppliers));
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="">পণ্যাগার</label>
+                                                <select name="warehouse" class="form-control " id="warehouse">
+                                                    <?php
+                                                    $CI->load_view('dropdown', array('drop_down_options' => $warehouses));
+                                                    ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2 col-md-offset-3" style="margin-top: 20px">
+                                            <label class="">Unassigned</label>
+
+                                            <input type="radio" checked value="unassigned" name="product_type"/>
+                                        </div>
+                                        <div class="form-group col-md-3" style="margin-top: 20px">
+                                            <label class="">Assigned & Unassigned</label>
+
+                                            <input type="radio" value="all" name="product_type"/>
+
+                                        </div>
+
+                                        <div class="form-group col-md-2" style="margin-top: 20px">
+                                            <label class="">Only Assigned</label>
+
+                                            <input type="radio" value="assigned" name="product_type"/>
+
+                                        </div>
+
 
                                     </div>
-                                </div>
+
+                            </div>
+
+                            <div class="col-md-12" style="margin: 10px 0">
+                                <input type="submit" class="btn btn-primary pull-right"
+                                       value="রিপোর্ট দেখুন">
+                            </div>
+
+                            </form>
+                            <div class="col-md-12">
+                                <hr/>
+                            </div>
+                            <div class="col-md-12 " id="PrintArea" style="overflow: scroll;padding-top: 22px;">
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- END SAMPLE FORM PORTLET-->
             </div>
+            <!-- END SAMPLE FORM PORTLET-->
         </div>
-        <!-- END PAGE CONTENT INNER -->
     </div>
+    <!-- END PAGE CONTENT INNER -->
 </div>
-<script>
-    $(document).ready(function ()
-    {
-        turn_off_triggers();
-//        $('.date-picker').datepicker()
-        $(document).on('click','#submit',function(){
-//            console.log();
-            $.ajax({
-                url: '<?php echo $CI->get_encoded_url('reports/product_reports/get_product_list'); ?>',
-                type: 'POST',
-                dataType: "JSON",
-                data:{
-                    category:$('#category').val(),
-                    manufacture:$('#manufacture').val(),
-                    supplier:$('#supplier').val(),
-                    warehouse:$('#warehouse').val(),
-                    product_type:$('[name=product_type]:checked').val()
-                },
-                success: function (data, status)
-                {
-//                    console.log(data.system_content.html)
-//                    window.open(data.html, "width=600,height=600,scrollbars=yes");
-                },
-                error: function (xhr, desc, err)
-                {
-                    console.log("error");
-
-                }
-            });
-        });
-
-    });
-    function print_rpt(){
-        URL="<?php echo base_url().'assets/'; ?>page/Print_a4_Eng.php?selLayer=PrintArea";
-        day = new Date();
-        id = day.getTime();
-        eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=yes,scrollbars=yes ,location=0,statusbar=0 ,menubar=yes,resizable=1,left = 20,top = 50');");
-    }
-</script>
+</div>
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        turn_off_triggers();-->
+<!--//        $('.date-picker').datepicker()-->
+<!--        $(document).on('click', '#submit', function () {-->
+<!--//            console.log();-->
+<!--            $.ajax({-->
+<!--                url: '--><?php //echo $CI->get_encoded_url('reports/product_reports/get_product_list'); ?><!--',-->
+<!--                type: 'POST',-->
+<!--                dataType: "JSON",-->
+<!--                data: {-->
+<!--                    category: $('#category').val(),-->
+<!--                    manufacture: $('#manufacture').val(),-->
+<!--                    supplier: $('#supplier').val(),-->
+<!--                    warehouse: $('#warehouse').val(),-->
+<!--                    product_type: $('[name=product_type]:checked').val()-->
+<!--                },-->
+<!--                success: function (data, status) {-->
+<!--//                    console.log(data.system_content.html)-->
+<!--//                    window.open(data.html, "width=600,height=600,scrollbars=yes");-->
+<!--                },-->
+<!--                error: function (xhr, desc, err) {-->
+<!--                    console.log("error");-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--    function print_rpt() {-->
+<!--        URL = "--><?php //echo base_url().'assets/'; ?><!--page/Print_a4_Eng.php?selLayer=PrintArea";-->
+<!--        day = new Date();-->
+<!--        id = day.getTime();-->
+<!--        eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=yes,scrollbars=yes ,location=0,statusbar=0 ,menubar=yes,resizable=1,left = 20,top = 50');");-->
+<!--    }-->
+<!--</script>-->

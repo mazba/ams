@@ -20,14 +20,7 @@ $CI=& get_instance();
                         <div class="caption">
                             <i class="fa fa-qrcode"></i> <?php echo $title; ?>
                         </div>
-                        <div class="tools">
-                            <a href="" class="collapse">
-                            </a>
-                            <a href="#portlet-config" data-toggle="modal" class="config">
-                            </a>
-                            <a href="" class="reload">
-                            </a>
-                        </div>
+
                     </div>
                     <div class="portlet-body form">
                         <form id="system_save_form" action="<?php echo $CI->get_encoded_url('asset_management/product_assign/index/save'); ?>" method="post">

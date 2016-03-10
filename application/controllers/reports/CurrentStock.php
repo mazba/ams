@@ -47,7 +47,7 @@ class CurrentStock extends Root_Controller
                 $ajax['system_message']=$this->message;
             }
             $ajax['system_page_url']=$this->get_encoded_url('reports/CurrentStock');
-            $ajax['system_page_title']=$this->lang->line("PRODUCT_RELATED_REPORTS");
+            $ajax[ 'system_page_title']=$this->lang->line("PRODUCT_CURRENT_STATUS_REPORTS");
             $this->jsonReturn($ajax);
         }
         else
@@ -58,10 +58,10 @@ class CurrentStock extends Root_Controller
     }
     public function get_product_list()
     {
-        $inputs = $this->input->post();
-        $data['data'] = $this->Current_stock_model->get_product_list($inputs);
-        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/current_stock/report_format",$data,true));
-        $this->jsonReturn($ajax);
+//        $inputs = $this->input->post();
+//        $data['data'] = $this->Current_stock_model->get_product_list($inputs);
+//        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/current_stock/report_format",$data,true));
+//        $this->jsonReturn($ajax);
     }
 
 }

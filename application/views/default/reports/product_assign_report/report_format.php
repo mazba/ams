@@ -1,20 +1,47 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mazba
- * Date: 2/8/2016
- * Time: 6:22 PM
- */
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+$pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_SERVER['REQUEST_URI']);
+
 ?>
-<button class="btn btn-sm btn-danger" id="print_button" onclick="print_rpt()"><i class="fa fa-print"></i> প্রিন্ট</button>
-<h1 class="text-center">
-    বাংলাদেশ জাতীয় সংসদ
-</h1>
-<h3 class="text-center">
-    বরাদ্দকৃত  পণ্য সম্পর্কিত প্রতিবেদন
-</h3>
-<h5 class="text-center">
-    তারিখ: <?php echo date('d-m-Y') ?>
+<html lang="en">
+<head>
+    <title><?php echo $title; ?></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/templates/default/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="main_container">
+        <div class="row show-grid hidden-print">
+            <!--            <a class="btn btn-primary btn-rect pull-right"-->
+            <!--               href="--><?php //echo $pdf_link; ?><!--">--><?php //echo $this->lang->line("BUTTON_PDF"); ?><!--</a>-->
+            <a class="btn btn-primary btn-rect pull-right" style="margin-right: 10px;"
+               href="javascript:window.print();"><?php echo $this->lang->line("BUTTON_PRINT"); ?></a>
+
+            <div class="clearfix"></div>
+            <!--            <span class="pull-right">-->
+            <?php //echo $this->lang->line('REPORT_CURRENT_DATE_VIEW');?><!--</span>-->
+        </div>
+        <div class="col-lg-12">
+<table style="margin-top: 50px;">
+    <tr>
+        <td style="width: 20%">
+            <img src="<?php echo base_url()?>images/government-logo.gif">
+        </td>
+        <td style="width: 60%">
+            <h1 class="text-center">বাংলাদেশ জাতীয় সংসদ</h1>
+            <h3 class="text-center"> বরাদ্দকৃত  পণ্য সম্পর্কিত প্রতিবেদন</h3>
+        </td>
+        <td style="width: 20%">
+            <img  src="<?php echo base_url()?>images/government-logo.gif">
+
+        </td>
+    </tr>
+
+</table>
+<h5 class="pull-right">
+    মুদ্রণ তারিখ: <?php echo date('d-m-Y') ?>
 </h5>
 <table class="table table-bordered">
     <thead>
@@ -53,3 +80,9 @@
     ?>
     </tbody>
 </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

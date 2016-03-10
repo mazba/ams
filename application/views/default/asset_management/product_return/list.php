@@ -30,7 +30,7 @@ $CI=& get_instance();
     $(document).ready(function ()
     {
         turn_off_triggers();
-        var url = "<?php echo $CI->get_encoded_url('asset_management/supplier/get_list');?>";
+        var url = "<?php echo $CI->get_encoded_url('asset_management/product_return/get_product_user_list');?>";
 
         // prepare the data
         var source =
@@ -39,11 +39,10 @@ $CI=& get_instance();
             dataFields: [
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
-                { name: 'company_name', type: 'string' },
-                { name: 'company_office_phone', type: 'string' },
-                { name: 'contact_person', type: 'string' },
-                { name: 'contact_person_phone', type: 'string' },
-                { name: 'status_text', type: 'string' }
+
+                { name: 'user_name', type: 'string' },
+                { name: 'nub_of_product', type: 'string' }
+
             ],
             id: 'id',
             url: url
@@ -62,16 +61,14 @@ $CI=& get_instance();
                 columnsresize: true,
                 pagesize:10,
                 pagesizeoptions: ['10', '20', '30', '50','100','150'],
-                selectionmode: 'checkbox',
+          // selectionmode: 'checkbox',
                 altrows: true,
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('COMPANY_NAME'); ?>', dataField: 'company_name', width:'35%'},
-                    { text: '<?php echo $CI->lang->line('COMPANY_OFFICE_PHONE'); ?>', dataField: 'company_office_phone', width:'15%'},
-                    { text: '<?php echo $CI->lang->line('CONTACT_PERSON'); ?>', dataField: 'contact_person', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('CONTACT_PERSON_PHONE'); ?>', dataField: 'contact_person_phone', width:'17%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'80%'},
+
+                    { text: '<?php echo $CI->lang->line('NUMBER_OF_PRODUCT'); ?>', dataField: 'nub_of_product', width:'20%'}
                 ]
             });
         //for Double Click to edit

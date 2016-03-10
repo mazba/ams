@@ -64,6 +64,7 @@ class Ticket_issue_model extends CI_Model
                 $user['status_text']=$user['status'];
             }
             $user['create_date_time']=date('h:i A - d M,y',$user['create_date']);
+            $user['id']=System_helper::Get_Eng_to_Bng($user['id']);
         }
         return $users;
     }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Product_assign_report extends Root_Controller
+class Product_return_report extends Root_Controller
 {
     public $permissions;
     public $message;
@@ -11,9 +11,9 @@ class Product_assign_report extends Root_Controller
     {
         parent::__construct();
         $this->message='';
-        $this->permissions = Menu_helper::get_permission('reports/product_assign_report');
-        $this->controller_url = 'reports/product_assign_report';
-        $this->load->model("reports/Product_assign_report_model");
+        $this->permissions=Menu_helper::get_permission('reports/Product_return_report');
+        $this->controller_url='reports/Product_return_report';
+        $this->load->model("reports/Product_return_model");
     }
 
     public function index($action='list',$id=0)
@@ -39,17 +39,18 @@ class Product_assign_report extends Root_Controller
             $data['suppliers'] = Query_helper::get_info($this->config->item('table_supplier'),array('id value','company_name text'),array('status !=99'));
             $data['warehouses'] = Query_helper::get_info($this->config->item('table_warehouse'),array('id value','warehouse_name text'),array('status !=99'));
             $data['categories'] = Query_helper::get_info($this->config->item('table_product_category'),array('id value','category_name text'),array('status !=99'));
+            $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'),array('status !=99'));
             $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), array('status !=99'));
 
             $ajax['status']=true;
-            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("reports/product_assign_report/list",$data,true));
+            $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("reports/product_return_reports/list",$data,true));
 
             if($this->message)
             {
                 $ajax['system_message']=$this->message;
             }
-            $ajax['system_page_url']=$this->get_encoded_url('reports/product_assign_report');
-            $ajax['system_page_title']=$this->lang->line("PRODUCT_ASSIGN_RELATED_REPORT");
+            $ajax['system_page_url']=$this->get_encoded_url('reports/Product_return_report');
+            $ajax['system_page_title']=$this->lang->line("PRODUCT_RETURN_REPORTS");
             $this->jsonReturn($ajax);
         }
         else
@@ -61,8 +62,8 @@ class Product_assign_report extends Root_Controller
 //    public function get_product_list()
 //    {
 //        $inputs = $this->input->post();
-//        $data['products'] = $this->Product_assign_report_model->get_product_list($inputs);
-//        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/product_assign_report/report_format",$data,true));
+//        $data['products'] = $this->Product_return_model->get_product_list($inputs);
+//        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/product_return_reports/report_format",$data,true));
 //        $this->jsonReturn($ajax);
 //    }
 

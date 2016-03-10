@@ -38,13 +38,35 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //COMMON
-$lang['NEW_TICKET_ISSUE']		= 'নতুন টিকেট ইস্যু';
+$lang['NEW_TICKET_ISSUE']		= 'নতুন টিকেট ইস্যু করুণ';
+
+$lang['NEW_TICKET_ASSIGN']		= 'নতুন টিকেট দায়িত্ব অর্পণ করুণ';
+
 $lang['PRODUCT_NAME']		= 'পণ্যের নাম';
 $lang['SUBJECT']		= 'বিষয়';
 $lang['TIME']		= 'সময়';
 $lang['TOKEN']		= 'টোকেন';
 $lang['PRIORITY']		= 'Priority';
 $lang['EDIT_TICKET_RESOLVE']= 'টিকেট সমাধান করুণ  ';
-
-
-$lang['VIEW_DETAILS_TICKET_ASSIGN']		= 'নতুন টিকেট ইস্যু';
+$lang['TOTAL_NOT_ASSIGN_ISSUE']='মোট অনির্ধারিত ইস্যু ';
+$lang['USER_NAME']		= 'ব্যবহারকারীর নাম';
+$lang['ATTACHMENT']		= 'সংযুক্ত';
+$lang['Upload']		= 'আপলোড';
+$lang['VIEW_DETAILS_TICKET_ASSIGN']	= 'নতুন টিকেট ইস্যু';
+$lang['LIST_TICKET_ISSUE']='টিকেট ইস্যু';
+$lang['LIST_TICKET_ASSIGN']='টিকেট দায়িত্ব অর্পণ';
+$lang['LIST_TICKET_RESOLVE']='টিকেট সমাধান';
+$lang['VIEW_DETAILS_TICKET_ISSUE']='বিস্তারিত দেখুন';
+$lang['NUMBER_OF_ISSUE']='ইস্যু  সংখ্যা';
+$lang['ISSUE_FROM']='ইস্যু  এসেছে';
+$lang['SUPPORT_NAME']='সাপোর্ট ';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';
+$lang['']='';

@@ -21,12 +21,12 @@ $directory=$this->config->item('file_upload');
                         <div class="caption">
                             <i class="fa fa-qrcode"></i> <?php echo $title; ?>
                         </div>
-                        <div class="tools">
-                            <a href="" class="collapse">
-                            </a>
-                            <a href="" class="reload external">
-                            </a>
-                        </div>
+<!--                        <div class="tools">-->
+<!--                            <a href="" class="collapse">-->
+<!--                            </a>-->
+<!--                            <a href="" class="reload external">-->
+<!--                            </a>-->
+<!--                        </div>-->
                     </div>
                     <div class="portlet-body form">
                         <form id="system_save_form" action="<?php echo $CI->get_encoded_url('ticket_management/ticket_resolve/index/save'); ?>" method="post">

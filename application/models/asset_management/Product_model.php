@@ -35,4 +35,15 @@ class Product_model extends CI_Model
         }
         return $results;
     }
+    public function get_product_name_by_str($str){
+        $CI =& get_instance();
+        //$this->db->select('*');
+        $CI->db->from($CI->config->item('table_product'));
+        $this->db->like('product_name', $str, 'after');
+        $this->db->group_by('product_name');
+//        $CI->db->where();
+        $CI->db->select('product_name as label');
+        $results = $this->db->get()->result_array();
+        return $results;
+    }
 }

@@ -42,20 +42,21 @@ class Current_stock_model extends CI_Model
         $CI->db->select('category.category_name');
         $CI->db->select('supplier.company_name');
         $CI->db->select('warehouse.warehouse_name');
-        if($inputs['category'])
+        if(isset($inputs['category']))
             $CI->db->where('product.category_id',$inputs['category']);
-        if($inputs['manufacture'])
+        if(isset($inputs['manufacture']))
             $CI->db->where('product.manufacture_id',$inputs['manufacture']);
-        if($inputs['supplier'])
+        if(isset($inputs['supplier']))
             $CI->db->where('product.supplier_id',$inputs['supplier']);
-        if($inputs['warehouse'])
+        if(isset($inputs['warehouse']))
             $CI->db->where('product.warehouse_id',$inputs['warehouse']);
-        $CI->db->order_by('product.id','ASC');
+        $CI->db->order_by("product.id", "desc");
         $CI->db->join($CI->config->item('table_manufacture').' manufacture','manufacture.id = product.manufacture_id', 'LEFT');
         $CI->db->join($CI->config->item('table_product_category').' category','category.id = product.category_id', 'LEFT');
         $CI->db->join($CI->config->item('table_supplier').' supplier','supplier.id = product.supplier_id', 'LEFT');
         $CI->db->join($CI->config->item('table_warehouse').' warehouse','warehouse.id = product.warehouse_id', 'LEFT');
         $CI->db->group_by('product.product_name');
+
         $data['products'] = $CI->db->get()->result_array();
         return $data;
 

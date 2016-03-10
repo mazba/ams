@@ -15,7 +15,7 @@ $CI=& get_instance();
                 <!-- BEGIN SAMPLE FORM PORTLET-->
                 <div class="portlet box grey-cararra">
                     <div class="col-lg-12 text-danger h4">
-                        <?php echo $this->lang->line('TOTAL_NOT_ASSIGN_ISSUE');?> ( <?php echo $ticket['number_of_not_assign_issue']?$ticket['number_of_not_assign_issue']:0;?> )
+                        <?php echo $this->lang->line('TOTAL_NOT_ASSIGN_ISSUE');?> ( <?php echo System_helper::Get_Eng_to_Bng($ticket['number_of_not_assign_issue']?$ticket['number_of_not_assign_issue']:0);?> )
                     </div>
                     <div class="portlet-body">
                         <div id="system_dataTable">
@@ -59,7 +59,7 @@ $CI=& get_instance();
                 pageable: true,
                 filterable: true,
                 sortable: true,
-                showfilterrow: true,
+                showfilterrow: false,
                 columnsresize: true,
                 pagesize:10,
                 pagesizeoptions: ['10', '20', '30', '50','100','150'],

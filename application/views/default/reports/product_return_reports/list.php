@@ -11,7 +11,8 @@ $CI =& get_instance();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>টিকেট রিপোর্ট
+                            <i class="fa fa-cogs"></i>ফেরত দেত্তয়া প্রোডাক্ট সম্পর্কিত প্রতিবেদন
+
                         </div>
                         <div class="tools">
                             <a class="reload" href="javascript:;" data-original-title="" title="">
@@ -20,7 +21,7 @@ $CI =& get_instance();
                     </div>
                     <div class="portlet-body">
                         <form class="report_form" id="system_save_form"
-                              action="<?php echo $CI->get_encoded_url('reports/Ticket_reports_view/index/list'); ?>"
+                              action="<?php echo $CI->get_encoded_url('reports/Product_return_report_view/index/list'); ?>"
                               method="get">
                         <div class="row form-inline">
                             <div class="form-body">
@@ -42,18 +43,7 @@ $CI =& get_instance();
                                                    name="end_date"/>
 
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label class="">টিকেটর ধরন</label>
 
-                                            <select name="ticket_type" id="ticket_type" class="form-control">
-                                                <option value="all">All</option>
-                                                <option value="assigned">Assigned</option>
-                                                <option value="unassigned">Unassigned</option>
-                                                <option value="resolved">Resolved</option>
-                                                <option value="reject">Reject</option>
-                                            </select>
-
-                                        </div>
 
                                         <div class="form-group col-md-4" style="margin-top: 15px;">
 
@@ -92,13 +82,11 @@ $CI =& get_instance();
                                 </div>
 
                                 <div class="col-md-12" style="margin: 10px 0">
-
                                     <div class="col-md-12" style="margin: 10px 0">
                                         <input type="submit" class="btn btn-primary pull-right"
                                                value="রিপোর্ট দেখুন">
                                     </div>
                                 </div>
-                                </form>
                                 <div class="col-md-12">
                                     <hr/>
                                 </div>
@@ -107,6 +95,7 @@ $CI =& get_instance();
                                 </div>
                             </div>
                         </div>
+                            </form>
                     </div>
                 </div>
                 <!-- END SAMPLE FORM PORTLET-->
@@ -122,13 +111,13 @@ $CI =& get_instance();
         $(document).on('click', '#submit', function () {
 //            console.log();
             $.ajax({
-                url: '<?php echo $CI->get_encoded_url('reports/ticket_reports/get_ticket_list'); ?>',
+                url: '<?php echo $CI->get_encoded_url('reports/product_return_report/get_product_list'); ?>',
                 type: 'POST',
                 dataType: "JSON",
                 data: {
                     start_date: $('#start_date').val(),
                     end_date: $('#end_date').val(),
-                    ticket_type: $('#ticket_type').val(),
+                 //   ticket_type: $('#ticket_type').val(),
                     category: $('#category').val(),
                     user_name:$('#user_name').val(),
                     product_name:$('#product_name').val()

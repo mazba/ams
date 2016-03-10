@@ -190,8 +190,10 @@ class Task extends Root_Controller
                 'module_id'=>$this->input->post('module_id'),
                 'controller'=>$this->input->post('controller'),
                 'icon'=>$this->input->post('icon'),
-                $this->config->item('system_sidebar01')=>$this->input->post($this->config->item('system_sidebar01')) ? 1:0,
-                $this->config->item('system_sidebar02')=>$this->input->post($this->config->item('system_sidebar02')) ? 1:0,
+//                $this->config->item('system_sidebar01')=>$this->input->post($this->config->item('system_sidebar01')) ? 1:0,
+//                $this->config->item('system_sidebar02')=>$this->input->post($this->config->item('system_sidebar02')) ? 1:0,
+//                'position_left_01'=>($this->input->post('system_sidebar02') ? 1:0),
+//                'position_left_02'=>($this->input->post('system_sidebar01') ? 1:0),
                 'description'=>$this->input->post('description'),
                 'status'=>$this->input->post('status'),
                 'ordering'=>$this->input->post('ordering')

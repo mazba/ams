@@ -12,9 +12,8 @@ class Ticket_resolve_model extends CI_Model
 
     public function get_record_list()
     {
-        $user=User_helper::get_user();
-        if($user->user_group_level==$this->config->item('SUPPORT_GROUP_ID'))
-        {
+        $user = User_helper::get_user();
+        if ($user->user_group_level == $this->config->item('SUPPORT_GROUP_ID')) {
             $this->db->where('ticket_assign.user_id', $user->id);
         }
         $CI =& get_instance();
@@ -28,19 +27,20 @@ class Ticket_resolve_model extends CI_Model
                             users.name_bn,
                             users_assign.name_bn support_name,
                             ticket_assign.resolved_date");
-        $this->db->from($CI->config->item('table_ticket_assign').' ticket_assign');
-        $this->db->join($CI->config->item('table_ticket_issue').' ticket_issue','ticket_issue.id = ticket_assign.ticket_issue_id', 'INNER');
-        $this->db->join($CI->config->item('table_users').' users','users.id = ticket_issue.user_id', 'INNER');
-        $this->db->join($CI->config->item('table_users').' users_assign','users_assign.id = ticket_assign.user_id', 'INNER');
-        $this->db->join($CI->config->item('table_product').' product','product.id = ticket_issue.product_id', 'LEFT');
-        $this->db->where('ticket_assign.status ='. $this->config->item('STATUS_ASSIGN'));
+        $this->db->from($CI->config->item('table_ticket_assign') . ' ticket_assign');
+        $this->db->join($CI->config->item('table_ticket_issue') . ' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id', 'INNER');
+        $this->db->join($CI->config->item('table_users') . ' users', 'users.id = ticket_issue.user_id', 'INNER');
+        $this->db->join($CI->config->item('table_users') . ' users_assign', 'users_assign.id = ticket_assign.user_id', 'INNER');
+        $this->db->join($CI->config->item('table_product') . ' product', 'product.id = ticket_issue.product_id', 'LEFT');
+        $this->db->where('ticket_assign.status =' . $this->config->item('STATUS_ASSIGN'));
         $this->db->order_by('ticket_assign.ticket_issue_id', 'DESC');
         $users = $this->db->get()->result_array();
         //echo $this->db->last_query();
         $all_priority = $CI->config->item('ticket_priority');
-        foreach($users as &$user)
-        {
-            $user['edit_link']=$CI->get_encoded_url('ticket_management/ticket_resolve/index/edit/'.$user['id']);
+        foreach ($users as &$user) {
+            $user['edit_link'] = $CI->get_encoded_url('ticket_management/ticket_resolve/index/edit/' . $user['id']);
+            $user['ticket_issue_id']=System_helper::Get_Eng_to_Bng($user['ticket_issue_id']);
+
             //            if($user['status']==$this->config->item('STATUS_ASSIGN'))
             //            {
             //                $user['status_text']=$CI->lang->line('ASSIGN');
@@ -57,17 +57,16 @@ class Ticket_resolve_model extends CI_Model
             //            {
             //                $user['status_text']=$user['status'];
             //            }
-            $user['create_date_time']=date('h:i A - d M,y',$user['create_date']);
-            $user['priority'] = isset($all_priority[$user['priority']])?$all_priority[$user['priority']]:'';
+            $user['create_date_time'] = date('h:i A - d M,y', $user['create_date']);
+            $user['priority'] = isset($all_priority[$user['priority']]) ? $all_priority[$user['priority']] : '';
         }
-       return $users;
+        return $users;
     }
 
-    public function get_ticket_assign($ticket_assign_id=0)
+    public function get_ticket_assign($ticket_assign_id = 0)
     {
-        if(!empty($ticket_assign_id))
-        {
-            $this->db->where('ticket_assign.id ='.$ticket_assign_id);
+        if (!empty($ticket_assign_id)) {
+            $this->db->where('ticket_assign.id =' . $ticket_assign_id);
         }
         $CI =& get_instance();
         $this->db->select('ticket_issue.`subject`,
@@ -84,25 +83,22 @@ class Ticket_resolve_model extends CI_Model
                             ticket_issue.issue_attachment,
                             ticket_issue.status ticket_issue_status
                             ');
-        $CI->db->from($CI->config->item('table_ticket_assign').' ticket_assign');
-        $CI->db->join($CI->config->item('table_ticket_issue').' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id','INNER');
-        $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_issue.user_id','INNER');
-        $CI->db->join($CI->config->item('table_product').' product', 'product.id = ticket_issue.product_id','LEFT');
-        $CI->db->where('ticket_assign.status',$this->config->item('STATUS_ASSIGN'));
+        $CI->db->from($CI->config->item('table_ticket_assign') . ' ticket_assign');
+        $CI->db->join($CI->config->item('table_ticket_issue') . ' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id', 'INNER');
+        $CI->db->join($CI->config->item('table_users') . ' users', 'users.id = ticket_issue.user_id', 'INNER');
+        $CI->db->join($CI->config->item('table_product') . ' product', 'product.id = ticket_issue.product_id', 'LEFT');
+        $CI->db->where('ticket_assign.status', $this->config->item('STATUS_ASSIGN'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
-        $result=$this->db->get()->result_array();
+        $result = $this->db->get()->result_array();
         //echo $this->db->last_query();
-        if(sizeof($result)>0)
-        {
+        if (sizeof($result) > 0) {
             return $result;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public function get_ticket_comments($ticket_issue_id=0)
+    public function get_ticket_comments($ticket_issue_id = 0)
     {
 
         $CI =& get_instance();
@@ -117,19 +113,16 @@ class Ticket_resolve_model extends CI_Model
                             ticket_resolve_comment.create_by,
                             ticket_resolve_comment.create_date,
                             ticket_resolve_comment.ticket_issue_id');
-        $CI->db->from($CI->config->item('table_ticket_resolve_comment').' ticket_resolve_comment');
-        $CI->db->join($CI->config->item('table_ticket_resolve_status').' ticket_resolve_status', 'ticket_resolve_status.id = ticket_resolve_comment.ticket_status_id','LEFT');
-        $CI->db->join($CI->config->item('table_users').' users', 'users.id = ticket_resolve_comment.create_by','INNER');
-        $CI->db->where('ticket_resolve_comment.ticket_issue_id ='.$ticket_issue_id);
+        $CI->db->from($CI->config->item('table_ticket_resolve_comment') . ' ticket_resolve_comment');
+        $CI->db->join($CI->config->item('table_ticket_resolve_status') . ' ticket_resolve_status', 'ticket_resolve_status.id = ticket_resolve_comment.ticket_status_id', 'LEFT');
+        $CI->db->join($CI->config->item('table_users') . ' users', 'users.id = ticket_resolve_comment.create_by', 'INNER');
+        $CI->db->where('ticket_resolve_comment.ticket_issue_id =' . $ticket_issue_id);
         $CI->db->order_by('ticket_resolve_comment.id', 'DESC');
-        $result=$this->db->get()->result_array();
+        $result = $this->db->get()->result_array();
         //echo $this->db->last_query();
-        if(sizeof($result)>0)
-        {
+        if (sizeof($result) > 0) {
             return $result;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

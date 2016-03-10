@@ -67,10 +67,10 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'60%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'52%'},
                     { text: '<?php echo $CI->lang->line('PRODUCT_CODE'); ?>', dataField: 'product_code', width:'10%'},
                     { text: '<?php echo $CI->lang->line('ITEM_UNIT'); ?>', dataField: 'item_unit', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'15%'}
                 ]
             });
         //for Double Click to edit

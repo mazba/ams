@@ -56,12 +56,12 @@ class Product_reports extends Root_Controller
             $this->jsonReturn($ajax);
         }
     }
-    public function get_product_list()
-    {
-        $inputs = $this->input->post();
-        $data['products'] = $this->Product_reports_model->get_product_list($inputs);
-        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/product_reports/report_format",$data,true));
-        $this->jsonReturn($ajax);
-    }
+//    public function get_product_list()
+//    {
+//        $inputs = $this->input->post();
+//        $data['products'] = $this->Product_reports_model->get_product_list($inputs);
+//        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/product_reports/report_format",$data,true));
+//        $this->jsonReturn($ajax);
+//    }
 
 }

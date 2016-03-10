@@ -92,29 +92,7 @@ $CI=& get_instance();
     }
     ?>
 </div>
-<div class="col-md-15">
-    <?php
-    if(($CI->current_action=='list')&&($CI->permissions['delete']))
-    {
-        ?>
 
-        <button id="button_action_delete" class="btn btn-success button_action_batch top_action_button" data-action-link="<?php echo $CI->get_encoded_url($CI->controller_url.'/index/batch_delete'); ?>" data-jqxgrid="#system_dataTable">
-            <i class="fa fa-remove" style="font-size:20px"></i>
-            <br/>
-            <?php echo $CI->lang->line('DELETE');?></button>
-    <?php
-    }
-    else
-    {
-        ?>
-        <button class="btn disabled btn-default top_action_button">
-            <i class="fa fa-remove" style="font-size:20px"></i>
-            <br/>
-            <?php echo $CI->lang->line('DELETE');?></button>
-    <?php
-    }
-    ?>
-</div>
 <div class="col-md-15">
     <?php
     if((($CI->current_action=='add')&&($CI->permissions['add']))||(($CI->current_action=='edit')&&($CI->permissions['edit'])))
@@ -160,44 +138,9 @@ $CI=& get_instance();
     }
     ?>
 </div>
-<div class="col-md-15">
-    <!--Report need to activate-->
 
-    <button class="btn disabled btn-default top_action_button">
-        <i class="fa fa-clipboard" style="font-size:20px"></i>
-        <br/>
-        <?php echo $CI->lang->line('REPORT');?></button>
 
-</div>
-<div class="col-md-15">
-    <!--Report need to activate-->
-    <button class="btn disabled btn-default top_action_button">
-        <i class="fa fa-print" style="font-size:20px"></i>
-        <br/>
-        <?php echo $CI->lang->line('PRINT');?></button>
-</div>
-<div class="col-md-15">
-    <?php
-    if(($CI->current_action=='add')||($CI->current_action=='edit'))
-    {
-        ?>
-        <button id="button_action_clear" data-form='#system_save_form' class="btn btn-success top_action_button">
-            <i class="fa fa-eraser" style="font-size:20px"></i>
-            <br/>
-            <?php echo $CI->lang->line('CLEAR');?></button>
-    <?php
-    }
-    else
-    {
-        ?>
-        <button class="btn disabled btn-default top_action_button">
-            <i class="fa fa-eraser" style="font-size:20px"></i>
-            <br/>
-            <?php echo $CI->lang->line('CLEAR');?></button>
-    <?php
-    }
-    ?>
-</div>
+
 <div class="col-md-15">
     <?php
     if(($CI->current_action=='list'))

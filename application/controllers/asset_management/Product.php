@@ -211,6 +211,7 @@ class Product extends Root_Controller
             {
                 unset($data['id']);
                 $data['update_by']=$user->id;
+                $data['status']=1;
                 $data['warranty_start_date']= strtotime($data['warranty_start_date']);
                 $data['warranty_end_date']= strtotime($data['warranty_end_date']);
                 $data['purchase_date']= strtotime($data['purchase_date']);
@@ -245,6 +246,7 @@ class Product extends Root_Controller
             {
                 $data['create_by']=$user->id;
                 $data['create_date']=time();
+                $data['status']=1;
 
                 $data['warranty_start_date']= strtotime($data['warranty_start_date']);
                 $data['warranty_end_date']= strtotime($data['warranty_end_date']);
@@ -309,7 +311,7 @@ class Product extends Root_Controller
         $this->form_validation->set_rules('product[unit_price]',$this->lang->line('UNIT_PRICE'),'required');
 //        $this->form_validation->set_rules('product[quantity]',$this->lang->line('QUANTITY'),'required');
 
-        $this->form_validation->set_rules('product[status]',$this->lang->line('STATUS'),'required');
+      //  $this->form_validation->set_rules('product[status]',$this->lang->line('STATUS'),'required');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -330,7 +332,11 @@ class Product extends Root_Controller
         }
         $this->jsonReturn($data);
     }
-
+    public function get_product_name_by_str(){
+        $str = $this->input->get('term');
+        $data = $this->Product_model->get_product_name_by_str($str);
+        return $this->jsonReturn($data);
+    }
 
 
 }

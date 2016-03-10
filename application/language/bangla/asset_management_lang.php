@@ -59,7 +59,7 @@ $lang['USER_TYPE']		= 'ব্যবহারকারী ধরণ';
 $lang['DESIGNATION']		= 'পদবী';
 $lang['PRESENT_ADDRESS']		= 'বর্তমান ঠিকানা';
 $lang['PERMANENT_ADDRESS']		= 'স্থায়ী ঠিকানা';
-
+$lang['PRODUCT_NAME']='প্রোডাক্ট নাম';
 $lang['CREATE_NEW_SUPPLIER']		= 'সরবরাহকারী   যোগ করন';
 $lang['EDIT_SUPPLIER']		= 'সরবরাহকারী সম্পাদনা';
 $lang['COMPANY_NAME']		= 'প্রতিষ্ঠানের নাম';
@@ -96,7 +96,25 @@ $lang['REQUISITION_TYPE'] = 'রিকুইজিশন টাইপ ';
 $lang['REQUISITION_ID'] = 'রিকুইজিশন আইডি ';
 $lang['REQUISITIONS_DETAILS'] = 'রিকুইজিশন ডিটেলস  ';
 $lang['CREATE_NEW_PRODUCT'] = 'নতুন প্রোডাক্ট তৈরি করুন ';
-$lang['NUMBER_OF_PRODUCT'] = 'পণ্য সংখ্যা';
+$lang['NUMBER_OF_PRODUCT'] = 'প্রোডাক্ট সংখ্যা';
+$lang['MANUFACTURE_NAME']='প্রস্তুতকারকের নাম';
+$lang['MANUFACTURE_CODE']='প্রস্তুতকারকের কোড';
+$lang['MANUFACTURE_DESCRIPTION']='প্রস্তুতকারকের বর্ণনা';
+$lang['PRODUCT_RELATED_REPORTS']='প্রোডাক্ট সম্পর্কিত রিপোর্ট';
+$lang['MANUFACTURE']='প্রস্তুতকারক';
+$lang['CREATE_NEW_MANUFACTURE']='নতুন প্রস্তুতকারক';
+$lang['EDIT_MANUFACTURE']='প্রস্তুতকারক সম্পাদনা';
+$lang['NEW_PRODUCT_ASSIGN']='প্রোডাক্ট নতুন  দায়িত্ব অর্পণ ';
+$lang['EDIT_PRODUCT']='প্রোডাক্ট সম্পাদন ';
+$lang['ADD_PRODUCT']='নতুন প্রোডাক্ট তৈরি';
+
+$lang['REQUISITION']='রিকুইজিশন ';
+$lang['ADD_NEW_REQUISITION']='নতুন রিকুইজিশন তৈরি';
+$lang['']='';
+$lang['']='';
+
+
+
 
 
 

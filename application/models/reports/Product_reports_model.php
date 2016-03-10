@@ -18,7 +18,7 @@ class Product_reports_model extends CI_Model
         $CI->db->select('category.category_name');
         $CI->db->select('supplier.company_name');
         $CI->db->select('warehouse.warehouse_name');
-        $CI->db->select('COUNT(product.product_name) no_of_product');
+//        $CI->db->select('COUNT(product.product_name) no_of_product');
         $CI->db->from($CI->config->item('table_product').' product');
         if($inputs['category'])
             $CI->db->where('product.category_id',$inputs['category']);
@@ -28,7 +28,7 @@ class Product_reports_model extends CI_Model
             $CI->db->where('product.supplier_id',$inputs['supplier']);
         if($inputs['warehouse'])
             $CI->db->where('product.warehouse_id',$inputs['warehouse']);
-        $CI->db->order_by('product.id','ASC');
+     //   $CI->db->order_by('product.id','ASC');
         //check product type
         if($inputs['product_type']=='unassigned')
         {
@@ -45,9 +45,10 @@ class Product_reports_model extends CI_Model
         $CI->db->join($CI->config->item('table_product_category').' category','category.id = product.category_id', 'LEFT');
         $CI->db->join($CI->config->item('table_supplier').' supplier','supplier.id = product.supplier_id', 'LEFT');
         $CI->db->join($CI->config->item('table_warehouse').' warehouse','warehouse.id = product.warehouse_id', 'LEFT');
+//        $CI->db->order_by("product.id", "desc");
         $CI->db->group_by('product.product_name');
         $results = $CI->db->get()->result_array();
-//        echo $CI->db->last_query();
+ //echo $CI->db->last_query();
         return $results;
     }
 }

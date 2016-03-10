@@ -66,8 +66,8 @@ $CI=& get_instance();
 
                 columns: [
                     { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'category_name', width:'40%'},
-                    { text: '<?php echo $CI->lang->line('CODE'); ?>', dataField: 'category_code', width:'50%'},
-                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', width:'10%'}
+                    { text: '<?php echo $CI->lang->line('CODE'); ?>', dataField: 'category_code', width:'48%'},
+                    { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'10%'}
                 ]
             });
         //for Double Click to edit

@@ -17,6 +17,7 @@ class Home extends Root_Controller
 
     public function dashboard()
     {
+
         $user=User_helper::get_user();
         if($user)
         {

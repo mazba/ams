@@ -40,10 +40,21 @@ class Ticket_reports_model extends CI_Model
         {
             $CI->db->where('ticket_issue.status',$CI->config->item('STATUS_REJECT'));
         }
+
+        if($inputs['category'])
+            $CI->db->where('product.category_id',$inputs['category']);
+
+
+        if($inputs['user_name'])
+            $CI->db->where('ticket_issue.user_id',$inputs['user_name']);
+
+        if($inputs['product_name'])
+            $CI->db->where('ticket_issue.product_id',$inputs['product_name']);
+
         $this->db->join($CI->config->item('table_users').' users','users.id = ticket_issue.user_id', 'LEFT');
         $this->db->join($CI->config->item('table_product').' product','product.id = ticket_issue.product_id', 'LEFT');
         $results = $this->db->get()->result_array();
-//        echo $this->db->last_query();
+  //echo $this->db->last_query();
         return $results;
     }
 }
