@@ -1,5 +1,6 @@
 <?php
-class Query_helper
+class
+Query_helper
 {
     public static function add($tablename,$data)
     {
@@ -139,7 +140,7 @@ class Query_helper
 
 
 
-    public static function get_info($tablename,$fieldnames,$conditions,$limit=0,$start=0)
+    public static function get_info($tablename,$fieldnames,$conditions,$limit=0,$start=0,$group_by=null)
     {
         $CI =& get_instance();
 
@@ -160,6 +161,9 @@ class Query_helper
         foreach($conditions as $condition)
         {
             $CI->db->where($condition);
+        }
+        if($group_by){
+            $CI->db->group_by($group_by);
         }
         if($limit==0)
         {

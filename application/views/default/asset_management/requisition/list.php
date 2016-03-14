@@ -68,7 +68,7 @@ $CI=& get_instance();
                 columns: [
                     { text: '<?php echo $CI->lang->line('REQUISITION_ID'); ?>', dataField: 'requisition_id', width:'20%'},
                     { text: '<?php echo $CI->lang->line('REQUISITION_TITLE'); ?>', dataField: 'requisition_title', width:'43%'},
-                    { text: '<?php echo $CI->lang->line('REQUISITION_TYPE'); ?>', dataField: 'requisition_type', width:'16%'},
+                    { text: '<?php echo $CI->lang->line('REQUISITION_TYPE'); ?>', dataField: 'requisition_type',filtertype:'list', width:'16%'},
                     { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'18%'}
                 ]
             });

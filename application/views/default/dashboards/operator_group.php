@@ -14,7 +14,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('WAREHOUSE_WISE_PRODUCT_INFO'); ?> &nbsp;<span class="label label-warning"><?php echo count($warehouse_product_info) ?></span>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('WAREHOUSE_WISE_PRODUCT_INFO'); ?> &nbsp;<span class="label label-warning"><?php echo System_helper::Get_Eng_to_Bng( count($warehouse_product_info)) ?></span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">
@@ -48,7 +48,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                                 <?php echo $warehouse['warehouse_name'] ?> </a>
                                         </td>
                                         <td>
-                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo $warehouse['number_of_product'] ?></div>
+                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo System_helper::Get_Eng_to_Bng($warehouse['number_of_product']) ?></div>
                                         </td>
                                     </tr>
                                     <?php
@@ -68,7 +68,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS_LIST'); ?> <span class="label label-warning"><?php echo count($get_product_list) ?></span>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS_LIST'); ?> <span class="label label-warning"><?php echo System_helper::Get_Eng_to_Bng( count($get_product_list)) ?></span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">

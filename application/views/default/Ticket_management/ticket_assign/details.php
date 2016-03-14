@@ -38,7 +38,7 @@ $user=User_helper::get_user();
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart theme-font hide"></i>
                                             <span class="caption-subject font-blue-madison bold uppercase"><?php echo $this->lang->line('TICKET');?></span>
-                                            <span class="caption-helper"><?php echo sizeof($ticket_issues);?> <?php echo $this->lang->line('PENDING');?></span>
+                                            <span class="caption-helper"><?php echo System_helper::Get_Eng_to_Bng( sizeof($ticket_issues));?> <?php echo $this->lang->line('PENDING');?></span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -79,7 +79,7 @@ $user=User_helper::get_user();
                                                                                 <span class="label label-sm label-primary" title="<?php echo $this->lang->line('NAME');?>"><?php echo $ticket_issue['name_bn'];?></span>
                                                                                 <span class="label label-sm label-success" title="<?php echo $this->lang->line('PRODUCT_NAME');?>"><?php echo $ticket_issue['product_name'];?></span>
                                                                                 <span class="label label-sm label-danger" title="<?php echo $this->lang->line('TIME');?>"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
-                                                                                <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo $ticket_issue['id'];?></span>
+                                                                                <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo System_helper::Get_Eng_to_Bng( $ticket_issue['id']);?></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>

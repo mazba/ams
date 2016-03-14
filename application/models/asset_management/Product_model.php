@@ -17,20 +17,22 @@ class Product_model extends CI_Model
         $this->db->from($CI->config->item('table_product'));
 
         $results = $this->db->get()->result_array();
+        $product_condition=$this->config->item('product_condition');
+//            print_r($product_condition);die;
         foreach($results as &$result)
         {
             $result['edit_link']=$CI->get_encoded_url('asset_management/product/index/edit/'.$result['id']);
-            if($result['status']==$this->config->item('STATUS_ACTIVE'))
+            if($result['condition']==0)
             {
-                $result['status_text']=$CI->lang->line('ACTIVE');
+                $result['status_text']=$product_condition[0];
             }
-            else if($result['status']==$this->config->item('STATUS_INACTIVE'))
+            else if($result['status']==1)
             {
-                $result['status_text']=$CI->lang->line('INACTIVE');
+                $result['status_text']=$product_condition[1];
             }
             else
             {
-                $result['status_text']=$result['status'];
+                $result['status_text']=$result['condition'];
             }
         }
         return $results;

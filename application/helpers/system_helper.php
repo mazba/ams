@@ -5,7 +5,8 @@ class System_helper
     {
         if($time>0)
         {
-            return date('Y-m-d',$time);
+           // return date('Y-m-d',$time);
+            return self::Get_Eng_to_Bng(date('d-m-Y',$time)) ;
         }
         else
         {

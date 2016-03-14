@@ -39,6 +39,8 @@ class CurrentStock extends Root_Controller
             $data['suppliers'] = Query_helper::get_info($this->config->item('table_supplier'),array('id value','company_name text'),array('status !=99'));
             $data['warehouses'] = Query_helper::get_info($this->config->item('table_warehouse'),array('id value','warehouse_name text'),array('status !=99'));
             $data['categories'] = Query_helper::get_info($this->config->item('table_product_category'),array('id value','category_name text'),array('status !=99'));
+            $data['products']=Query_helper::get_info($this->config->item('table_product'),array('id value', 'product_name text'), array('status !=99'),0,0,'product_name');
+
             $ajax['status']=true;
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("reports/current_stock/list",$data,true));
 
@@ -62,6 +64,17 @@ class CurrentStock extends Root_Controller
 //        $data['data'] = $this->Current_stock_model->get_product_list($inputs);
 //        $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/current_stock/report_format",$data,true));
 //        $this->jsonReturn($ajax);
+    }
+
+    public function get_product_list_by_category()
+    {
+        $category_id =$this->input->post('category_id');
+
+
+        $products = Query_helper::get_info($this->config->item('table_product'),array('product_name value', 'product_name text'), array('category_id='.$category_id),0,0,'product_name');
+        $ajax['status'] = true;
+        $ajax['system_content'][] = array("id"=>"#product_name","html"=>$this->load_view("dropdown",array('drop_down_options'=>$products),true));
+        $this->jsonReturn($ajax);
     }
 
 }

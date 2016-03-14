@@ -107,7 +107,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                     <div class="portlet-body">
                         <div class="scroller" style="height: 186px;" data-always-visible="1" data-rail-visible="0">
                             <div class="table-scrollable table-scrollable-borderless">
-                                <table class="table table-bordered">
+                                <table style="border: 1px solid #ccc;" class="table  table-bordered  table-hover">
                                     <tbody>
                                     <tr>
                                         <?php
@@ -115,16 +115,26 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                         $b = 0;
                                         $c = 0;
                                         ?>
-                                        <th><?php echo $CI->lang->line('PENDING_TICKET'); ?></th><td><span class="badge badge-danger"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_INACTIVE')]) ? $a = $ticket_status_info[$CI->config->item('STATUS_INACTIVE')] : '0' ?></span></td>
+                                        <th><?php echo $CI->lang->line('PENDING_TICKET'); ?></th>
+                                        <th><span
+                                                class="badge badge-danger"><?php echo System_helper::Get_Eng_to_Bng(isset($ticket_status_info[$CI->config->item('STATUS_INACTIVE')]) ? $a = $ticket_status_info[$CI->config->item('STATUS_INACTIVE')] : '0') ?></span>
+                                        </th>
                                     </tr>
                                     <tr>
-                                        <th><?php echo $CI->lang->line('ASSIGNED_TICKET'); ?></th><td><span class="badge badge-warning"><?php echo isset($ticket_status_info[$CI->config->item('STATUS_ASSIGN')]) ? $c = $ticket_status_info[$CI->config->item('STATUS_ASSIGN')] : '0' ?></span></td>
+                                        <th><?php echo $CI->lang->line('RESOLVED_TICKET'); ?></th>
+                                        <td><span
+                                                class="badge badge-success"><?php echo System_helper::Get_Eng_to_Bng(isset($ticket_status_info[$CI->config->item('STATUS_RESOLVE')]) ? $b = $ticket_status_info[$CI->config->item('STATUS_RESOLVE')] : '0') ?></span>
+                                        </td>
                                     </tr>
+
                                     <tr>
-                                        <th><?php echo $CI->lang->line('TOTAL_TICKET'); ?></th><td><span class="badge badge-info"><?php echo $a+$b+$c; ?></span></td>
+                                        <th><?php echo $CI->lang->line('TOTAL_TICKET'); ?></th>
+                                        <td><span class="badge badge-info"><?php echo System_helper::Get_Eng_to_Bng($a + $b + $c); ?></span></td>
                                     </tr>
                                     </tbody>
                                 </table>
+
+
                             </div>
                         </div>
                     </div>
@@ -136,7 +146,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('WAREHOUSE_WISE_PRODUCT_INFO'); ?> &nbsp;<span class="label label-warning"><?php echo count($warehouse_product_info) ?></span>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('WAREHOUSE_WISE_PRODUCT_INFO'); ?> &nbsp;<span class="label label-warning"><?php echo System_helper::Get_Eng_to_Bng(count($warehouse_product_info)) ?></span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">
@@ -170,7 +180,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                                 <?php echo $warehouse['warehouse_name'] ?> </a>
                                         </td>
                                         <td>
-                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo $warehouse['number_of_product'] ?></div>
+                                            <div class="label label-info center-block"><i class="fa fa-cubes "></i> <?php echo System_helper::Get_Eng_to_Bng( $warehouse['number_of_product']) ?></div>
                                         </td>
                                     </tr>
                                     <?php
@@ -188,7 +198,7 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS_LIST'); ?> <span class="label label-warning"><?php echo count($get_product_list) ?></span>
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('MY_PRODUCTS_LIST'); ?> <span class="label label-warning"><?php echo System_helper::Get_Eng_to_Bng(count($get_product_list)) ?></span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse external">

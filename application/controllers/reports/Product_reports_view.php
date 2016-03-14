@@ -13,6 +13,8 @@ class Product_reports_view extends CI_Controller
         //check security and loged user
         //$this->lang->load("report", $this->config->item('GET_LANGUAGE'));
         //$this->lang->load("my", $this->config->item('GET_LANGUAGE'));
+        $this->lang->load("my", $this->config->item('GET_LANGUAGE'));
+
         $this->load->model("reports/Product_reports_model");
     }
 
@@ -35,7 +37,7 @@ class Product_reports_view extends CI_Controller
     {
         if($format!="pdf")
         {
-            $data['title']=$this->lang->line("REPORT_ENTREPRENEUR_INFO_TITLE");
+            $data['title']=$this->lang->line("PRODUCT_RELATED_REPORTS");
             $inputs = $this->input->get();
             $data['products'] = $this->Product_reports_model->get_product_list($inputs);
             $this->load->view('default/reports/product_reports/report_format',$data);

@@ -43,7 +43,7 @@ $user=User_helper::get_user();
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart theme-font hide"></i>
                                             <span class="caption-subject font-blue-madison bold uppercase"><?php echo $this->lang->line('TICKET');?></span>
-                                            <span class="caption-helper"><?php echo sizeof($ticket_issues);?> <?php echo $this->lang->line('PENDING');?></span>
+                                            <span class="caption-helper"><?php echo System_helper::Get_Eng_to_Bng(sizeof($ticket_issues));?> <?php echo $this->lang->line('PENDING');?></span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">

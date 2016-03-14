@@ -15,7 +15,7 @@ class Product_return_model extends CI_Model
         $CI =& get_instance();
         $CI->db->select('product_return.*');
         $CI->db->select('users.username');
-        $CI->db->select('product.product_name,product.purchase_date,product.status');
+        $CI->db->select('product.product_name,product.purchase_date,product.condition');
         $CI->db->select('manufacture.manufacture_name');
         $CI->db->select('category.category_name');
         $CI->db->select('supplier.company_name');

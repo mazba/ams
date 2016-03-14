@@ -46,20 +46,20 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
             </table>
 
             <h5 class="pull-right">
-                মুদ্রণ তারিখ: <?php echo date('d-m-Y') ?>
+                মুদ্রণ তারিখ: <?php echo System_helper::Get_Eng_to_Bng(date('d-m-Y')) ?>
             </h5>
             <table class="table table-bordered" style="overflow: auto">
                 <thead>
                 <tr style="background: #eee">
                     <th>প্রোডাক্ট নাম</th>
-                    <th>পণ্যাগার</th>
+                    <th>ওয়ারহাউস</th>
                     <th>প্রস্তুতকারক</th>
                     <th>সরবরাহকারী</th>
                     <th>আইটেম ইউনিট</th>
                     <th>সংক্ষিপ্ত বর্ণনা</th>
                     <th>স্পেসিফিকেশন</th>
                     <th>মডেল নাম্বার</th>
-                    <th>পণ্যের সংখ্যা</th>
+                    <th>প্রোডাক্টএর সংখ্যা</th>
 
                     <th>হস্তান্তর</th>
                     <th>অবশিষ্ট</th>
@@ -80,15 +80,15 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
                         <td><?php echo $product['specification'] ?></td>
                         <td><?php echo $product['model_no'] ?></td>
                         <td style="text-align: center"><span
-                                class="label label-primary"><?php echo $product['nub_of_product'] ?></span></td>
+                                class="label label-primary"><?php echo System_helper::Get_Eng_to_Bng( $product['nub_of_product']) ?></span></td>
 
                         <td style="text-align: center"><span
-                                class="label label-warning"> <?php echo $product['nub_of_product'] - $nub_of_product_warehouse =
-                                        (isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0)  ?>
+                                class="label label-warning"> <?php echo System_helper::Get_Eng_to_Bng($product['nub_of_product'] - $nub_of_product_warehouse =
+                                        (isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0))  ?>
                 </span>
                         </td>
                         <td style="text-align: center"><span class="label label-success">
-                     <?php echo(isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0) ?>
+                     <?php echo System_helper::Get_Eng_to_Bng((isset($data['current_product'][$product['product_name']]) ? $data['current_product'][$product['product_name']]['nub_of_product'] : 0) )?>
                  </span>
                         </td>
                     </tr>

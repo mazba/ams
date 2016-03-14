@@ -34,7 +34,7 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
                     <td style="width: 60%">
                         <h1 class="text-center">বাংলাদেশ জাতীয় সংসদ</h1>
 
-                        <h3 class="text-center">পণ্য সম্পর্কিত প্রতিবেদন</h3>
+                        <h3 class="text-center">প্রোডাক্ট সম্পর্কিত প্রতিবেদন</h3>
                     </td>
                     <td style="width: 20%">
                         <img style="margin-right: 0" class="pull-right"
@@ -44,15 +44,15 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
                 </tr>
 
             </table>
-            <h5 class="pull-right"> মুদ্রণ তারিখ: <?php echo date('d-m-Y') ?> </h5>
+            <h5 class="pull-right"> মুদ্রণ তারিখ: <?php  echo System_helper::Get_Eng_to_Bng(date('d-m-Y'))  ?> </h5>
             <table class="table table-bordered" style="overflow: auto">
                 <thead>
                 <tr style="background: #eee">
                     <th>প্রোডাক্ট নাম</th>
-
-                    <th>ইউনিট মূল্য</th>
                     <th>ক্যটাগরি</th>
-                    <th>পণ্যাগার</th>
+                    <th>ইউনিট মূল্য</th>
+
+                    <th>ওয়ারহাউস</th>
                     <th>প্রস্তুতকারক</th>
                     <th>সরবরাহকারী</th>
                     <th>আইটেম ইউনিট</th>
@@ -72,9 +72,8 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
                     ?>
                     <tr>
                         <td><?php echo $product['product_name'] ?></td>
-
-                        <td><?php echo $product['unit_price'] ?></td>
                         <td><?php echo $product['category_name'] ?></td>
+                        <td><?php echo $product['unit_price'] ?></td>
                         <td><?php echo $product['warehouse_name'] ?></td>
                         <td><?php echo $product['manufacture_name'] ?></td>
                         <td><?php echo $product['company_name'] ?></td>
@@ -85,7 +84,7 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
                         <td><?php echo System_helper::display_date($product['warranty_start_date']) ?></td>
                         <td><?php echo System_helper::display_date($product['warranty_end_date']) ?></td>
                         <td><?php echo System_helper::display_date($product['purchase_date']) ?></td>
-                        <td><?php echo ($product['status']) ? 'Active' : 'In-active' ?></td>
+                        <td><?php echo ($product['condition']) ? 'ত্রুটিপূর্ণ' : 'ভাল' ?></td>
                     </tr>
                 <?php
                 }

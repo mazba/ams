@@ -62,7 +62,7 @@ $user = User_helper::get_user();
                             <div class="form-body">
                                 <div class="form-group has-error row">
                                     <div class="col-lg-2"><label class="control-label bold"
-                                                                 for="name_bn"><?php echo $CI->lang->line('NAME'); ?></label>
+                                                                 for="name_bn"><?php echo $CI->lang->line('USER_NAME'); ?></label>
                                     </div>
                                     <div class="col-lg-8">
                                         <?php

@@ -9,10 +9,19 @@ class Ticket_reports_view extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        //TODO
+
+        /*$this->template='default';
+        $this->default_template='default';
+
+        $this->language='bangla';
+        $this->language_code='bn';*/
+
         //check security and loged user
+
         //$this->lang->load("report", $this->config->item('GET_LANGUAGE'));
-        //$this->lang->load("my", $this->config->item('GET_LANGUAGE'));
+        $this->lang->load("my", $this->config->item('GET_LANGUAGE'));
+
+        $this->lang->load("my", $this->config->item('GET_LANGUAGE'));
         $this->load->model("reports/ticket_reports_model");
     }
 
@@ -35,7 +44,7 @@ class Ticket_reports_view extends CI_Controller
     {
         if($format!="pdf")
         {
-            $data['title']=$this->lang->line("Title");
+            $data['title']=$this->lang->line("TICKET_RELATED_REPORT");
             $inputs = $this->input->get();
             $data['tickets'] = $this->ticket_reports_model->get_ticket_list($inputs);
             $this->load->view('default/reports/ticket_reports/report_format',$data);

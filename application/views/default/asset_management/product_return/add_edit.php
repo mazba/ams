@@ -33,17 +33,17 @@ $CI =& get_instance();
                                     <div id="system_dataTable">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td>Product Name</td>
-                                                    <td>Assign Date</td>
-                                                    <td>Return Date</td>
-                                                    <td>Action</td>
+                                                    <td><?php echo $CI->lang->line('PRODUCT_NAME');?> </td>
+                                                    <td><?php echo $CI->lang->line('ASSIGN_DATE');?></td>
+                                                    <td><?php echo $CI->lang->line('RETURN_DATE');?></td>
+                                                    <td><?php // echo $CI->lang->line('');?></td>
                                                 </tr>
                                                 <?php foreach($user_products as $product):?>
                                                 <tr>
                                                     <td><?= $product->product_name?></td>
                                                     <td><?= System_helper::display_date($product->assign_date)?></td>
                                                     <td><?= System_helper::display_date($product->return_date)?></td>
-                                                    <td><button type="button" class="btn btn-danger" onclick="deleteIt(<?php echo $product->product_id; ?>,this)">delete</button></td>
+                                                    <td><button type="button" class="btn btn-danger" onclick="deleteIt(<?php echo $product->product_id; ?>,this)">প্রোডাক্টটি ফেরত নিন</button></td>
 
                                                 </tr>
                                                 <?php endforeach?>
@@ -73,21 +73,25 @@ $CI =& get_instance();
     });
     function deleteIt(assignId, ele)
     {
+        var answer = confirm ("Are you delete this record?")
 
-        $.ajax({
-            url: '<?php echo $CI->get_encoded_url('asset_management/product_return/unassigned_product'); ?>',
-            type: 'POST',
-            dataType: "JSON",
-            data:{assign_id:assignId},
-            success: function (data, status)
-            {
-                $(ele).closest('tr').remove();
-            },
-            error: function (xhr, desc, err)
-            {
-                console.log("error");
+        if (answer)
+        {
+            $.ajax({
+                url: '<?php echo $CI->get_encoded_url('asset_management/product_return/unassigned_product'); ?>',
+                type: 'POST',
+                dataType: "JSON",
+                data:{assign_id:assignId},
+                success: function (data, status)
+                {
+                    $(ele).closest('tr').remove();
+                },
+                error: function (xhr, desc, err)
+                {
+                    console.log("error");
 
-            }
-        });
+                }
+            });
+        }
     }
 </script>

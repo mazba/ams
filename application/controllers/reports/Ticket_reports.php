@@ -67,5 +67,15 @@ class Ticket_reports extends Root_Controller
         $ajax['system_content'][]=array("id"=>"#PrintArea","html"=>$this->load_view("reports/ticket_reports/report_format",$data,true));
         $this->jsonReturn($ajax);
     }
+    public function get_product_list_by_category()
+    {
+        $category_id =$this->input->post('category_id');
+
+
+        $products = Query_helper::get_info($this->config->item('table_product'),array('product_name value', 'product_name text'), array('category_id='.$category_id),0,0,'product_name');
+        $ajax['status'] = true;
+        $ajax['system_content'][] = array("id"=>"#product_name","html"=>$this->load_view("dropdown",array('drop_down_options'=>$products),true));
+        $this->jsonReturn($ajax);
+    }
 
 }

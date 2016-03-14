@@ -12,7 +12,7 @@ class Product_assign_report_view extends CI_Controller
         //TODO
         //check security and loged user
         //$this->lang->load("report", $this->config->item('GET_LANGUAGE'));
-        //$this->lang->load("my", $this->config->item('GET_LANGUAGE'));
+        $this->lang->load("my", $this->config->item('GET_LANGUAGE'));
         $this->load->model("reports/Product_assign_report_model");
     }
 
@@ -35,8 +35,8 @@ class Product_assign_report_view extends CI_Controller
     {
         if($format!="pdf")
         {
-            $data['title']=$this->lang->line("TITLE");
-            $inputs = $this->input->post();
+            $data['title']=$this->lang->line("PRODUCT_ASSIGN_RELATED_REPORT");
+            $inputs = $this->input->get();
             $data['products'] = $this->Product_assign_report_model->get_product_list($inputs);
             $this->load->view('default/reports/product_assign_report/report_format',$data);
         }

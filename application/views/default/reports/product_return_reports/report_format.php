@@ -22,7 +22,7 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
             <div class="clearfix"></div>
 <!--            <span class="pull-right">--><?php //echo $this->lang->line('REPORT_CURRENT_DATE_VIEW');?><!--</span>-->
         </div>
-        <div class="col-lg-12">n>
+        <div class="col-lg-12">
 <table style="margin-top: 50px;">
     <tr>
         <td style="width: 20%">
@@ -31,6 +31,20 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
         <td style="width: 60%">
             <h1 class="text-center">বাংলাদেশ জাতীয় সংসদ</h1>
             <h3 class="text-center">ফেরত দেত্তয়া প্রোডাক্ট সম্পর্কিত প্রতিবেদন</h3>
+
+            <?php
+            $start_date = $_GET['start_date'];
+            $end_date = $_GET['end_date'];
+
+            if ($start_date != null && $end_date != null) {
+                echo '<p class="text-center"> অনুসন্ধানএর তারিখ : ' . System_helper::Get_Eng_to_Bng($start_date) . " " . 'হইতে ' . System_helper::Get_Eng_to_Bng($end_date) .  'পর্যন্ত</p>';
+            } elseif ($start_date != null && $end_date == null) {
+                echo '<p class="text-center"> অনুসন্ধানএর তারিখ :  ' . System_helper::Get_Eng_to_Bng($start_date) . ' ' . 'হইতে বর্তমান পর্যন্ত</p>';
+            } elseif ($start_date == null && $end_date != null) {
+                echo '<p class="text-center">  অনুসন্ধানএর তারিখ :  আরম্ভ হইতে' . '' . System_helper::Get_Eng_to_Bng($end_date) . ' পর্যন্ত</p>';
+            } else {
+
+            } ?>
         </td>
         <td style="width: 20%">
             <img  src="<?php echo base_url()?>images/government-logo.gif">
@@ -41,7 +55,7 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
 </table>
 
 <h5 class="pull-right">
-    মুদ্রণ তারিখ: <?php echo date('d-m-Y') ?>
+    মুদ্রণ তারিখ: <?php echo System_helper::Get_Eng_to_Bng(date('d-m-Y')) ?>
 </h5>
 <table class="table table-bordered" style="overflow: auto">
     <thead>
@@ -68,8 +82,7 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
             <td><?php echo $product['username']?></td>
             <td><?php echo System_helper::display_date($product['create_date']) ?></td>
             <td><?php echo System_helper::display_date($product['update_date']) ?></td>
-
-            <td><?php echo ($product['status']) ? 'Active' : 'In-active' ?></td>
+            <td><?php echo ($product['condition']) ? 'ত্রুটিপূর্ণ' : 'ভাল' ?></td>
         </tr>
         <?php
     }

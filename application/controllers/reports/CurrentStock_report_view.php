@@ -14,6 +14,8 @@ class CurrentStock_report_view extends CI_Controller
         //$this->lang->load("report", $this->config->item('GET_LANGUAGE'));
         //$this->lang->load("my", $this->config->item('GET_LANGUAGE'));
         $this->load->model("reports/Current_stock_model");
+        $this->lang->load("my", $this->config->item('GET_LANGUAGE'));
+
     }
 
     public function index($task="search",$id=0)
@@ -35,8 +37,8 @@ class CurrentStock_report_view extends CI_Controller
     {
         if($format!="pdf")
         {
-            $data['title']=$this->lang->line("TITLE");
-            $inputs = $this->input->post();
+            $data['title']=$this->lang->line("PRODUCT_CURRENT_STATUS_REPORTS");
+            $inputs = $this->input->get();
             $data['data'] = $this->Current_stock_model->get_product_list($inputs);
             $this->load->view('default/reports/current_stock/report_format',$data);
         }

@@ -20,8 +20,13 @@ class Product_reports_model extends CI_Model
         $CI->db->select('warehouse.warehouse_name');
 //        $CI->db->select('COUNT(product.product_name) no_of_product');
         $CI->db->from($CI->config->item('table_product').' product');
+
         if($inputs['category'])
             $CI->db->where('product.category_id',$inputs['category']);
+
+        if($inputs['product_name'])
+            $CI->db->where('product.product_name',$inputs['product_name']);
+
         if($inputs['manufacture'])
             $CI->db->where('product.manufacture_id',$inputs['manufacture']);
         if($inputs['supplier'])
@@ -38,17 +43,24 @@ class Product_reports_model extends CI_Model
         elseif($inputs['product_type']=='assigned')
         {
             $CI->db->where('product_assign.product_id IS NOT NULL',NULL,true);
+            $CI->db->where('product_assign.status',1);
+
             $CI->db->join($CI->config->item('table_product_assign').' product_assign','product_assign.product_id = product.id', 'LEFT');
         }
-        
+
         $CI->db->join($CI->config->item('table_manufacture').' manufacture','manufacture.id = product.manufacture_id', 'LEFT');
         $CI->db->join($CI->config->item('table_product_category').' category','category.id = product.category_id', 'LEFT');
         $CI->db->join($CI->config->item('table_supplier').' supplier','supplier.id = product.supplier_id', 'LEFT');
         $CI->db->join($CI->config->item('table_warehouse').' warehouse','warehouse.id = product.warehouse_id', 'LEFT');
 //        $CI->db->order_by("product.id", "desc");
-        $CI->db->group_by('product.product_name');
+       // $CI->db->group_by('product.product_name');
         $results = $CI->db->get()->result_array();
- //echo $CI->db->last_query();
+        //echo $CI->db->last_query();
+
+        foreach($results as &$result)
+        {
+            $result['unit_price'] = System_helper::Get_Eng_to_Bng($result['unit_price']);
+        }
         return $results;
     }
 }

@@ -19,14 +19,7 @@ $requisition_type = $CI->config->item('requisition_type');
                         <div class="caption">
                             <i class="fa fa-qrcode"></i> <?php echo $title; ?>
                         </div>
-                        <div class="tools">
-                            <a href="" class="collapse">
-                            </a>
-                            <a href="#portlet-config" data-toggle="modal" class="config">
-                            </a>
-                            <a href="" class="reload">
-                            </a>
-                        </div>
+
                     </div>
                     <div class="portlet-body">
                         <?php

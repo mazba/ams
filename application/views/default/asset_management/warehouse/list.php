@@ -65,8 +65,8 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'warehouse_name', width:'40%'},
-                    { text: '<?php echo $CI->lang->line('CODE'); ?>', dataField: 'warehouse_code', width:'48%'},
+                    { text: '<?php echo $CI->lang->line('WAREHOUSE_NAME'); ?>', dataField: 'warehouse_name', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('WAREHOUSE_CODE'); ?>', dataField: 'warehouse_code', width:'48%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'10%'}
                 ]
             });
