@@ -17,10 +17,12 @@ class Ticket_reports_model extends CI_Model
         $CI->db->select('users.name_en user_name');
         $CI->db->select('product.product_name');
         $CI->db->from($CI->config->item('table_ticket_issue').' ticket_issue');
+
         if($inputs['start_date'])
-            $CI->db->where('ticket_issue.create_date >',strtotime($inputs['start_date']));
+            $CI->db->where('ticket_issue.create_date >=', strtotime($inputs['start_date']));
         if($inputs['end_date'])
-            $CI->db->where('ticket_issue.create_date <',strtotime($inputs['end_date']));
+            $CI->db->where('ticket_issue.create_date <=', strtotime($inputs['end_date']));
+
         $CI->db->order_by('ticket_issue.id','ASC');
 
         //check ticket type

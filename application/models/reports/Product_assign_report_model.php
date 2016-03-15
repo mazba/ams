@@ -17,7 +17,7 @@ class Product_assign_report_model extends CI_Model
         $CI->db->select('pa.*,user.name_en user_name,product.product_name');
         $CI->db->select('product.*');
         $CI->db->select('manufacture.manufacture_name,category.category_name');
-        $CI->db->where('pa.status = 1');
+
 
         if ($inputs['search_type']) {
             if ($inputs['search_type'] == 'pending') {
@@ -25,9 +25,9 @@ class Product_assign_report_model extends CI_Model
             }
         }
         if ($inputs['start_date'])
-            $CI->db->where('pa.create_date >', strtotime($inputs['start_date']));
+            $CI->db->where('pa.assign_date >=', strtotime($inputs['start_date']));
         if ($inputs['end_date'])
-            $CI->db->where('pa.create_date <', strtotime($inputs['end_date']));
+            $CI->db->where('pa.assign_date <=', strtotime($inputs['end_date']));
 
 
         if ($inputs['category'])
@@ -35,6 +35,7 @@ class Product_assign_report_model extends CI_Model
         if ($inputs['product_name'])
             $CI->db->where('product.id', $inputs['product_name']);
 
+        $CI->db->where('pa.status = 1');
         $CI->db->join($CI->config->item('table_users') . ' user', 'user.id = pa.user_id', 'LEFT');
         $CI->db->join($CI->config->item('table_product') . ' product', 'product.id = pa.product_id', 'LEFT');
         $this->db->join($CI->config->item('table_manufacture') . ' manufacture', 'manufacture.id = product.manufacture_id', 'LEFT');

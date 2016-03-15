@@ -12,6 +12,7 @@ class Product_return_model extends CI_Model
 
     public function get_product_list($inputs)
     {
+
         $CI =& get_instance();
         $CI->db->select('product_return.*');
         $CI->db->select('users.username');
@@ -23,10 +24,20 @@ class Product_return_model extends CI_Model
         $CI->db->where("product_return.status", 0);
         $CI->db->from($CI->config->item('table_product_assign').' product_return');
 
-        if($inputs['start_date'])
-            $CI->db->where('product_return.create_date >',strtotime($inputs['start_date']));
-        if($inputs['end_date'])
-            $CI->db->where('product_return.create_date <',strtotime($inputs['end_date']));
+        if($inputs['start_date']==$inputs['end_date'])
+            $CI->db->where('product_return.update_date >=',strtotime($inputs['start_date']));
+        else {
+
+            if ($inputs['start_date'])
+                $CI->db->where('product_return.update_date >=', strtotime($inputs['start_date'].'   00:00:00 UTC'));
+            if ($inputs['end_date'])
+                $CI->db->where('product_return.update_date <=', strtotime($inputs['end_date'].'   24:00:00 UTC'));
+        }
+
+//        if(!empty($inputs['start_date']) && !empty($inputs['end_date']) )
+//        {
+//            $CI->db->where('product_return.update_date >='. strtotime($inputs['start_date']).' AND product_return.update_date <='. strtotime($inputs['end_date']));
+//        }
 
         if($inputs['category'])
             $CI->db->where('product.category_id',$inputs['category']);
@@ -46,7 +57,7 @@ class Product_return_model extends CI_Model
 //        $CI->db->order_by("product.id", "desc");
        // $CI->db->group_by('product.product_name');
         $results = $CI->db->get()->result_array();
-    //   echo $CI->db->last_query();
+    // echo $CI->db->last_query();
         return $results;
     }
 }
