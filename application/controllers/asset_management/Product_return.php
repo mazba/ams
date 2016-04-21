@@ -123,6 +123,7 @@ class Product_return extends Root_Controller
 
             $data['title']=$this->lang->line("EDIT_RETURN_PRODUCT_INFORMATION");
             $data['user_products']=$this->Product_return_model->get_assigend_product($id);
+            $data['user_info']=Query_helper::get_info($this->config->item('table_users'),'*',array('id ='.$id),1);
            // $data['product']=Query_helper::get_info($this->config->item('table_product'),'*',array('id ='.$id),1);
 
            // $data['category'] = Query_helper::get_list($this->config->item('table_product_category'),'category_name',array('status = 1'));
@@ -254,6 +255,28 @@ class Product_return extends Root_Controller
             $data['update_date']=time();
             $data['status']=0;
             $this->Product_return_model->update_assign_produce($id,$data);
+        }
+        return  $this->jsonReturn('tes') ;
+    }
+
+    public function reject_product(){
+        $user=User_helper::get_user();
+        $id= $this->input->post('assign_id');
+        if($id>0){
+            $data= array();
+            $data['update_by']=$user->id;
+            $data['update_date']=time();
+            $data['status']=0;
+            Query_helper::update($this->config->item('table_product_assign'),$data,array('product_id ='.$id));
+    //        $this->Product_return_model->update_assign_produce($id,$data);
+
+            $s_data= array();
+            $s_data['update_by']=$user->id;
+            $s_data['update_date']=time();
+            $s_data['status']=99;
+
+            Query_helper::update($this->config->item('table_product'),$s_data,array('id ='.$id));
+
         }
         return  $this->jsonReturn('tes') ;
     }

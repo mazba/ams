@@ -260,19 +260,22 @@ $get_requisition_info = Dashboard_helper::get_requisition_info();
                         <thead>
                         <tr>
                             <th><?php echo $CI->lang->line('PRODUCT'); ?></th>
+                            <th><?php echo $CI->lang->line('PRODUCT_CODE'); ?></th>
                             <th><?php echo $CI->lang->line('ASSIGN_DATE'); ?></th>
-                            <th><?php echo $CI->lang->line('RETURN_DATE'); ?></th>
+                            <th><?php echo $CI->lang->line('WARRANTY_END_DATE'); ?></th>
                             <th><?php echo $CI->lang->line('REMAIN/PENDING'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
                         foreach ($get_product_list as $product) {
+
                             ?>
                             <tr>
                                 <td><?php echo $product['product_name'] ?></td>
+                                <td><?php echo $product['product_code'] ?></td>
                                 <td><?php echo System_helper::display_date($product['assign_date']) ?></td>
-                                <td><?php echo System_helper::display_date($product['return_date']) ?></td>
+                                <td><?php echo System_helper::display_date($product['warranty_end_date']) ?></td>
                                 <td>
                                     <?php
                                     $total_date = $product['return_date'] - $product['assign_date'];

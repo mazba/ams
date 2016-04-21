@@ -41,6 +41,8 @@ $CI=& get_instance();
                 { name: 'edit_link', type: 'string' },
 
                 { name: 'user_name', type: 'string' },
+                { name: 'email', type: 'string' },
+                { name: 'mobile', type: 'string' },
                 { name: 'nub_of_product', type: 'string' }
 
             ],
@@ -66,8 +68,9 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'80%'},
-
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('MOBILE_NUMBER'); ?>', dataField: 'mobile', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('EMAIL'); ?>', dataField: 'email', width:'20%'},
                     { text: '<?php echo $CI->lang->line('NUMBER_OF_PRODUCT'); ?>', dataField: 'nub_of_product', width:'20%'}
                 ]
             });

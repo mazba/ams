@@ -68,7 +68,7 @@ $CI=& get_instance();
                 columns: [
                     { text: '<?php echo $CI->lang->line('MANUFACTURE_NAME'); ?>', dataField: 'manufacture_name', width:'30%'},
                     { text: '<?php echo $CI->lang->line('MANUFACTURE_CODE'); ?>', dataField: 'manufacture_code', width:'10%'},
-                    { text: '<?php echo $CI->lang->line('MANUFACTURE_DESCRIPTION'); ?>', dataField: 'manufacture_description', width:'50%'},
+                    { text: '<?php echo $CI->lang->line('MANUFACTURE_DESCRIPTION'); ?>', dataField: 'manufacture_description', width:'47%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'10%'}
                 ]
             });

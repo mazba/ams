@@ -99,7 +99,7 @@ class System_helper
         }
     }
 
-    public static function upload_file($save_dir="images",$max_size=1024,$types='gif|jpg|png')
+    public static function upload_file($save_dir="images",$max_size=1024,$types='gif|jpg|png|pdf|xls|xlsx')
     {
         $CI = & get_instance();
         $CI->load->library('upload');

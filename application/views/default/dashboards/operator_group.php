@@ -1,14 +1,60 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 $CI =& get_instance();
 $user = User_helper::get_user();
 $warehouse_product_info = Dashboard_helper::get_warehouse_product_info();
 $get_product_list = Dashboard_helper::get_my_product_list();
 
 ?>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="" rel="stylesheet" type="text/css"/>
+<style>
+    .display_none{
+        display: none;
+    }
+</style>
+
 <div class="page-content-wrapper">
     <div class="page-content">
         <!-- BEGIN PAGE CONTENT INNER -->
         <div class="row">
+            <div class="col-sm-12 col-sm-offset-0">
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-shopping-cart"></i><?php echo $CI->lang->line('PRODUCT_DETAILS'); ?>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse external">
+                            </a>
+                            <a href="javascript:;" class="remove external">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="scroller" style="height: 189px;" data-always-visible="1" data-rail-visible="0">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <br/>
+                                <input type="text" class="form-control large" id="product_name" value="" placeholder="SEARCH PRODUCT">
+                                <br/>
+                            </div>
+                            <table class="table table-bordered product_list display_none" data-item-id="0" data-payment-id="0" id="" >
+                                <tr>
+                                    <td><?php echo $CI->lang->line('NAME'); ?></td>
+                                    <td><?php echo $CI->lang->line('PRODUCT_CODE'); ?></td>
+                                    <td><?php echo $CI->lang->line('SERIAL_NUMBER'); ?></td>
+                                    <td><?php echo $CI->lang->line('UNIT_PRICE'); ?></td>
+                                    <td><?php echo $CI->lang->line('MODEL_NO'); ?></td>
+                                    <td><?php echo $CI->lang->line('WARRANTY_START_DATE'); ?></td>
+                                    <td><?php echo $CI->lang->line('WARRANTY_END_DATE'); ?></td>
+                                    <td><?php echo $CI->lang->line('STATUS'); ?></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-6">
                 <!-- BEGIN SAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
@@ -89,8 +135,9 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                     <thead>
                                     <tr>
                                         <th><?php echo $CI->lang->line('PRODUCT'); ?></th>
+                                        <th><?php echo $CI->lang->line('PRODUCT_CODE'); ?></th>
                                         <th><?php echo $CI->lang->line('ASSIGN_DATE'); ?></th>
-                                        <th><?php echo $CI->lang->line('RETURN_DATE'); ?></th>
+                                        <th><?php echo $CI->lang->line('WARRANTY_END_DATE'); ?></th>
                                         <th><?php echo $CI->lang->line('REMAIN/PENDING'); ?></th>
                                     </tr>
                                     </thead>
@@ -100,8 +147,9 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                                         ?>
                                         <tr>
                                             <td><?php echo $product['product_name'] ?></td>
+                                            <td><?php echo $product['product_code'] ?></td>
                                             <td><?php echo System_helper::display_date($product['assign_date']) ?></td>
-                                            <td><?php echo System_helper::display_date($product['return_date']) ?></td>
+                                            <td><?php echo System_helper::display_date($product['warranty_end_date']) ?></td>
                                             <td>
                                                 <?php
                                                 $total_date = $product['return_date'] - $product['assign_date'];
@@ -131,6 +179,8 @@ $get_product_list = Dashboard_helper::get_my_product_list();
                 </div>
                 <!-- END SAMPLE TABLE PORTLET-->
             </div>
+
+
         </div>
         <!-- END PAGE CONTENT INNER -->
     </div>
@@ -164,6 +214,82 @@ $get_product_list = Dashboard_helper::get_my_product_list();
             });
 
             $(this).attr("data-initialized", "1");
+        });
+
+
+        $("#product_name").autocomplete({
+            source: "<?php echo  base_url().'Home/'.'search_product/'; ?>",
+            minLength: 2,
+            focus: function( event, ui ) {
+                event.preventDefault();
+                $('#item_name').val(ui.item.label);
+            },
+            select: function (event, ui) {
+
+                $('#product_name').val(ui.item.label);
+
+                //alert(discount_type);
+//                $('#item_id').val(ui.item.value);
+//                return false
+                $(".table").removeClass('display_none');
+                var index = $('.product_list').data('item-id');
+                var html = "<tr class=' single_product'>" +
+
+
+                    "<td>"+
+                    "<input type='text' class='form-control' value='" + ui.item.product_name + "' disabled>" +
+                    "</td>"+
+
+                    "<td>" +
+                    "<input type='text' class='form-control' value='" + ui.item.product_code + "' disabled>" +
+                    "</td>"+
+
+                    "<td>"+
+                    "<input type='text' class='form-control' value='" + ui.item.serial_numb + "' disabled>" +
+                    "</td>"+
+
+                    "<td>"+
+                    "<input type='text' class='form-control' value='" + ui.item.unit_price + "' disabled>" +
+                    "</td>"+
+
+                    "<td>"+
+                    "<input type='text' class='form-control' value='" + ui.item.model_no + "' disabled>" +
+                    "</td>"+
+
+                    "<td>"+
+                    "<input type='text' class='form-control' value='" + ui.item.warranty_start_date + "' disabled>" +                    "</td>"+
+
+                    "<td>"+
+
+                    "<input type='text' class='form-control' value='" + ui.item.warranty_end_date + "' disabled>" +
+                    "</td>"+
+                    "<td>"+
+
+                    "<input type='text' class='form-control' value='" + ui.item.status + "' disabled>" +
+                    "</td>"+
+                    "</tr>";
+
+
+                var status = true;
+                $.each($('.product_list').find('.product_id'), function (index, element) {
+                    if (parseInt(element.value) == ui.item.value) {
+                        status = false;
+                        alert('This product already assigned.')
+                        return false;
+                    }
+                });
+                if (status) {
+                    $('.product_list').data('item-id',index+1)
+                    $('.product_list tr:first').after(html);
+                }
+                $(this).val('')
+                return false
+            }
+            ,
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+
         });
     });
 </script>

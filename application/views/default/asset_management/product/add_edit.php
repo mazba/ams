@@ -6,6 +6,28 @@ foreach ($this->config->item('product_condition') as $key => $dd) {
     $conditions[] = array('text' => $dd, 'value' => $key);
 }
 ?>
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+</style>
 <div class="page-content-wrapper">
     <div class="page-content">
         <div id="system_action_button_container" class="system_action_button_container">
@@ -149,8 +171,7 @@ foreach ($this->config->item('product_condition') as $key => $dd) {
                                                     class="control-label bold"><?php echo $CI->lang->line('REMARKS'); ?></label>
                                             </div>
                                             <div class="col-lg-8">
-            <textarea class="form-control" name="product[remarks]" cols="30"
-                      rows="3"><?php echo $product['remarks']; ?></textarea>
+                                                <textarea class="form-control" name="product[remarks]" cols="30"  rows="3"><?php echo $product['remarks']; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -248,6 +269,22 @@ foreach ($this->config->item('product_condition') as $key => $dd) {
                                                     $CI->load_view('dropdown', array('drop_down_default_option' => true, 'drop_down_options' => $conditions, 'drop_down_selected' => $product['condition']));
                                                     ?>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-success row">
+                                            <div class="col-lg-4"><label
+                                                    class="control-label bold"><?php echo $CI->lang->line('ATTACHMENT'); ?></label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                        <span class="btn btn-primary btn-file">
+                                             <i class="fa fa-cloud-upload"></i>
+                                            <?php echo $CI->lang->line('Upload'); ?>
+                                            <input type="file" name="attachment" id="issue_attachment"
+                                                   data-preview-container="#imtext" data-preview-height="30"
+                                                   class="validate[custom[validateMIME[image/jpeg|image/png|image/jpg|image/gif]]]"/>
+
+                                        </span>
+                                                <span>Max Size 1024KB</span>
                                             </div>
                                         </div>
 

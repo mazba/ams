@@ -26,22 +26,21 @@ $pdf_link = "http://" . $_SERVER['HTTP_HOST'] . str_replace("/list", "/pdf", $_S
         <div class="col-lg-12">
 
 
-            <table style="margin-top: 50px;">
+            <table style="margin-top: 50px; width: 100%">
                 <tr>
-                    <td style="width: 20%">
-                        <img src="<?php echo base_url() ?>images/government-logo.gif">
+                    <td style="text-align:center;">
+                        <img src="<?php echo base_url() ?>images/government-logo.png">
                     </td>
-                    <td style="width: 60%">
+                    </tr>
+                <tr>
+                    <td style="text-align:center;">
                         <h1 class="text-center">বাংলাদেশ জাতীয় সংসদ</h1>
 
                         <h3 class="text-center">প্রোডাক্ট সম্পর্কিত প্রতিবেদন</h3>
                     </td>
-                    <td style="width: 20%">
-                        <img style="margin-right: 0" class="pull-right"
-                             src="<?php echo base_url() ?>images/government-logo.gif">
+                    </tr>
 
-                    </td>
-                </tr>
+
 
             </table>
             <h5 class="pull-right"> মুদ্রণ তারিখ: <?php  echo System_helper::Get_Eng_to_Bng(date('d-m-Y'))  ?> </h5>

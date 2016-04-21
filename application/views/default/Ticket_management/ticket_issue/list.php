@@ -43,6 +43,7 @@ $CI=& get_instance();
                 { name: 'name_bn', type: 'string' },
                 { name: 'subject', type: 'string' },
                 { name: 'product_name', type: 'string' },
+                { name: 'product_code', type: 'string' },
                 { name: 'create_date_time', type: 'string' },
                 { name: 'status_text', type: 'string' }
             ],
@@ -71,8 +72,9 @@ $CI=& get_instance();
                     //{ text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'token', width:'20%'},
                     { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'id', width:'5%'},
                     { text: '<?php echo $CI->lang->line('NAME'); ?>', dataField: 'name_bn', filtertype:'list', width:'10%'},
-                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', filtertype:'list', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', filtertype:'list', width:'30%'},
                     { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', filtertype:'list', width:'17%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_CODE'); ?>', dataField: 'product_code', filtertype:'list', width:'10%'},
                     { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'15%'},
                     { text: '<?php echo $CI->lang->line('STATUS'); ?>', dataField: 'status_text', filtertype:'list', width:'10%'}
                 ]

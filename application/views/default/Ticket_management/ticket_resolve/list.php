@@ -44,6 +44,7 @@ $CI=& get_instance();
                 { name: 'name_bn', type: 'string' },
                 { name: 'priority', type: 'string' },
                 { name: 'product_name', type: 'string' },
+                { name: 'product_code', type: 'string' },
                 { name: 'create_date_time', type: 'string' },
                 { name: 'support_name', type: 'string' }
             ],
@@ -70,10 +71,11 @@ $CI=& get_instance();
 
                 columns: [
                     { text: '<?php echo $CI->lang->line('TOKEN'); ?>', dataField: 'ticket_issue_id', width:'5%'},
-                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'37%'},
+                    { text: '<?php echo $CI->lang->line('SUBJECT'); ?>', dataField: 'subject', width:'27%'},
                     { text: '<?php echo $CI->lang->line('ISSUE_FROM'); ?>', dataField: 'name_bn', width:'10%'},
                     { text: '<?php echo $CI->lang->line('PRIORITY'); ?>', dataField: 'priority', width:'10%'},
                     { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_CODE'); ?>', dataField: 'product_code', width:'10%'},
                     { text: '<?php echo $CI->lang->line('TIME'); ?>', dataField: 'create_date_time', width:'10%'},
                     { text: '<?php echo $CI->lang->line('SUPPORT_NAME'); ?>', dataField: 'support_name', width:'15%'}
                 ]

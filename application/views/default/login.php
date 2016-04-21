@@ -3,7 +3,11 @@ $CI =& get_instance();
 ?>
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/pages/css/login-soft.css" rel="stylesheet" type="text/css"/>
+
 <script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/pages/scripts/login-soft.js" type="text/javascript"></script>
+<script src="<?php echo base_url().'assets/templates/'.$CI->get_template(); ?>/metronic/admin/layout4/scripts/layout.js" type="text/javascript"></script>
+
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN LOGIN -->
 <div class="login" style="background: none!important;">

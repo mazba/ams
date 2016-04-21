@@ -26,12 +26,14 @@ $CI=& get_instance();
 
 $CI = &get_instance();
 ?>
-<table style="margin-top: 50px;">
+<table style="width: 100%">
     <tr>
-        <td style="width: 20%">
-            <img src="<?php echo base_url()?>images/government-logo.gif">
+        <td style="text-align:center;">
+            <img src="<?php echo base_url()?>images/government-logo.png">
         </td>
-        <td style="width: 60%">
+        </tr>
+    <tr>
+        <td style="text-align:center;">
             <h1 class="text-center">বাংলাদেশ জাতীয় সংসদ</h1>
             <h3 class="text-center">    টিকেট সম্পর্কিত  প্রতিবেদন      </h3>
 
@@ -49,11 +51,8 @@ $CI = &get_instance();
 
             } ?>
         </td>
-        <td style="width: 20%">
-            <img  src="<?php echo base_url()?>images/government-logo.gif">
+        </tr>
 
-        </td>
-    </tr>
 
 </table>
 

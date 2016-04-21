@@ -41,6 +41,7 @@ $CI=& get_instance();
                 { name: 'edit_link', type: 'string' },
                 { name: 'product_name', type: 'string' },
                 { name: 'user_name', type: 'string' },
+                { name: 'receiver_name', type: 'string' },
                 { name: 'remarks', type: 'string' },
                 { name: 'assign_date', type: 'string' },
                 { name: 'return_date', type: 'string' },
@@ -69,11 +70,12 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
+                    { text: '<?php echo $CI->lang->line('RECEIVER_NAME'); ?>', dataField: 'receiver_name', width:'20%'},
                     { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'user_name', width:'20%'},
                     { text: '<?php echo $CI->lang->line('PRODUCT_NAME'); ?>', dataField: 'product_name', width:'20%'},
-                    { text: '<?php echo $CI->lang->line('ASSIGN_DATE'); ?>', dataField: 'assign_date', width:'10%'},
+                    { text: '<?php echo $CI->lang->line('PRODUCT_ASSIGN_DATE'); ?>', dataField: 'assign_date', width:'10%'},
                     { text: '<?php echo $CI->lang->line('RETURN_DATE'); ?>', dataField: 'return_date', width:'10%'},
-                    { text: '<?php echo $CI->lang->line('REMARKS'); ?>', dataField: 'remarks', width:'40%'},
+                    { text: '<?php echo $CI->lang->line('REMARKS'); ?>', dataField: 'remarks', width:'20%'},
 //                    { text: '<?php //echo $CI->lang->line('STATUS'); ?>//', dataField: 'status_text', width:'10%'}
                 ]
             });

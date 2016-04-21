@@ -1,6 +1,8 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['REQUEST_URI']);
 //echo "<pre>";
 //print_r($report);
@@ -23,16 +25,16 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
 <!--            <span class="pull-right">--><?php //echo $this->lang->line('REPORT_CURRENT_DATE_VIEW');?><!--</span>-->
         </div>
         <div class="col-lg-12">
-<table style="width: 100%">
+<table style="width: 100%;">
     <tr>
         <td style="text-align:center;">
             <img src="<?php echo base_url()?>images/government-logo.png">
         </td>
         </tr>
     <tr>
-        <td style="text-align:center;">
+        <td style="width: 60%">
             <h1 class="text-center">বাংলাদেশ জাতীয় সংসদ</h1>
-            <h3 class="text-center">ফেরত দেত্তয়া প্রোডাক্ট সম্পর্কিত প্রতিবেদন</h3>
+            <h3 class="text-center">ওয়ারেন্টি শেষ হয়ে যাওয়া প্রোডাক্ট সম্পর্কিত প্রতিবেদন</h3>
 
             <?php
             $start_date = $_GET['start_date'];
@@ -60,11 +62,13 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
     <thead>
         <tr style="background: #eee">
             <th>প্রোডাক্ট  নাম</th>
+            <th>প্রোডাক্ট কোড</th>
             <th>ক্যটাগরি</th>
+            <th>সরবরাহকারী প্রতিষ্ঠানের নাম</th>
+            <th> সরবরাহকারী  ব্যক্তির নাম</th>
+            <th>সরবরাহকারী  ব্যক্তির মোবাইল নাম্বার</th>
             <th>ক্রয়ের তারিখ</th>
-            <th>ব্যবহারকারীর নাম</th>
-            <th>প্রোডাক্ট দায়িত্ব অর্পণতারিখ </th>
-            <th>প্রোডাক্ট ফেরত তারিখ</th>
+            <th>ওয়ারেন্টি শেষ এর  তারিখ</th>
             <th>প্রোডাক্টএর বর্তমান অবস্থা</th>
 
         </tr>
@@ -76,11 +80,16 @@ $pdf_link="http://".$_SERVER['HTTP_HOST'].str_replace("/list","/pdf",$_SERVER['R
         ?>
         <tr>
             <td><?php echo $product['product_name'] ?></td>
+            <td><?php echo $product['product_code'] ?></td>
             <td><?php echo $product['category_name'] ?></td>
+
+            <td><?php echo $product['company_name'] ?></td>
+            <td><?php echo $product['contact_person'] ?></td>
+            <td><?php echo $product['contact_person_phone'] ?></td>
+
+
             <td><?php echo System_helper::display_date($product['purchase_date']) ?></td>
-            <td><?php echo $product['username']?></td>
-            <td><?php echo System_helper::display_date($product['create_date']) ?></td>
-            <td><?php echo System_helper::display_date($product['update_date']) ?></td>
+            <td><?php echo System_helper::display_date($product['warranty_end_date']) ?></td>
             <td><?php echo ($product['condition']) ? 'ত্রুটিপূর্ণ' : 'ভাল' ?></td>
         </tr>
         <?php

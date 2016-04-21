@@ -63,6 +63,7 @@ $lang['PRODUCT_NAME']='প্রোডাক্টএর নাম';
 $lang['CREATE_NEW_SUPPLIER']		= 'সরবরাহকারী   যোগ করন';
 $lang['EDIT_SUPPLIER']		= 'সরবরাহকারী সম্পাদনা';
 $lang['COMPANY_NAME']		= 'প্রতিষ্ঠানের নাম';
+$lang['COMPANY_ADDRESS']		= 'প্রতিষ্ঠানের ঠিকানা';
 $lang['COMPANY_OFFICE_PHONE']		= 'প্রতিষ্ঠানের ফোন নাম্বার';
 $lang['CONTACT_PERSON']		= 'যোগাযোগ ব্যক্তির নাম';
 $lang['CONTACT_PERSON_PHONE']		= 'যোগাযোগ ব্যক্তির মোবাইল নাম্বার';
@@ -118,7 +119,7 @@ $lang['CATEGORY_NAME']='ক্যাটাগরির নাম';
 $lang['CATEGORY_CODE']='ক্যাটাগরি কোড';
 $lang['WAREHOUSE_NAME']='ওয়ারহাউসএর নাম';
 $lang['WAREHOUSE_CODE']='ওয়ারহাউসএর কোড';
-$lang['']='';
+$lang['SUPPLIER_DETAILS']='সরবরাহকারী তথ্য';
 $lang['']='';
 
 

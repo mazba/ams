@@ -23,7 +23,7 @@ class Ticket_resolve_model extends CI_Model
                             ticket_assign.priority,
                             ticket_assign.`status`,
                             `ticket_issue`.`subject`,
-                            product.product_name,
+                            product.product_name,product.product_code,
                             users.name_bn,
                             users_assign.name_bn support_name,
                             ticket_assign.resolved_date");
@@ -75,9 +75,10 @@ class Ticket_resolve_model extends CI_Model
                             ticket_assign.`priority`,
                             ticket_assign.user_id,
                             ticket_issue.create_date,
-                            product.product_name,
+                            product.product_name,product.id product_id,
+                              product.product_code,
                             ticket_issue.id ticket_issue_id,
-                            users.name_bn,
+                            users.name_bn,  users.id  user_id,
                             ticket_issue.ticket_issue_description,
                             ticket_assign.ticket_issue_id,
                             ticket_issue.issue_attachment,
@@ -89,7 +90,7 @@ class Ticket_resolve_model extends CI_Model
         $CI->db->join($CI->config->item('table_product') . ' product', 'product.id = ticket_issue.product_id', 'LEFT');
         $CI->db->where('ticket_assign.status', $this->config->item('STATUS_ASSIGN'));
         $CI->db->order_by('ticket_issue.id', 'DESC');
-        $result = $this->db->get()->result_array();
+        $result = $this->db->get()->row_array();
         //echo $this->db->last_query();
         if (sizeof($result) > 0) {
             return $result;

@@ -1,4 +1,4 @@
-<?php
+]<?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 $CI=& get_instance();
 ?>
@@ -45,6 +45,16 @@ $CI=& get_instance();
                                             <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('USER'); ?></label></div>
                                             <div class="col-lg-8">
                                                 <select name="product_assign[user_id]" class="form-control" >
+                                                    <?php
+                                                    $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$user));
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-success  row">
+                                            <div class="col-lg-4"><label class="control-label bold"><?php echo $CI->lang->line('RECEIVED_BY'); ?></label></div>
+                                            <div class="col-lg-8">
+                                                <select name="product_assign[received_by]" class="form-control" >
                                                     <?php
                                                     $CI->load_view('dropdown',array('drop_down_default_option'=>true,'drop_down_options'=>$user));
                                                     ?>

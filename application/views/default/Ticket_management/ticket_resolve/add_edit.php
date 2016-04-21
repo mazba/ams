@@ -55,7 +55,7 @@ $directory = $this->config->item('file_upload');
                                                 <ul class="feeds">
                                                     <?php
                                                     //$ticket_issues='';
-                                                    if (empty($ticket_issues))
+                                                    if (empty($ticket_issue))
                                                     {
                                                         ?>
                                                         <li>
@@ -71,8 +71,7 @@ $directory = $this->config->item('file_upload');
                                                     }
                                                     else
                                                     {
-                                                        foreach ($ticket_issues as $ticket_issue)
-                                                        {
+
                                                             $ticket_issue_status = $ticket_issue['ticket_issue_status'];
                                                             ?>
                                                             <li>
@@ -100,10 +99,11 @@ $directory = $this->config->item('file_upload');
                                                                         </div>
                                                                         <div class="cont-col2 text-right">
                                                                             <br/>
-                                                                            <span class="label label-sm label-primary"
-                                                                                  title="<?php echo $this->lang->line('NAME'); ?>"><?php echo $ticket_issue['name_bn']; ?></span>
-                                                                            <span class="label label-sm label-success"
-                                                                                  title="<?php echo $this->lang->line('PRODUCT_NAME'); ?>"><?php echo isset($ticket_issue['product_name']) ? $ticket_issue['product_name'] : ''; ?></span>
+                                                                            <span class="btn label label-sm label-primary" data-toggle="modal" data-target="#myModal"
+                                                                                  title="<?php echo $this->lang->line('NAME'); ?>"><?php echo $ticket_issue['name_bn']; ?>
+                                                                             </span> &nbsp;
+                                                                            <span class=" btn label label-sm label-success" data-toggle="modal" data-target="#productModal"
+                                                                                  title="<?php echo $this->lang->line('PRODUCT_NAME'); ?>"><?php echo isset($ticket_issue['product_name']) ? $ticket_issue['product_name']." (".$ticket_issue['product_code'].")" : ''; ?></span>
                                                                             <span class="label label-sm label-danger"
                                                                                   title="<?php echo $this->lang->line('TIME'); ?>"><?php echo date('h:i A', $ticket_issue['create_date']); ?></span>
                                                                             <span class="badge badge-warning"
@@ -137,7 +137,7 @@ $directory = $this->config->item('file_upload');
                                                             </li>
 
                                                             <?php
-                                                        }
+
                                                     }
                                                     ?>
                                                 </ul>
@@ -335,6 +335,72 @@ $directory = $this->config->item('file_upload');
 </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> <?php echo $this->lang->line('USER_DETAILS'); ?>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p><b><?php echo $CI->lang->line('NAME'); ?></b>:<?php echo" ".$user_info['name_bn']?></p>
+                <p><b><?php echo $CI->lang->line('EMAIL'); ?></b>:<?php echo" ".$user_info['email']?></p>
+                <p><b><?php echo $CI->lang->line('MOBILE_NUMBER'); ?></b>:<?php echo" ".$user_info['mobile']?></p>
+                <p><b><?php echo $CI->lang->line('PBX'); ?></b>:<?php echo" ".$user_info['pbx']?></p>
+                <p><b><?php echo $CI->lang->line('IP'); ?></b>:<?php echo" ".$user_info['ip']?></p>
+                <p><b><?php echo $CI->lang->line('PRESENT_ADDRESS'); ?></b>:<?php echo" ".$user_info['present_address']?></p>
+                <p><b><?php echo $CI->lang->line('PERMANENT_ADDRESS'); ?></b>:<?php echo" ".$user_info['permanent_address']?></p>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> <?php echo $this->lang->line('PRODUCT_DETAILS'); ?>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <p><b><?php echo $CI->lang->line('NAME'); ?></b>:<?php echo" ".$product_info['product_name']?></p>
+                <p><b><?php echo $CI->lang->line('CATEGORY'); ?></b>:<?php echo" ".$product_info['category_name']?></p>
+                <p><b><?php echo $CI->lang->line('PRODUCT_CODE'); ?></b>:<?php echo" ".$product_info['product_code']?></p>
+                <p><b><?php echo $CI->lang->line('SERIAL_NUMBER'); ?></b>:<?php echo" ".$product_info['serial_number']?></p>
+                <p><b><?php echo $CI->lang->line('UNIT_PRICE'); ?></b>:<?php echo" ".$product_info['unit_price']?></p>
+                <p><b><?php echo $CI->lang->line('MODEL_NO'); ?></b>:<?php echo" ".$product_info['model_no']?></p>
+                <p><b><?php echo $CI->lang->line('WAREHOUSE'); ?></b>:<?php echo" ".$product_info['warehouse_name']?></p>
+                <p><b><?php echo $CI->lang->line('WARRANTY_START_DATE'); ?></b>:<?php echo" ".System_helper::display_date($product_info['warranty_start_date']) ?></p>
+                <p><b><?php echo $CI->lang->line('WARRANTY_END_DATE'); ?></b>:<?php echo" ".System_helper::display_date($product_info['warranty_end_date'])?></p>
+                <p><b><?php echo $CI->lang->line('STATUS'); ?></b>:<?php echo" ";if($product_info['condition']==0){echo "ভাল";}else{echo'ত্রুটিপূর্ণ';}?></p>
+                <hr/>
+                <h4><?php echo $CI->lang->line('SUPPLIER_DETAILS')?></h4>
+                <hr/>
+                <p><b><?php echo $CI->lang->line('COMPANY_NAME'); ?></b>:<?php echo " ".$product_info['company_name'];?></p>
+                <p><b><?php echo $CI->lang->line('COMPANY_ADDRESS'); ?></b>:<?php echo " ".$product_info['company_address'];?></p>
+                <p><b><?php echo $CI->lang->line('COMPANY_OFFICE_PHONE'); ?></b>:<?php echo " ".$product_info['company_office_phone'];?></p>
+                <p><b><?php echo $CI->lang->line('CONTACT_PERSON'); ?></b>:<?php echo " ".$product_info['contact_person'];?></p>
+                <p><b><?php echo $CI->lang->line('CONTACT_PERSON_PHONE'); ?></b>:<?php echo " ".$product_info['contact_person_phone'];?></p>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {

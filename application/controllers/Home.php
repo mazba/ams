@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends Root_Controller
 {
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model("asset_management/Product_model");
+    }
     public function index()
     {
         $ajax['status']=true;
@@ -103,5 +108,12 @@ class Home extends Root_Controller
     public function user_profile_list()
     {
 
+    }
+    public function search_product(){
+
+        $str = $this->input->get('term');
+        $data = $this->Product_model->get_product_name($str);
+
+        echo json_encode($data);
     }
 }

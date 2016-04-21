@@ -82,9 +82,16 @@ $user=User_helper::get_user();
                                                                             <div class="desc">
                                                                                 <input type="hidden" name="row_id[]" value="<?php echo $ticket_issue['id'];?>" />
                                                                                 <input type="checkbox" name="ticket_issue_id[]" value="<?php echo $ticket_issue['id'];?>" class="checkbox-inline">
+
                                                                                 <span class="" title="<?php echo $this->lang->line('SUBJECT');?>"><?php echo $ticket_issue['subject'];?></span>
-                                                                                <span class="label label-sm label-primary" title="<?php echo $this->lang->line('NAME');?>"><?php echo $ticket_issue['name_bn'];?></span>
-                                                                                <span class="label label-sm label-success" title="<?php echo $this->lang->line('PRODUCT_NAME');?>"><?php echo $ticket_issue['product_name'];?></span>
+
+                                                                                <span class="btn label label-sm label-primary user_info" data-user_id="<?php echo $ticket_issue['user_id'];?>"data-toggle="modal" data-target="#myModal" title="<?php echo $this->lang->line('NAME');?>">
+                                                                                    <?php echo $ticket_issue['name_bn'];?></span>
+
+                                                                                <span class="label label-sm label-success btn product_info"  data-product_id="<?php echo $ticket_issue['product_id'];?>"data-toggle="modal" data-target="#productModal"title="<?php echo $this->lang->line('PRODUCT_NAME');?>">
+                                                                                    <?php echo $ticket_issue['product_name'].' ('.$ticket_issue['product_code'].')';?></span>
+
+
                                                                                 <span class="label label-sm label-danger" title="<?php echo $this->lang->line('TIME');?>"><?php echo date('h:i A',$ticket_issue['create_date']);?></span>
                                                                                 <span class="badge badge-warning" title="<?php echo $this->lang->line('TOKEN');?>"><?php echo $ticket_issue['id'];?></span>
 
@@ -138,12 +145,85 @@ $user=User_helper::get_user();
         <!-- END PAGE CONTENT INNER -->
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> <?php echo $this->lang->line('USER_DETAILS'); ?>
+                </h4>
+            </div>
+            <div class="modal-body" id="user_model_body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"> <?php echo $this->lang->line('PRODUCT_DETAILS'); ?>
+                </h4>
+            </div>
+            <div class="modal-body" id="product_model_body">
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script type="text/javascript">
     $(document).ready(function ()
     {
         turn_off_triggers();
+
+        $(document).on ('click',".user_info",function(){
+
+
+                var id = $(this).data('user_id');
+                $.ajax({
+                    data:{id: id},
+                    url:'<?php echo $CI->get_encoded_url('common/user_info');?>',
+                    type: 'POST',
+                    success: function(response)
+                    {
+
+
+                    }
+                });
+        });
+
+        $(document).on ('click',".product_info",function(){
+
+
+            var id = $(this).data('product_id');
+            $.ajax({
+                data:{id: id},
+                url:'<?php echo $CI->get_encoded_url('common/product_info');?>',
+                type: 'POST',
+                success: function(response){
+
+
+                }
+            });
+
+        });
+
+
         //        $(document).on("change","#user_id",function()
         //        {
         //            $.ajax({

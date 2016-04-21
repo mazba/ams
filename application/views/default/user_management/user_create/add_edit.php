@@ -134,6 +134,28 @@ $CI=& get_instance();
                                         </select>
                                     </div>
                                 </div>
+
+
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('PBX'); ?></label></div>
+                                    <div class="col-lg-4">
+                                        <input type="text" name="user_detail[pbx]" value="<?php echo $userInfo['pbx'];?>" placeholder="<?php echo $CI->lang->line('PBX'); ?>" class="form-control " maxlength="11" />
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('IP'); ?></label></div>
+                                    <div class="col-lg-4">
+                                        <input type="text" name="user_detail[ip]" value="<?php echo $userInfo['ip'];?>" placeholder="<?php echo $CI->lang->line('IP'); ?>" class="form-control " maxlength="11" />
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="name_bn"><?php echo $CI->lang->line('MAC'); ?></label></div>
+                                    <div class="col-lg-4">
+                                        <input type="text" name="user_detail[mac]" value="<?php echo $userInfo['mac'];?>" placeholder="<?php echo $CI->lang->line('MAC'); ?>" class="form-control " maxlength="11" />
+                                    </div>
+                                </div>
+
+
                                 <div class="form-group has-success row">
                                     <div class="col-lg-2"><label class="control-label bold" for="controller"><?php echo $CI->lang->line('PRESENT_ADDRESS'); ?></label></div>
                                     <div class="col-lg-8">
@@ -144,6 +166,12 @@ $CI=& get_instance();
                                     <div class="col-lg-2"><label class="control-label bold" for="controller"><?php echo $CI->lang->line('PERMANENT_ADDRESS'); ?></label></div>
                                     <div class="col-lg-8">
                                         <textarea class="form-control" name="user_detail[permanent_address]"  rows="3"><?php echo $userInfo['permanent_address'];?></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group has-success row">
+                                    <div class="col-lg-2"><label class="control-label bold" for="controller"><?php echo $CI->lang->line('OFFICE_ADDRESS'); ?></label></div>
+                                    <div class="col-lg-8">
+                                        <textarea class="form-control" name="user_detail[office_address]"  rows="3"><?php echo $userInfo['office_address'];?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group has-error row" >

@@ -26,7 +26,7 @@ class Ticket_issue_model extends CI_Model
         $this->db->select("core_01_users.name_bn,
                             ticket_issue.id,
                             ticket_issue.token,
-                            product.product_name,
+                            product.product_name,product.product_code,
                             ticket_issue.`subject`,
                             ticket_issue.`create_date`,
                             ticket_issue.`status`");

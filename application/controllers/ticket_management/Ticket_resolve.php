@@ -20,7 +20,11 @@ class Ticket_resolve extends Root_Controller
         }
         $this->controller_url='ticket_management/ticket_resolve';
         $this->load->model("ticket_management/ticket_resolve_model");
+        $this->load->model("Common_model");
+
         $this->lang->load("ticket_management", $this->get_language());
+        $this->lang->load("asset_management", $this->get_language());
+
     }
 
     public function index($action='list',$id=0)
@@ -137,7 +141,11 @@ class Ticket_resolve extends Root_Controller
             $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('id ='.$id),1);
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
             $data['ticket_status']=Query_helper::get_info($this->config->item('table_ticket_resolve_status'),array('id value', 'name text'), array('status = '.$this->config->item('STATUS_ACTIVE')));
-            $data['ticket_issues'] = $this->ticket_resolve_model->get_ticket_assign($data['ticket']['id']);
+            $data['ticket_issue'] = $this->ticket_resolve_model->get_ticket_assign($data['ticket']['id']);
+            $data['user_info']=Query_helper::get_info($this->config->item('table_users'),'*', array('id = '. $data['ticket_issue']['user_id']),'1');
+          //  $data['product_info']=Query_helper::get_info($this->config->item('table_product'),'*', array('id = '. $data['ticket_issue']['product_id']),'1');
+            $data['product_info']=$this->Common_model->get_product_info_by_id($data['ticket_issue']['product_id']);
+          //  print_r($data['user_info']);die();
             $data['comments'] = $this->ticket_resolve_model->get_ticket_comments($data['ticket']['ticket_issue_id']);
             //$data['comments']=Query_helper::get_info($this->config->item('table_ticket_resolve_comment'),'*',array('ticket_issue_id ='.$data['ticket']['ticket_issue_id']),1);
             $ajax['system_content'][]=array("id"=>"#system_wrapper","html"=>$this->load_view("ticket_management/ticket_resolve/add_edit",$data,true));

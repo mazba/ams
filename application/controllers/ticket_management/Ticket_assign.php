@@ -21,6 +21,8 @@ class Ticket_assign extends Root_Controller
         $this->controller_url='ticket_management/ticket_assign';
         $this->load->model("ticket_management/ticket_assign_model");
         $this->lang->load("ticket_management", $this->get_language());
+        $this->lang->load("asset_management", $this->get_language());
+
     }
 
     public function index($action='list',$id=0)
@@ -376,6 +378,9 @@ class Ticket_assign extends Root_Controller
         }
         $this->jsonReturn($ticket_assigns);
     }
+
+
+
 
 
 }

@@ -60,7 +60,7 @@ class Dashboard_helper
         $CI = & get_instance();
         $user =  User_helper::get_user();
         $CI->db->from($CI->config->item('table_product_assign').' pa');
-        $CI->db->select('product.product_name,pa.assign_date,pa.return_date');
+        $CI->db->select('product.product_name,product.warranty_end_date,product.product_code,pa.assign_date,pa.return_date');
         $CI->db->where('pa.user_id',$user->id);
         $CI->db->where('pa.status',1);
         $CI->db->join($CI->config->item('table_product').' product' ,'product.id = pa.product_id','LEFT' );

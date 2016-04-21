@@ -55,7 +55,8 @@ class Ticket_assign_model extends CI_Model
                             ticket_issue.`status`,
                             ticket_issue.create_date,
                             users.name_bn,
-                            product.product_name');
+                            users.id user_id,
+                            product.product_name,product.product_code,product.id product_id');
         $CI->db->from($CI->config->item('table_ticket_issue') . ' ticket_issue');
         $CI->db->join($CI->config->item('table_users') . ' users', 'users.id = ticket_issue.user_id', 'INNER');
         $CI->db->join($CI->config->item('table_product') . ' product', 'product.id = ticket_issue.product_id', 'LEFT');
@@ -82,7 +83,10 @@ class Ticket_assign_model extends CI_Model
                             ticket_assign.user_id,
                             ticket_issue.create_date,
                             product.product_name,
+                            product.product_code,
+                            product.id product_id,
                             users.name_bn,
+                            users.id user_id,
                             ticket_assign.ticket_issue_id');
         $CI->db->from($CI->config->item('table_ticket_assign') . ' ticket_assign');
         $CI->db->join($CI->config->item('table_ticket_issue') . ' ticket_issue', 'ticket_issue.id = ticket_assign.ticket_issue_id', 'INNER');
