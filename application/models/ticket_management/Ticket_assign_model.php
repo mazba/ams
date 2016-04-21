@@ -13,7 +13,8 @@ class Ticket_assign_model extends CI_Model
     public function get_record_list()
     {
         $CI =& get_instance();
-        $this->db->select("ticket_assign.user_id id, count(ticket_assign.ticket_issue_id) ticket_issue_id, users.name_bn");
+        $this->db->select("ticket_assign.user_id id, count(ticket_assign.ticket_issue_id) ticket_issue_id, users.name_bn, users.email,
+        users.mobile,users.pbx");
         $this->db->from($CI->config->item('table_ticket_assign'));
         $this->db->join($CI->config->item('table_users') . ' users', 'users.id = ticket_assign.user_id', 'LEFT');
         $this->db->where('ticket_assign.status =' . $this->config->item('STATUS_ASSIGN'));
@@ -25,6 +26,7 @@ class Ticket_assign_model extends CI_Model
             $user['ticket_issue_id']=System_helper::Get_Eng_to_Bng($user['ticket_issue_id']);
 
         }
+
         return $users;
     }
 

@@ -44,6 +44,9 @@ $CI=& get_instance();
                 { name: 'id', type: 'int' },
                 { name: 'edit_link', type: 'string' },
                 { name: 'name_bn', type: 'string' },
+                { name: 'email', type: 'string' },
+                { name: 'mobile', type: 'string' },
+                { name: 'pbx', type: 'string' },
                 { name: 'ticket_issue_id', type: 'string' }
             ],
             id: 'id',
@@ -68,8 +71,11 @@ $CI=& get_instance();
                 autoheight: true,
 
                 columns: [
-                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'name_bn',filtertype: 'checkedlist', width:'70%'},
-                    { text: '<?php echo $CI->lang->line('NUMBER_OF_ISSUE'); ?>', dataField: 'ticket_issue_id', width:'27%'}
+                    { text: '<?php echo $CI->lang->line('USER_NAME'); ?>', dataField: 'name_bn',filtertype: 'checkedlist', width:'25%'},
+                    { text: '<?php echo $CI->lang->line('EMAIL'); ?>', dataField: 'email',filtertype: 'checkedlist', width:'22%'},
+                    { text: '<?php echo $CI->lang->line('MOBILE_NUMBER'); ?>', dataField: 'mobile',filtertype: 'checkedlist', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('PBX'); ?>', dataField: 'pbx',filtertype: 'checkedlist', width:'20%'},
+                    { text: '<?php echo $CI->lang->line('NUMBER_OF_ISSUE'); ?>', dataField: 'ticket_issue_id', width:'10%'}
                 ]
             });
         //for Double Click to edit
