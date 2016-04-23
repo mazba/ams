@@ -14,7 +14,7 @@ class Ticket_issue extends Root_Controller
         $this->permissions=Menu_helper::get_permission('ticket_management/ticket_issue');
         if($this->permissions)
         {
-            //$this->permissions['edit']=0;
+            $this->permissions['edit']=0;
             $this->permissions['delete']=0;
             //$this->permissions['view']=0;
         }
