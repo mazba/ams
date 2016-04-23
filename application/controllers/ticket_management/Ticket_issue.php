@@ -168,17 +168,18 @@ class Ticket_issue extends Root_Controller
 
     private function details($id)
     {
+
         if($this->permissions['view'])
         {
             $this->permissions['edit']=1;
             if(is_array($id))
-                $id = $id[0];
+                $id = System_helper::Get_Bng_to_Eng($id[0]);
             $this->current_action='edit';
             $ajax['status']=true;
             $data=array();
 
             $data['title']=$this->lang->line("VIEW_DETAILS_TICKET_ISSUE");
-            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),'*',array('id ='.$id),1);
+            $data['ticket']=Query_helper::get_info($this->config->item('table_ticket_issue'),'*',array('id = '. $id ),1);
             $data['users']=Query_helper::get_info($this->config->item('table_users'),array('id value', 'name_bn text'), array('status = '.$this->config->item('STATUS_ACTIVE'), "id = ".$data['ticket']['user_id']));
             $data['products'] = $this->ticket_issue_model->get_product($data['users'][0]['value'], $data['ticket']['product_id']);
             $data['ticket_assign']=Query_helper::get_info($this->config->item('table_ticket_assign'),'*',array('ticket_issue_id ='.$id),1);
@@ -329,7 +330,7 @@ class Ticket_issue extends Root_Controller
     private function system_batch_details($ids)
     {
         if(!$ids)
-            $ids=$this->input->post('selected_ids');
+        $ids=$this->input->post('selected_ids');
         $this->details($ids);
     }
 
