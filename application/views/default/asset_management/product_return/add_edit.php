@@ -35,14 +35,11 @@ $CI =& get_instance();
 
                                         <div class="col-sm-6 ">
                                             <h3><?php echo $CI->lang->line('USER_DETAILS');?></h3>
-                                          <p><b><?php echo $CI->lang->line('name_bn');?>:</b> <?php echo  $user_info['name_bn']?></p>
-
-                                            <p><b><?php echo $CI->lang->line('office_phone');?>:</b> <?php echo  $user_info['office_phone']?></p>
-                                            <p><b><?php echo $CI->lang->line('mobile');?>:</b> <?php echo  $user_info['mobile']?></p>
-                                            <p><b><?php echo $CI->lang->line('email');?>:</b> <?php echo  $user_info['email']?></p>
-                                            <p><b><?php echo $CI->lang->line('national_id_no');?>:</b> <?php echo  $user_info['national_id_no']?></p>
-                                            <p><b><?php echo $CI->lang->line('present_address');?>:</b> <?php echo  $user_info['present_address']?></p>
-                                            <p><b><?php echo $CI->lang->line('permanent_address');?>:</b> <?php echo  $user_info['permanent_address']?></p>
+                                          <p><b><?php echo $CI->lang->line('NAME_BN');?>:</b> <?php echo  $user_info['name_bn']?></p>
+                                            <p><b><?php echo $CI->lang->line('MOBILE_NUMBER');?>:</b> <?php echo  $user_info['mobile']?></p>
+                                            <p><b><?php echo $CI->lang->line('EMAIL');?>:</b> <?php echo  $user_info['email']?></p>
+                                            <p><b><?php echo $CI->lang->line('PRESENT_ADDRESS');?>:</b> <?php echo  $user_info['present_address']?></p>
+                                            <p><b><?php echo $CI->lang->line('PERMANENT_ADDRESS');?>:</b> <?php echo  $user_info['permanent_address']?></p>
 
 
                                         </div>
