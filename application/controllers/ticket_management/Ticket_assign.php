@@ -158,10 +158,12 @@ class Ticket_assign extends Root_Controller
         }
     }
 
-    private function system_batch_details($user_id)
+    private function details($user_id)
     {
         if($this->permissions['view'])
         {
+            if(is_array($user_id))
+            $user_id = System_helper::Get_Bng_to_Eng($user_id[0]);
             $this->current_action='batch_details';
             $ajax['status']=true;
             $data=array();
@@ -186,6 +188,12 @@ class Ticket_assign extends Root_Controller
             $ajax['system_message']=$this->lang->line("YOU_DONT_HAVE_ACCESS");
             $this->jsonReturn($ajax);
         }
+    }
+    private function system_batch_details($ids)
+    {
+        if(!$ids)
+        $ids=$this->input->post('selected_ids');
+        $this->details($ids);
     }
 
     private function system_save()
